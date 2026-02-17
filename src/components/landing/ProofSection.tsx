@@ -40,7 +40,7 @@ const scenarios = [
 const ProofSection = () => {
   return (
     <section className="border-y border-border bg-secondary/20">
-      <div className="container py-24 md:py-32">
+      <div className="container pt-16 pb-24 md:py-32">
         <div className="grid gap-10 xl:grid-cols-[0.78fr_1.22fr] xl:gap-12">
           <aside className="xl:sticky xl:top-24 xl:self-start">
             <p className="text-[11px] uppercase tracking-wider text-muted-foreground">

@@ -30,6 +30,14 @@ type ApplicationFormData = {
   goals: string;
 };
 
+type ApplicationUtmData = {
+  source?: string;
+  medium?: string;
+  campaign?: string;
+  content?: string;
+  term?: string;
+};
+
 type ApplicationSheetContextValue = {
   isOpen: boolean;
   openApplication: () => void;
@@ -79,7 +87,10 @@ const ApplicationSheetProvider = ({ children }: { children: ReactNode }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [formData, setFormData] = useState<ApplicationFormData>(initialFormData);
+  const [honeypot, setHoneypot] = useState("");
   const formId = useId();
 
   const openApplication = () => {
@@ -107,14 +118,55 @@ const ApplicationSheetProvider = ({ children }: { children: ReactNode }) => {
       setFormData((previous) => ({ ...previous, [field]: event.target.value }));
     };
 
-  const handleSubmit = (event: FormEvent) => {
+  const getUtmData = (): ApplicationUtmData => {
+    const params = new URLSearchParams(window.location.search);
+    const value = (key: string) => params.get(key) ?? undefined;
+    return {
+      source: value("utm_source"),
+      medium: value("utm_medium"),
+      campaign: value("utm_campaign"),
+      content: value("utm_content"),
+      term: value("utm_term"),
+    };
+  };
+
+  const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
-    setSubmitted(true);
+    if (isSubmitting) return;
+    setSubmitError(null);
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("/api/apply", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...formData,
+          pageUrl: window.location.href,
+          utm: getUtmData(),
+          website: honeypot,
+        }),
+      });
+
+      if (!response.ok) {
+        setSubmitError("Something went wrong. Please try again.");
+        return;
+      }
+
+      setSubmitted(true);
+    } catch {
+      setSubmitError("Something went wrong. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const resetAndClose = () => {
     setSubmitted(false);
+    setSubmitError(null);
+    setIsSubmitting(false);
     setFormData(initialFormData);
+    setHoneypot("");
     setIsOpen(false);
   };
 
@@ -147,7 +199,7 @@ const ApplicationSheetProvider = ({ children }: { children: ReactNode }) => {
           className="fixed right-0 top-1/2 z-40 -translate-y-1/2 rounded-l-md border border-r-0 border-border bg-background/95 px-2 py-3 text-[11px] uppercase tracking-wider text-muted-foreground shadow-sm backdrop-blur transition-colors hover:text-foreground"
         >
           <span className="[writing-mode:vertical-rl] [text-orientation:mixed]">
-            {isOpen ? "Close Application" : "Apply For Cohort 1"}
+            {isOpen ? "Close Application" : "Apply For Pilot"}
           </span>
         </button>
       ) : null}
@@ -185,7 +237,7 @@ const ApplicationSheetProvider = ({ children }: { children: ReactNode }) => {
                 <div className="flex items-start justify-between gap-4">
                   <div className="space-y-2">
                     <SheetTitle className="text-xl tracking-tight">
-                      Apply for Cohort 1
+                      Apply for Pilot
                     </SheetTitle>
                     <SheetDescription>
                       Short application: five fields, about 3-5 minutes.
@@ -202,6 +254,20 @@ const ApplicationSheetProvider = ({ children }: { children: ReactNode }) => {
               </SheetHeader>
 
               <form onSubmit={handleSubmit} className="space-y-6 px-6 py-6">
+                <div
+                  aria-hidden="true"
+                  className="absolute left-[-10000px] top-auto h-px w-px overflow-hidden"
+                >
+                  <Label htmlFor={`${formId}-website`}>Website</Label>
+                  <Input
+                    id={`${formId}-website`}
+                    tabIndex={-1}
+                    autoComplete="off"
+                    value={honeypot}
+                    onChange={(event) => setHoneypot(event.target.value)}
+                  />
+                </div>
+
                 <div className="space-y-2">
                   <Label htmlFor={`${formId}-name`}>Your name</Label>
                   <Input
@@ -264,8 +330,16 @@ const ApplicationSheetProvider = ({ children }: { children: ReactNode }) => {
                   <p className="text-xs text-muted-foreground">
                     No commitment required to apply.
                   </p>
-                  <Button type="submit">Submit application</Button>
+                  <Button type="submit" disabled={isSubmitting}>
+                    {isSubmitting ? "Submitting..." : "Submit application"}
+                  </Button>
                 </div>
+
+                {submitError ? (
+                  <p className="text-sm text-destructive" role="alert">
+                    {submitError}
+                  </p>
+                ) : null}
               </form>
             </>
           )}

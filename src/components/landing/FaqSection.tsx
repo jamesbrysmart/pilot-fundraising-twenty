@@ -12,7 +12,7 @@ const faqs = [
   },
   {
     q: "How many organizations are selected?",
-    a: "5–10 for Cohort 1. We're keeping the group small so every participant gets direct support and meaningful input into the roadmap.",
+    a: "5–10 for Pilot. We're keeping the group small so every participant gets direct support and meaningful input into the roadmap.",
   },
   {
     q: "What level of effort is required?",

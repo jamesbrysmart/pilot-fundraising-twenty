@@ -40,7 +40,7 @@ const sections: DetailsSection[] = [
           </p>
           <p className="text-sm leading-relaxed text-muted-foreground">
             The intent is long-term: a serious, community-driven nonprofit CRM
-            built on modern open-source foundations. Cohort 1 is the beginning
+            built on modern open-source foundations. Pilot is the beginning
             of that work, not a marketing exercise.
           </p>
         </div>
@@ -138,7 +138,7 @@ const sections: DetailsSection[] = [
           {[
             {
               title: "Influence the future of nonprofit CRM",
-              desc: "Your feedback directly shapes the product roadmap. Cohort 1 participants have outsized input on what gets built.",
+              desc: "Your feedback directly shapes the product roadmap. Pilot participants have outsized input on what gets built.",
             },
             {
               title: "Early access to modern infrastructure",
@@ -313,7 +313,7 @@ const DetailsSheetPanel = ({
               ))}
               <div className="mt-auto border-t border-border pt-4">
                 <Button className="w-full" onClick={onOpenApplication}>
-                  Apply for Cohort 1
+                  Apply for Pilot
                 </Button>
               </div>
             </nav>
@@ -346,7 +346,7 @@ const DetailsSheetPanel = ({
                 {current?.content}
                 <div className="border-t border-border pt-6 md:hidden">
                   <Button onClick={onOpenApplication}>
-                    Apply for Cohort 1
+                    Apply for Pilot
                   </Button>
                 </div>
               </div>

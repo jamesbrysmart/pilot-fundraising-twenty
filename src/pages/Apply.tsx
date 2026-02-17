@@ -36,7 +36,7 @@ const Apply = () => {
               <div className="space-y-8">
                 <div className="space-y-2">
                   <h1 className="text-2xl font-semibold tracking-tight">
-                    Apply for Cohort 1
+                    Apply for Pilot
                   </h1>
                   <p className="text-sm text-muted-foreground">
                     Tell us a bit about your organization. We'll follow up within a few days.

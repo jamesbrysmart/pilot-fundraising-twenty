@@ -1,16 +1,6 @@
 const NarrativeSection = () => {
   return (
-    <section className="container py-24 md:py-32">
-      <div className="mb-12 flex flex-wrap items-center gap-2">
-        {["01 Opportunity", "02 Structure", "03 Decision"].map((stage) => (
-          <span
-            key={stage}
-            className="rounded-full border border-border bg-secondary/40 px-3 py-1 text-[11px] uppercase tracking-wider text-muted-foreground"
-          >
-            {stage}
-          </span>
-        ))}
-      </div>
+    <section className="container pt-24 pb-16 md:py-32">
       <div className="grid gap-20 md:grid-cols-2">
         {/* The problem */}
         <div className="space-y-4">

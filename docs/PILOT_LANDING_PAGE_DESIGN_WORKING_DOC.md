@@ -114,6 +114,16 @@ Motion:
 - minimal only (hover/focus/subtle reveal),
 - no scroll choreography or media swapping on scroll.
 
+Green shoot motif (subtle brand signal):
+- Purpose: symbolize early momentum and practical hope without introducing a campaign aesthetic.
+- Primary placement: one motif on a single full-width horizontal seam between Hero and Signal Strip.
+- Structural rule: this seam should do real layout work (section transition), not act as decoration.
+- Frequency rule: default to one instance on the full landing page. Add a second instance only if the first is too easy to miss after usability review.
+- If a second instance is used: keep it tiny and functional (for example near final CTA metadata), never as another large line-and-icon composition.
+- Visual rule: neutral hairline + small green shoot; remove heavy shadow/gradient effects that compete with the motif.
+- Responsive rule: keep the seam full-width on all breakpoints; on desktop align shoot to the right content rhythm, on mobile place center or slightly right of center.
+- Implementation note: keep shoot as SVG, but drive stroke/fill from CSS variables so color/weight can be tuned without editing path geometry.
+
 ## 8) Proof System Guidance
 Goal:
 - make the offer feel operationally real with observable evidence.
@@ -169,6 +179,5 @@ For each iteration:
 
 ## 13) Source Of Truth
 - Design operating brief: `docs/PILOT_LANDING_PAGE_DESIGN_WORKING_DOC.md`
-- Copy and narrative tracks: `docs/PO_THREAD_COPY_TRACKS_V3.md`
 - Messaging working doc: `docs/LANDING_PAGE_MESSAGING_WORKING_DOC.md`
 - Planning context: `docs/LANDING_PAGE_PLAN.md`

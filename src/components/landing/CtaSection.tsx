@@ -13,7 +13,7 @@ const CtaSection = () => {
             5–10 organizations for the first cohort.
           </p>
           <div className="pt-2">
-            <ApplicationTriggerButton>Apply for Cohort 1</ApplicationTriggerButton>
+            <ApplicationTriggerButton>Apply for Pilot</ApplicationTriggerButton>
           </div>
         </div>
       </div>

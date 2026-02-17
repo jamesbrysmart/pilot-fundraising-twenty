@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import ApplicationTriggerButton from "@/components/application/ApplicationTriggerButton";
 import { useDetailsSheet } from "@/components/application/ApplicationSheetProvider";
+import GreenShootMark from "@/components/branding/GreenShootMark";
 
 const Navbar = () => {
   const { openDetails } = useDetailsSheet();
@@ -9,13 +10,14 @@ const Navbar = () => {
     <header className="border-b border-border">
       <div className="container flex h-14 items-center justify-between">
         <div className="flex items-center gap-6">
-          <Link to="/" className="text-sm font-semibold tracking-tight text-foreground">
+          <Link
+            to="/"
+            className="inline-flex items-center gap-2 text-sm font-semibold tracking-tight text-foreground"
+          >
+            <GreenShootMark className="h-6 w-6 md:h-7 md:w-7" />
             Fundraising for Twenty
           </Link>
           <nav className="hidden items-center gap-3 text-xs text-muted-foreground md:flex">
-            <Link to="/" className="transition-colors hover:text-foreground">
-              Landing
-            </Link>
             <button
               type="button"
               onClick={openDetails}
