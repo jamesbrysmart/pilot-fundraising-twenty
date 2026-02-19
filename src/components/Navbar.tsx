@@ -21,7 +21,7 @@ const Navbar = () => {
             <button
               type="button"
               onClick={openDetails}
-              className="transition-colors hover:text-foreground"
+              className="underline underline-offset-4 transition-colors hover:text-foreground"
             >
               Details
             </button>

@@ -4,19 +4,16 @@ import GreenShootMark from "@/components/branding/GreenShootMark";
 
 const pilotJourney = [
   {
-    step: "01",
     title: "Try a modern CRM in real workflow",
     detail:
       "See what modern donor management and campaign workflows feel like, at no cost.",
   },
   {
-    step: "02",
     title: "Leave with clarity and next steps",
     detail:
       "Get a clear assessment of fit and next-step options, even if you do not continue.",
   },
   {
-    step: "03",
     title: "Help prove a better path forward",
     detail:
       "Open-source foundations now, with a community-led direction over time.",
@@ -32,7 +29,7 @@ const HeroSection = () => {
         <div className="grid gap-10 lg:grid-cols-[1fr_0.95fr] lg:items-start lg:gap-14">
           <div className="max-w-2xl space-y-6">
             <div className="flex items-center gap-3">
-              <span className="h-px w-8 bg-foreground/30" />
+              <span className="h-px w-8 bg-[hsl(var(--shoot))] opacity-60" />
               <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground">
                 Launch pilot
               </p>
@@ -60,25 +57,45 @@ const HeroSection = () => {
           </div>
 
           <aside className="lg:pt-10">
-            <div className="border-t border-border pt-8 lg:border-t-0 lg:border-l lg:pt-0 lg:pl-6">
-              <p className="text-[11px] uppercase tracking-wider text-muted-foreground">
+            <div className="border-t border-border pt-8 lg:border-t-0 lg:pt-0">
+              <p className="text-sm font-medium uppercase tracking-widest text-muted-foreground">
                 Thinking about changing your CRM?
               </p>
 
-              <div className="mt-4 space-y-5 md:mt-6 md:space-y-6">
-                {pilotJourney.map((item) => (
-                  <div key={item.step}>
-                    <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                      <p className="text-xs font-medium tabular-nums text-muted-foreground">
-                        {item.step}
-                      </p>
-                      <p className="text-sm font-medium">{item.title}</p>
-                    </div>
-                    <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-                      {item.detail}
-                    </p>
-                  </div>
-                ))}
+              <div className="relative mt-5 md:mt-6">
+                <span
+                  aria-hidden="true"
+                  className="absolute left-0 top-2 h-[calc(100%-16px)] w-px bg-[hsl(var(--shoot))] opacity-30"
+                />
+                <div className="space-y-6">
+                  {pilotJourney.map((item, index) => {
+                    const tickWidth = ["w-6", "w-10", "w-14"][index] ?? "w-10";
+                    return (
+                      <div key={item.title} className="flex items-start gap-4">
+                        <div className={`relative ${tickWidth} pt-2`}>
+                          <span
+                            aria-hidden="true"
+                            className="block h-px w-full bg-[hsl(var(--shoot))] opacity-50"
+                          />
+                          <span
+                            aria-hidden="true"
+                            className="absolute -right-2 top-[calc(0.5rem-0.55em)] text-sm leading-none text-[hsl(var(--shoot))] opacity-60"
+                          >
+                            ›
+                          </span>
+                        </div>
+                        <div className="flex-1">
+                          <p className="text-sm font-medium leading-tight">
+                            {item.title}
+                          </p>
+                          <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+                            {item.detail}
+                          </p>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
             </div>
           </aside>

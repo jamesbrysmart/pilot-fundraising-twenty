@@ -9,7 +9,7 @@ const Navbar = () => {
           Fundraising for Twenty
         </Link>
         <Button asChild size="sm" variant="outline">
-          <Link to="/apply">Apply</Link>
+          <Link to="/">Apply</Link>
         </Button>
       </div>
     </header>

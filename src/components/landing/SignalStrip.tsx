@@ -13,7 +13,11 @@ const signals = [
 
 const SignalStrip = () => {
   return (
-    <section className="border-b border-border">
+    <section className="relative border-b border-border">
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-[hsl(var(--shoot))] opacity-40"
+      />
       <div className="container">
         <div className="grid grid-cols-2 md:grid-cols-4">
           {signals.map((signal, i) => (

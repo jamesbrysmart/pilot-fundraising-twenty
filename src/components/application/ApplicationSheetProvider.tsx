@@ -4,8 +4,6 @@ import {
   useId,
   useMemo,
   useState,
-  type ChangeEvent,
-  type FormEvent,
   type ReactNode,
 } from "react";
 import { useLocation } from "react-router-dom";
@@ -17,26 +15,10 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 import DetailsSheetPanel from "@/components/details/DetailsSheetPanel";
-
-type ApplicationFormData = {
-  name: string;
-  email: string;
-  organization: string;
-  currentCrm: string;
-  goals: string;
-};
-
-type ApplicationUtmData = {
-  source?: string;
-  medium?: string;
-  campaign?: string;
-  content?: string;
-  term?: string;
-};
+import ApplicationForm, {
+  type ApplicationFormResult,
+} from "@/components/application/ApplicationForm";
 
 type ApplicationSheetContextValue = {
   isOpen: boolean;
@@ -51,14 +33,6 @@ type ApplicationSheetContextValue = {
 const ApplicationSheetContext = createContext<
   ApplicationSheetContextValue | undefined
 >(undefined);
-
-const initialFormData: ApplicationFormData = {
-  name: "",
-  email: "",
-  organization: "",
-  currentCrm: "",
-  goals: "",
-};
 
 export const useApplicationSheet = () => {
   const context = useContext(ApplicationSheetContext);
@@ -89,8 +63,7 @@ const ApplicationSheetProvider = ({ children }: { children: ReactNode }) => {
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
-  const [formData, setFormData] = useState<ApplicationFormData>(initialFormData);
-  const [honeypot, setHoneypot] = useState("");
+  const [formKey, setFormKey] = useState(0);
   const formId = useId();
 
   const openApplication = () => {
@@ -112,26 +85,7 @@ const ApplicationSheetProvider = ({ children }: { children: ReactNode }) => {
   };
   const closeDetails = () => setIsDetailsOpen(false);
 
-  const handleChange =
-    (field: keyof ApplicationFormData) =>
-    (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-      setFormData((previous) => ({ ...previous, [field]: event.target.value }));
-    };
-
-  const getUtmData = (): ApplicationUtmData => {
-    const params = new URLSearchParams(window.location.search);
-    const value = (key: string) => params.get(key) ?? undefined;
-    return {
-      source: value("utm_source"),
-      medium: value("utm_medium"),
-      campaign: value("utm_campaign"),
-      content: value("utm_content"),
-      term: value("utm_term"),
-    };
-  };
-
-  const handleSubmit = async (event: FormEvent) => {
-    event.preventDefault();
+  const submitApplication = async (result: ApplicationFormResult) => {
     if (isSubmitting) return;
     setSubmitError(null);
     setIsSubmitting(true);
@@ -141,10 +95,9 @@ const ApplicationSheetProvider = ({ children }: { children: ReactNode }) => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          ...formData,
-          pageUrl: window.location.href,
-          utm: getUtmData(),
-          website: honeypot,
+          ...result.legacy,
+          form: result.form,
+          website: result.honeypot,
         }),
       });
 
@@ -165,8 +118,7 @@ const ApplicationSheetProvider = ({ children }: { children: ReactNode }) => {
     setSubmitted(false);
     setSubmitError(null);
     setIsSubmitting(false);
-    setFormData(initialFormData);
-    setHoneypot("");
+    setFormKey((previous) => previous + 1);
     setIsOpen(false);
   };
 
@@ -216,7 +168,7 @@ const ApplicationSheetProvider = ({ children }: { children: ReactNode }) => {
         <SheetContent
           id="application-sheet"
           side="right"
-          className="w-full overflow-y-auto border-l border-border p-0 sm:max-w-xl [&>button]:hidden"
+          className="w-full overflow-y-auto border-l border-border p-0 sm:max-w-3xl [&>button]:hidden"
         >
           {submitted ? (
             <div className="px-6 pb-10 pt-12">
@@ -240,7 +192,7 @@ const ApplicationSheetProvider = ({ children }: { children: ReactNode }) => {
                       Apply for Pilot
                     </SheetTitle>
                     <SheetDescription>
-                      Short application: five fields, about 3-5 minutes.
+                      Short application: three sections, about 3-5 minutes.
                     </SheetDescription>
                   </div>
                   <button
@@ -253,94 +205,19 @@ const ApplicationSheetProvider = ({ children }: { children: ReactNode }) => {
                 </div>
               </SheetHeader>
 
-              <form onSubmit={handleSubmit} className="space-y-6 px-6 py-6">
-                <div
-                  aria-hidden="true"
-                  className="absolute left-[-10000px] top-auto h-px w-px overflow-hidden"
-                >
-                  <Label htmlFor={`${formId}-website`}>Website</Label>
-                  <Input
-                    id={`${formId}-website`}
-                    tabIndex={-1}
-                    autoComplete="off"
-                    value={honeypot}
-                    onChange={(event) => setHoneypot(event.target.value)}
-                  />
-                </div>
+              <ApplicationForm
+                key={formKey}
+                idPrefix={formId}
+                disabled={isSubmitting}
+                submitting={isSubmitting}
+                onSubmit={submitApplication}
+              />
 
-                <div className="space-y-2">
-                  <Label htmlFor={`${formId}-name`}>Your name</Label>
-                  <Input
-                    id={`${formId}-name`}
-                    required
-                    placeholder="Jane Smith"
-                    value={formData.name}
-                    onChange={handleChange("name")}
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor={`${formId}-email`}>Work email</Label>
-                  <Input
-                    id={`${formId}-email`}
-                    type="email"
-                    required
-                    placeholder="jane@nonprofit.org"
-                    value={formData.email}
-                    onChange={handleChange("email")}
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor={`${formId}-organization`}>Organization</Label>
-                  <Input
-                    id={`${formId}-organization`}
-                    required
-                    placeholder="Community Foundation of..."
-                    value={formData.organization}
-                    onChange={handleChange("organization")}
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor={`${formId}-crm`}>Current CRM (optional)</Label>
-                  <Input
-                    id={`${formId}-crm`}
-                    placeholder="Bloomerang, Salesforce, spreadsheets..."
-                    value={formData.currentCrm}
-                    onChange={handleChange("currentCrm")}
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor={`${formId}-goals`}>
-                    What do you want to evaluate in the pilot?
-                  </Label>
-                  <Textarea
-                    id={`${formId}-goals`}
-                    required
-                    rows={4}
-                    placeholder="A few sentences is enough."
-                    value={formData.goals}
-                    onChange={handleChange("goals")}
-                  />
-                </div>
-
-                <div className="flex items-center justify-between gap-4 pt-1">
-                  <p className="text-xs text-muted-foreground">
-                    No commitment required to apply.
-                  </p>
-                  <Button type="submit" disabled={isSubmitting}>
-                    {isSubmitting ? "Submitting..." : "Submit application"}
-                  </Button>
-                </div>
-
-                {submitError ? (
-                  <p className="text-sm text-destructive" role="alert">
-                    {submitError}
-                  </p>
-                ) : null}
-              </form>
+              {submitError ? (
+                <p className="-mt-2 px-6 pb-6 text-sm text-destructive" role="alert">
+                  {submitError}
+                </p>
+              ) : null}
             </>
           )}
         </SheetContent>

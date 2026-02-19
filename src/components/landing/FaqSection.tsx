@@ -4,37 +4,54 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { useDetailsSheet } from "@/components/application/ApplicationSheetProvider";
 
 const faqs = [
   {
     q: "Is it really free?",
-    a: "Yes. There's no cost to participate in the pilot. We're investing in learning alongside early adopters.",
+    a: "Yes. Pilot participation is free, including Twenty licenses and the workshops/config support during the pilot.",
   },
   {
-    q: "How many organizations are selected?",
-    a: "5–10 for Pilot. We're keeping the group small so every participant gets direct support and meaningful input into the roadmap.",
+    q: "Do we have to switch CRMs during the pilot?",
+    a: "No. The pilot runs alongside your current system so you can evaluate without a forced cutover.",
   },
   {
-    q: "What level of effort is required?",
-    a: "Expect a few hours for onboarding and setup, then normal usage during the 4-week pilot. Weekly check-ins are brief.",
+    q: "What does “real data” mean?",
+    a: "It means you’ll test real workflows using representative data, so you can compare against your current system and make a confident decision.",
   },
   {
-    q: "Is this production-ready?",
-    a: "It's early-stage software. The pilot is designed to evaluate fit and surface gaps — not to replace your existing systems on day one.",
+    q: "How much effort is required?",
+    a: "We’ll keep the cadence predictable: a workflow workshop up front, then normal usage during the pilot with brief weekly check-ins. You’ll want one internal owner (a point person) to run the pilot on your side.",
+  },
+  {
+    q: "What about data privacy and access?",
+    a: "We’ll agree the scope up front and keep access limited to what’s needed. We suggest using a scoped slice of your data so you can test real workflows and see what migration readiness looks like, without pulling everything in.",
+    moreDetails: true,
+  },
+  {
+    q: "How are organizations selected, and when will we hear back?",
+    a: "We’re selecting a small cohort (5–10 orgs) and looking for teams with active fundraising workflows and someone able to own the pilot internally. Applications are reviewed on a rolling basis.",
   },
   {
     q: "What happens after the pilot?",
-    a: "You'll have a clear assessment of whether this works for you. If it does, there's an optional path to continue. If not, you walk away with no obligations.",
+    a: "You can stop cleanly with what you learned, or continue into full migration + additional customization if it’s a good fit. Commercial terms are discussed after evaluation.",
+    moreDetails: true,
   },
 ];
 
 const FaqSection = () => {
+  const { openDetails } = useDetailsSheet();
+
   return (
     <section className="border-t border-border bg-secondary/40">
       <div className="container py-24 md:py-32">
         <div className="grid gap-12 md:grid-cols-[1fr_2fr]">
           <div>
             <p className="text-[11px] uppercase tracking-wider text-muted-foreground mb-3">
+              <span
+                aria-hidden="true"
+                className="mr-2 inline-block h-1.5 w-1.5 translate-y-[-0.08em] rounded-full bg-[hsl(var(--shoot))]"
+              />
               FAQ
             </p>
             <h2 className="text-lg font-semibold">Common questions</h2>
@@ -46,7 +63,16 @@ const FaqSection = () => {
                   {faq.q}
                 </AccordionTrigger>
                 <AccordionContent className="text-sm text-muted-foreground leading-relaxed">
-                  {faq.a}
+                  <p>{faq.a}</p>
+                  {faq.moreDetails ? (
+                    <button
+                      type="button"
+                      onClick={openDetails}
+                      className="mt-3 text-sm text-muted-foreground underline underline-offset-2 transition-colors hover:text-foreground"
+                    >
+                      More details
+                    </button>
+                  ) : null}
                 </AccordionContent>
               </AccordionItem>
             ))}

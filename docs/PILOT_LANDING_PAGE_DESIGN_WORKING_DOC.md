@@ -12,7 +12,7 @@ Guidance note:
 ## 0) Current Iteration Model (Routes)
 Active implementation model:
 - Landing page baseline: `/`
-- Shared application route: `/apply`
+- Application surface: in-page application sheet/panel on `/`
 
 Notes:
 - Variant exploration is paused.
@@ -69,7 +69,7 @@ We optimize in this order unless leadership changes priorities:
 - reduce low-fit applications without exclusionary tone.
 
 5. Application friction tuning
-- keep `/apply` aligned with qualification quality goals,
+- keep the application sheet aligned with qualification quality goals,
 - adjust form depth only when it improves applicant quality.
 
 ## 5) Improvement Levers (Small Scope)

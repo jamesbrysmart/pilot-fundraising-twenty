@@ -295,7 +295,7 @@ const PilotDetails = ({ open, onClose }: PilotDetailsProps) => {
             ))}
             <div className="mt-auto pt-6">
               <Button asChild size="sm" className="w-full">
-                <Link to="/apply" onClick={onClose}>
+                <Link to="/" onClick={onClose}>
                   Apply for Cohort 1
                 </Link>
               </Button>
@@ -334,7 +334,7 @@ const PilotDetails = ({ open, onClose }: PilotDetailsProps) => {
             {/* Mobile CTA */}
             <div className="md:hidden pt-8 pb-12">
               <Button asChild size="sm">
-                <Link to="/apply" onClick={onClose}>
+                <Link to="/" onClick={onClose}>
                   Apply for Cohort 1
                 </Link>
               </Button>

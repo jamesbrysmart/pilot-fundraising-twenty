@@ -15,7 +15,7 @@ const CtaSection = () => {
           </p>
           <div className="pt-2">
             <Button asChild size="default">
-              <Link to="/apply">Apply for Cohort 1</Link>
+              <Link to="/">Apply for Cohort 1</Link>
             </Button>
           </div>
         </div>

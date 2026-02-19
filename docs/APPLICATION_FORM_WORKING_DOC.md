@@ -2,14 +2,14 @@
 
 Status: Working
 Owner: Product / Engineering
-Last updated: 2026-02-16
+Last updated: 2026-02-19
 
 ## Purpose
 This document aligns the team on:
 - what the application form is (and is not) in this pilot funnel,
 - what data we collect and why,
 - how submissions are captured for short-term pilot operations,
-- the smallest reliable test setup (so we don't overbuild or bake in assumptions).
+- how we keep capture reliable without overbuilding.
 
 This is an alignment doc, not a UI spec. The form UI can evolve as long as intent and capture remain consistent.
 
@@ -19,16 +19,15 @@ This is an alignment doc, not a UI spec. The form UI can evolve as long as inten
 - We optimize for qualified applications, not raw volume.
 
 ## Current Implementation Snapshot (Code Reality)
-As of 2026-02-16:
+As of 2026-02-19:
 - The active experience is the application sheet/panel on `/`.
-- Submissions are currently not persisted anywhere; submit triggers a local success state only.
+- Submissions from the application sheet are captured server-side via `POST /api/apply` (NDJSON by default, or Google Sheets when configured).
 
 Primary form implementation:
 - `src/components/application/ApplicationSheetProvider.tsx`
 
 Other notes:
-- `src/pages/Apply.tsx` exists but is not currently wired into routing (`src/App.tsx` only routes `/`).
-- Some docs reference a shared `/apply` route; treat that as a potential re-introduction, not current behavior.
+- Keep the experience as a single-page app: the application surface lives on `/` as an in-page sheet/panel.
 
 ## Form Data (Baseline Fields)
 Current fields in the application sheet:
@@ -51,7 +50,7 @@ Guidance:
 ## Submission Semantics
 Definition: a submission is "captured" only when it has been written to the chosen system of record (not when the UI shows success).
 
-Recommended semantics:
+Guideline:
 - UI shows success only after we receive `2xx` from the capture endpoint.
 - On failure:
   - show an error toast/message,
@@ -81,7 +80,7 @@ Cons:
 When to choose:
 - We need to be live in hours and accept UX compromise temporarily.
 
-### Option B: Site Form UI + Vercel Function -> Google Sheets (Recommended Default)
+### Option B: Site Form UI + Serverless Function -> Google Sheets
 How it works:
 - Keep current React form UI.
 - Browser `POST`s to `/api/apply`.
@@ -151,35 +150,6 @@ Regardless of capture option, we should store (or email) these fields:
 - Do we need a "copy to applicant" email now, or only internal notification?
 - Expected volume and spam tolerance (do we need CAPTCHA on day 1?).
 - Any compliance constraints (PII handling expectations)?
-
-## Proposed Test Plan (Smallest Reliable)
-Goal: validate capture end-to-end with minimal build.
-
-Phase 1 (today):
-- Implement capture via Option B or Option D.
-- Verify:
-  - success path writes/alerts correctly,
-  - failure path preserves form values and allows retry,
-  - basic spam mitigation (at least a honeypot; ideally CAPTCHA).
-
-Phase 2 (after initial traffic):
-- Add:
-  - UTM capture,
-  - better operational notifications (email/slack),
-  - dedupe behavior if needed (email + day window).
-
-## Local Setup (Recommended)
-Local-first behavior is:
-- `POST /api/apply` writes to an NDJSON file (default: `/tmp/fundraising-pilot-applications.ndjson`).
-- The UI shows success only after the endpoint returns `2xx`.
-
-Environment:
-- Copy `.env.example` to `.env.local` (or set env vars in your shell).
-- Default is `CAPTURE_MODE=ndjson`.
-
-Dev server:
-- Recommended: use `vercel dev` so `/api/*` works locally the same way it will on Vercel.
-- Alternative: deploy first and test on the Vercel preview URL (if you want to avoid installing Vercel CLI).
 
 ## Deploy Notes (Option B)
 Google Sheets mode:

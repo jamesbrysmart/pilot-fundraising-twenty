@@ -8,8 +8,7 @@ Guidance note:
 
 ## Working Context (Current Build)
 Current routes for iteration:
-- `/` = active landing copy track
-- `/apply` = shared application page
+- `/` = active landing copy track + application sheet/panel (primary apply surface)
 
 Iteration rule:
 - Current execution is baseline-first iteration on `/`.

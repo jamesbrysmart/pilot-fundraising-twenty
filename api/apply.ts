@@ -67,6 +67,15 @@ function validateEmail(value: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 }
 
+function pickRecord(value: unknown): JsonRecord | null {
+  return typeof value === "object" && value ? (value as JsonRecord) : null;
+}
+
+function pickRecordString(record: JsonRecord | null, key: string): string {
+  if (!record) return "";
+  return pickString(record[key]);
+}
+
 async function appendToNdjson(path: string, record: JsonRecord) {
   await fs.appendFile(path, `${JSON.stringify(record)}\n`, "utf8");
 }
@@ -183,7 +192,7 @@ export default async function handler(req: any, res: any) {
     const currentCrm = pickString(body.currentCrm);
     const goals = pickString(body.goals);
 
-    if (!name || !email || !organization || !goals) {
+    if (!name || !email || !organization || !currentCrm) {
       json(res, 400, { ok: false, error: "Missing required fields" });
       return;
     }
@@ -193,9 +202,16 @@ export default async function handler(req: any, res: any) {
     }
 
     const submittedAt = new Date().toISOString();
-    const pageUrl = pickString(body.pageUrl);
-    const userAgent = pickString(req.headers?.["user-agent"]);
-    const utm = (typeof body.utm === "object" && body.utm ? body.utm : {}) as JsonRecord;
+    const form = pickRecord(body.form);
+
+    const currentSystem = pickRecordString(form, "currentSystem");
+    const currentSystemOther = pickRecordString(form, "currentSystemOther");
+    const currentSystemValue =
+      currentSystem === "Other"
+        ? currentSystemOther
+          ? `Other: ${currentSystemOther}`
+          : "Other"
+        : currentSystem;
 
     const record: JsonRecord = {
       submittedAt,
@@ -204,9 +220,7 @@ export default async function handler(req: any, res: any) {
       organization,
       currentCrm,
       goals,
-      pageUrl,
-      utm,
-      userAgent,
+      form: form ?? undefined,
     };
 
     const captureMode = (getEnv("CAPTURE_MODE") ?? "ndjson").toLowerCase();
@@ -256,14 +270,16 @@ export default async function handler(req: any, res: any) {
         accessToken,
         row: [
           submittedAt,
-          name,
-          email,
-          organization,
-          currentCrm,
-          goals,
-          pageUrl,
-          userAgent,
-          JSON.stringify(utm),
+          pickRecordString(form, "contactName") || name,
+          pickRecordString(form, "contactEmail") || email,
+          pickRecordString(form, "orgName") || organization,
+          pickRecordString(form, "orgWebsite"),
+          pickRecordString(form, "country"),
+          currentSystemValue || currentCrm,
+          pickRecordString(form, "annualFundraisingVolumeBand"),
+          pickRecordString(form, "donationsPerMonthBand"),
+          pickRecordString(form, "crmChangeReason"),
+          pickRecordString(form, "pilotNotes"),
         ],
       });
 

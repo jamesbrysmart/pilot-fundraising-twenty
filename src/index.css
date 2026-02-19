@@ -80,10 +80,19 @@
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
   * {
     @apply border-border;
   }
   body {
     @apply bg-background text-foreground font-sans antialiased;
+  }
+  :where(a.underline, button.underline) {
+    text-decoration-color: hsl(var(--border));
+  }
+  :where(a.underline, button.underline):is(:hover, :focus-visible) {
+    text-decoration-color: hsl(var(--shoot));
   }
 }

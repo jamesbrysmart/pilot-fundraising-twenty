@@ -29,7 +29,7 @@ const HeroSection = ({ onOpenDetails }: HeroSectionProps) => {
           </p>
           <div className="flex items-center gap-4 pt-2">
             <Button asChild size="default">
-              <Link to="/apply">Apply for Cohort 1</Link>
+              <Link to="/">Apply for Cohort 1</Link>
             </Button>
             {onOpenDetails && (
               <button

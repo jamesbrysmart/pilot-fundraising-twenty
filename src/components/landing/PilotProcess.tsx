@@ -1,23 +1,24 @@
 const steps = [
   {
     number: "01",
-    title: "Fit conversation",
-    detail: "Short call to assess alignment.",
+    title: "Fit conversation + selection",
+    detail: "Short call and cohort selection for a small group.",
   },
   {
     number: "02",
-    title: "Scoped setup",
-    detail: "Controlled migration of bounded data.",
+    title: "Workflow workshop + scope",
+    detail: "Process mapping, in-scope agreement, and the data slice to use.",
   },
   {
     number: "03",
-    title: "4-week pilot",
-    detail: "Real workflow. Weekly check-ins.",
+    title: "Pilot execution",
+    detail:
+      "Use it as a helpful mirror for real workflows: compare, iterate, and learn without running everything twice.",
   },
   {
     number: "04",
-    title: "Your decision",
-    detail: "Stop cleanly, or continue.",
+    title: "Review + decision",
+    detail: "Documented findings and clear next steps: stop, or continue.",
   },
 ];
 
@@ -26,15 +27,17 @@ const PilotProcess = () => {
     <section className="border-y border-border bg-secondary/40">
       <div className="container py-24 md:py-32">
         <div className="mb-12 max-w-2xl space-y-3">
-          <p className="text-[11px] uppercase tracking-wider text-muted-foreground">
-            03 Structure
-          </p>
           <h2 className="text-xl font-semibold tracking-tight md:text-2xl">
+            <span
+              aria-hidden="true"
+              className="mr-2 inline-block h-1.5 w-1.5 translate-y-[-0.08em] rounded-full bg-[hsl(var(--shoot))]"
+            />
             Pilot operating model
           </h2>
           <p className="text-sm leading-relaxed text-muted-foreground">
-            A bounded sequence from fit check to decision, designed to keep risk
-            visible and workload predictable.
+            After selection, everything below happens inside a single 4-week
+            pilot designed to keep effort predictable and produce a clear
+            decision.
           </p>
         </div>
 
@@ -42,10 +45,16 @@ const PilotProcess = () => {
           {steps.map((step, i) => (
             <div
               key={step.number}
-              className={`grid grid-cols-[auto_1fr] items-baseline gap-6 py-5 md:gap-10 ${
+              className={`relative grid grid-cols-[auto_1fr] items-baseline gap-6 py-5 md:gap-10 ${
                 i < steps.length - 1 ? "border-b border-border" : ""
               }`}
             >
+              {i < steps.length - 1 ? (
+                <span
+                  aria-hidden="true"
+                  className="absolute bottom-0 left-0 h-px w-10 bg-[hsl(var(--shoot))] opacity-50"
+                />
+              ) : null}
               <span className="text-2xl md:text-3xl font-semibold text-muted-foreground/40 tabular-nums w-10 md:w-14">
                 {step.number}
               </span>
