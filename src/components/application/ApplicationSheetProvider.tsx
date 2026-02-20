@@ -18,6 +18,9 @@ import {
 import DetailsSheetPanel from "@/components/details/DetailsSheetPanel";
 import ApplicationForm, {
   type ApplicationFormResult,
+  initialForm,
+  type ApplicationFormSection,
+  type ApplicationFormV1,
 } from "@/components/application/ApplicationForm";
 
 type ApplicationSheetContextValue = {
@@ -26,7 +29,7 @@ type ApplicationSheetContextValue = {
   closeApplication: () => void;
   toggleApplication: () => void;
   isDetailsOpen: boolean;
-  openDetails: () => void;
+  openDetails: (sectionId?: string) => void;
   closeDetails: () => void;
 };
 
@@ -60,10 +63,15 @@ const ApplicationSheetProvider = ({ children }: { children: ReactNode }) => {
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
+  const [detailsSectionId, setDetailsSectionId] = useState<string | undefined>(
+    undefined,
+  );
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [formKey, setFormKey] = useState(0);
+  const [draftSection, setDraftSection] = useState<ApplicationFormSection>("org");
+  const [draftForm, setDraftForm] = useState<ApplicationFormV1>(initialForm);
   const formId = useId();
 
   const openApplication = () => {
@@ -79,8 +87,9 @@ const ApplicationSheetProvider = ({ children }: { children: ReactNode }) => {
       }
       return next;
     });
-  const openDetails = () => {
+  const openDetails = (sectionId?: string) => {
     setIsOpen(false);
+    setDetailsSectionId(sectionId);
     setIsDetailsOpen(true);
   };
   const closeDetails = () => setIsDetailsOpen(false);
@@ -119,6 +128,8 @@ const ApplicationSheetProvider = ({ children }: { children: ReactNode }) => {
     setSubmitError(null);
     setIsSubmitting(false);
     setFormKey((previous) => previous + 1);
+    setDraftSection("org");
+    setDraftForm(initialForm);
     setIsOpen(false);
   };
 
@@ -194,6 +205,9 @@ const ApplicationSheetProvider = ({ children }: { children: ReactNode }) => {
                     <SheetDescription>
                       Short application: three sections, about 3-5 minutes.
                     </SheetDescription>
+                    <p className="text-xs leading-relaxed text-muted-foreground">
+                      You can hide this panel without losing what you’ve entered. Progress isn’t saved if you refresh.
+                    </p>
                   </div>
                   <button
                     type="button"
@@ -210,6 +224,10 @@ const ApplicationSheetProvider = ({ children }: { children: ReactNode }) => {
                 idPrefix={formId}
                 disabled={isSubmitting}
                 submitting={isSubmitting}
+                value={draftForm}
+                onChange={setDraftForm}
+                activeSection={draftSection}
+                onActiveSectionChange={setDraftSection}
                 onSubmit={submitApplication}
               />
 
@@ -225,6 +243,7 @@ const ApplicationSheetProvider = ({ children }: { children: ReactNode }) => {
 
       <DetailsSheetPanel
         open={isDetailsOpen}
+        initialSectionId={detailsSectionId}
         onOpenChange={(nextOpen) => {
           setIsDetailsOpen(nextOpen);
           if (nextOpen) {

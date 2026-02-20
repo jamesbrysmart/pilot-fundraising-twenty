@@ -32,7 +32,7 @@ const sections: DetailsSection[] = [
           >
             Twenty
           </a>{" "}
-          — a modern open-source CRM platform. This pilot is a community-built
+          - a modern open-source CRM platform. This pilot is a community-built
           extension, not an official Twenty product.
         </p>
         <p className="text-sm leading-relaxed text-muted-foreground">
@@ -79,7 +79,7 @@ const sections: DetailsSection[] = [
           ))}
         </div>
         <p className="text-sm leading-relaxed text-muted-foreground">
-          These capabilities were designed around real fundraising workflows —
+          These capabilities were designed around real fundraising workflows -
           unlike legacy platforms, the
           underlying architecture is modern, extensible, and doesn&apos;t carry
           decades of technical debt.
@@ -232,6 +232,15 @@ const sections: DetailsSection[] = [
             ))}
           </ul>
         </div>
+
+        <div className="space-y-2 border-t border-border pt-5">
+          <p className="text-sm font-medium text-foreground">After the pilot</p>
+          <p className="text-sm leading-relaxed text-muted-foreground">
+            If you want more detail on what continuation could look like
+            (including commercial terms), contact us. We discuss options after
+            the evaluation, once scope and fit are clear.
+          </p>
+        </div>
       </div>
     ),
   },
@@ -245,7 +254,7 @@ const sections: DetailsSection[] = [
         </p>
         <div className="space-y-4">
           {[
-            "This is a limited cohort — we're selecting 5–10 organizations, not running an open beta.",
+            "This is a limited cohort - we're selecting 5–10 organizations, not running an open beta.",
             "The product is early-stage. Some features will be rough. Some workflows will need adjustment.",
             "We're building deliberately, not racing to ship features. Progress is steady but measured.",
             "You'll be working with a small team that's responsive but not a large support organization.",
@@ -272,6 +281,7 @@ const sections: DetailsSection[] = [
 
 type DetailsSheetPanelProps = {
   open: boolean;
+  initialSectionId?: string;
   onOpenChange: (open: boolean) => void;
   onClose: () => void;
   onOpenApplication: () => void;
@@ -279,8 +289,9 @@ type DetailsSheetPanelProps = {
 
 const DetailsSheetPanel = ({
   open,
+  initialSectionId,
   onOpenChange,
-  onClose,
+  onClose: _onClose,
   onOpenApplication,
 }: DetailsSheetPanelProps) => {
   const [activeSection, setActiveSection] = useState(sections[0].id);
@@ -288,9 +299,12 @@ const DetailsSheetPanel = ({
 
   useEffect(() => {
     if (open) {
-      setActiveSection(sections[0].id);
+      const requested = initialSectionId
+        ? sections.find((section) => section.id === initialSectionId)?.id
+        : undefined;
+      setActiveSection(requested ?? sections[0].id);
     }
-  }, [open]);
+  }, [initialSectionId, open]);
 
   const current = sections.find((section) => section.id === activeSection);
 
@@ -298,25 +312,16 @@ const DetailsSheetPanel = ({
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent
         side="right"
-        className="w-full overflow-y-auto border-l border-border p-0 sm:max-w-5xl [&>button]:hidden"
+        className="w-full overflow-y-auto border-l border-border p-0 sm:max-w-5xl"
       >
         <SheetHeader className="space-y-2 border-b border-border px-6 py-6 text-left">
-          <div className="flex items-start justify-between gap-4">
-            <div className="space-y-2">
-              <SheetTitle className="text-xl tracking-tight">
-                Pilot details
-              </SheetTitle>
-              <SheetDescription>
-                Structured answers for key fit, risk, and commitment questions.
-              </SheetDescription>
-            </div>
-            <button
-              type="button"
-              onClick={onClose}
-              className="rounded-md border border-border bg-background px-3 py-2 text-xs uppercase tracking-wider text-muted-foreground transition-colors hover:text-foreground"
-            >
-              Hide to edge -&gt;
-            </button>
+          <div className="space-y-2">
+            <SheetTitle className="text-xl tracking-tight">
+              Pilot details
+            </SheetTitle>
+            <SheetDescription>
+              Structured answers for key fit, risk, and commitment questions.
+            </SheetDescription>
           </div>
         </SheetHeader>
 

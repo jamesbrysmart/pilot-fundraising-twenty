@@ -9,7 +9,7 @@ import { useDetailsSheet } from "@/components/application/ApplicationSheetProvid
 const faqs = [
   {
     q: "Is it really free?",
-    a: "Yes. Pilot participation is free, including Twenty licenses and the workshops/config support during the pilot.",
+    a: "Yes. Pilot participation is free, including Twenty licenses plus the workshops and configuration support during the pilot.",
   },
   {
     q: "Do we have to switch CRMs during the pilot?",
@@ -48,10 +48,6 @@ const FaqSection = () => {
         <div className="grid gap-12 md:grid-cols-[1fr_2fr]">
           <div>
             <p className="text-[11px] uppercase tracking-wider text-muted-foreground mb-3">
-              <span
-                aria-hidden="true"
-                className="mr-2 inline-block h-1.5 w-1.5 translate-y-[-0.08em] rounded-full bg-[hsl(var(--shoot))]"
-              />
               FAQ
             </p>
             <h2 className="text-lg font-semibold">Common questions</h2>

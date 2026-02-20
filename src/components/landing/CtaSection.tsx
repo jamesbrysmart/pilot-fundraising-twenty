@@ -9,18 +9,13 @@ const CtaSection = () => {
       <div className="container py-24 md:py-32">
         <div className="max-w-md space-y-4">
           <h2 className="text-xl font-semibold tracking-tight md:text-2xl">
-            <span
-              aria-hidden="true"
-              className="mr-2 inline-block h-1.5 w-1.5 translate-y-[-0.08em] rounded-full bg-[hsl(var(--shoot))]"
-            />
             Interested?
           </h2>
           <p className="text-sm text-muted-foreground leading-relaxed">
-            Applications are reviewed on a rolling basis. We're selecting
-            5–10 organizations for the first cohort.
+            Applications are reviewed on a rolling basis. We&apos;re selecting 5–10 organisations and will close applications once the pilot is full.
           </p>
           <div className="flex items-center gap-4 pt-2">
-            <ApplicationTriggerButton>Apply for Pilot</ApplicationTriggerButton>
+            <ApplicationTriggerButton>Apply for the pilot</ApplicationTriggerButton>
             <button
               type="button"
               onClick={openDetails}

@@ -4,7 +4,7 @@ import GreenShootMark from "@/components/branding/GreenShootMark";
 
 const pilotJourney = [
   {
-    title: "Try a modern CRM in real workflow",
+    title: "Try a modern CRM in real workflows",
     detail:
       "See what modern donor management and campaign workflows feel like, at no cost.",
   },
@@ -65,7 +65,7 @@ const HeroSection = () => {
               <div className="relative mt-5 md:mt-6">
                 <span
                   aria-hidden="true"
-                  className="absolute left-0 top-2 h-[calc(100%-16px)] w-px bg-[hsl(var(--shoot))] opacity-30"
+                  className="absolute left-0 top-2 h-[calc(100%-16px)] w-px bg-border"
                 />
                 <div className="space-y-6">
                   {pilotJourney.map((item, index) => {
@@ -75,7 +75,7 @@ const HeroSection = () => {
                         <div className={`relative ${tickWidth} pt-2`}>
                           <span
                             aria-hidden="true"
-                            className="block h-px w-full bg-[hsl(var(--shoot))] opacity-50"
+                            className="block h-px w-full bg-border"
                           />
                           <span
                             aria-hidden="true"

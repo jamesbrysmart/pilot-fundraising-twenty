@@ -12,7 +12,12 @@ import {
 } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
-import { Check } from "lucide-react";
+import { Check, ChevronDown } from "lucide-react";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
 
 export type ApplicationFormSection = "org" | "setup" | "readiness";
 
@@ -51,14 +56,18 @@ type Props = {
   submitting?: boolean;
   idPrefix: string;
   onSubmit: (result: ApplicationFormResult) => void;
+  value?: ApplicationFormV1;
+  onChange?: (next: ApplicationFormV1) => void;
+  activeSection?: ApplicationFormSection;
+  onActiveSectionChange?: (next: ApplicationFormSection) => void;
 };
 
 const revenueBands = [
-  "Under $250k",
-  "$250k-$1M",
-  "$1M-$5M",
-  "$5M-$20M",
-  "$20M+",
+  "Under £250k",
+  "£250k-£1M",
+  "£1M-£5M",
+  "£5M-£20M",
+  "£20M+",
   "Not sure",
 ] as const;
 
@@ -83,7 +92,7 @@ const currentSystems = [
   "Not sure",
 ] as const;
 
-const initialForm: ApplicationFormV1 = {
+export const initialForm: ApplicationFormV1 = {
   orgName: "",
   orgWebsite: "",
   country: "",
@@ -120,6 +129,11 @@ function normalizeEmail(value: string): string {
   return value.trim();
 }
 
+function isValidEmail(value: string): boolean {
+  // Pragmatic validation: good UX without trying to fully implement RFC 5322.
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+}
+
 function buildCurrentCrm(form: ApplicationFormV1): string {
   if (!form.currentSystem) return "";
   if (form.currentSystem !== "Other") return form.currentSystem;
@@ -131,7 +145,8 @@ function requiredMissing(form: ApplicationFormV1): FieldKey[] {
   const missing: FieldKey[] = [];
   if (!form.orgName.trim()) missing.push("orgName");
   if (!form.contactName.trim()) missing.push("contactName");
-  if (!normalizeEmail(form.contactEmail)) missing.push("contactEmail");
+  const email = normalizeEmail(form.contactEmail);
+  if (!email || !isValidEmail(email)) missing.push("contactEmail");
   if (!form.currentSystem) missing.push("currentSystem");
   if (!form.donationsPerMonthBand) missing.push("donationsPerMonthBand");
   if (!form.annualFundraisingVolumeBand) {
@@ -152,7 +167,7 @@ function friendlyMissingLabel(key: FieldKey): string {
     case "contactName":
       return "Primary contact name";
     case "contactEmail":
-      return "Primary contact email";
+      return "Valid work email";
     case "currentSystem":
       return "Current system";
     case "donationsPerMonthBand":
@@ -167,11 +182,49 @@ export default function ApplicationForm({
   submitting,
   idPrefix,
   onSubmit,
+  value,
+  onChange,
+  activeSection: controlledActiveSection,
+  onActiveSectionChange,
 }: Props) {
-  const [activeSection, setActiveSection] = useState<ApplicationFormSection>("org");
-  const [form, setForm] = useState<ApplicationFormV1>(initialForm);
+  const [internalActiveSection, setInternalActiveSection] =
+    useState<ApplicationFormSection>("org");
+  const activeSection = controlledActiveSection ?? internalActiveSection;
+
+  const [internalForm, setInternalForm] = useState<ApplicationFormV1>(initialForm);
+  const form = value ?? internalForm;
+
+  const setForm = (
+    updater:
+      | ApplicationFormV1
+      | ((previous: ApplicationFormV1) => ApplicationFormV1),
+  ) => {
+    const next = typeof updater === "function" ? (updater as any)(form) : updater;
+    if (onChange) {
+      onChange(next);
+    } else {
+      setInternalForm(next);
+    }
+  };
+
+  const setActiveSection = (
+    updater:
+      | ApplicationFormSection
+      | ((previous: ApplicationFormSection) => ApplicationFormSection),
+  ) => {
+    const next =
+      typeof updater === "function"
+        ? (updater as any)(activeSection)
+        : updater;
+    if (onActiveSectionChange) {
+      onActiveSectionChange(next);
+    } else {
+      setInternalActiveSection(next);
+    }
+  };
   const [honeypot, setHoneypot] = useState("");
   const [attemptedSubmit, setAttemptedSubmit] = useState(false);
+  const [pilotDetailsOpen, setPilotDetailsOpen] = useState(false);
 
   const fieldRefs = useRef<Record<string, HTMLElement | null>>({});
 
@@ -212,8 +265,7 @@ export default function ApplicationForm({
     });
   };
 
-  const handleSubmit = (event: FormEvent) => {
-    event.preventDefault();
+  const handleSubmit = () => {
     setAttemptedSubmit(true);
 
     const nextMissing = requiredMissing(form);
@@ -250,11 +302,15 @@ export default function ApplicationForm({
     });
   };
 
+  const handleFormSubmit = (event: FormEvent) => {
+    event.preventDefault();
+  };
+
   const showInlineError = (field: FieldKey) =>
     attemptedSubmit && missing.includes(field);
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-5 px-6 py-6">
+    <form onSubmit={handleFormSubmit} className="space-y-5 px-6 py-6">
       <div
         aria-hidden="true"
         className="absolute left-[-10000px] top-auto h-px w-px overflow-hidden"
@@ -287,7 +343,7 @@ export default function ApplicationForm({
               )}
             >
               <span>{label}</span>
-              {sectionComplete(form, section) ? (
+              {section !== "readiness" && sectionComplete(form, section) ? (
                 <Check className="h-3.5 w-3.5 text-muted-foreground" aria-hidden="true" />
               ) : null}
             </TabsTrigger>
@@ -321,14 +377,28 @@ export default function ApplicationForm({
                 type="email"
                 value={form.contactEmail}
                 onChange={(e) => setForm((p) => ({ ...p, contactEmail: e.target.value }))}
+                onBlur={() => {
+                  const next = normalizeEmail(form.contactEmail);
+                  if (next !== form.contactEmail) {
+                    setForm((previous) => ({ ...previous, contactEmail: next }));
+                  }
+                }}
                 ref={(el) => {
                   fieldRefs.current.contactEmail = el;
                 }}
                 aria-invalid={showInlineError("contactEmail")}
+                autoComplete="email"
+                inputMode="email"
+                spellCheck={false}
+                autoCapitalize="none"
                 placeholder="jane@nonprofit.org"
               />
               {showInlineError("contactEmail") ? (
-                <p className="text-xs text-destructive">Required.</p>
+                <p className="text-xs text-destructive">
+                  {normalizeEmail(form.contactEmail)
+                    ? "Enter a valid email address."
+                    : "Required."}
+                </p>
               ) : null}
             </div>
           </div>
@@ -365,12 +435,14 @@ export default function ApplicationForm({
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor={`${idPrefix}-country`}>Country</Label>
+              <Label htmlFor={`${idPrefix}-country`}>
+                Country <span className="text-muted-foreground">(optional)</span>
+              </Label>
               <Input
                 id={`${idPrefix}-country`}
                 value={form.country}
                 onChange={(e) => setForm((p) => ({ ...p, country: e.target.value }))}
-                placeholder="United States"
+                placeholder="United Kingdom"
               />
             </div>
           </div>
@@ -494,27 +566,84 @@ export default function ApplicationForm({
 
         <TabsContent value="readiness" className="mt-0 space-y-5 pt-5">
           <div className="space-y-2">
-            <div className="rounded-md bg-muted/30 p-4">
-              <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">
-                Pilot Reminder
-              </p>
-              <ul className="mt-3 space-y-2.5">
-                {[
-                  "March-April pilot (4 weeks).",
-                  "Week 1 includes a fundraising team workshop to agree the workflows we'll test.",
-                  "We'll ask for a point person internally to coordinate setup and weekly check-ins.",
-                  "We are selecting 5-10 organizations for this cohort.",
-                ].map((item) => (
-                  <li key={item} className="flex items-start gap-3 text-sm text-muted-foreground">
-                    <span className="mt-2 h-px w-4 bg-border shrink-0" aria-hidden="true" />
-                    <span className="leading-relaxed">{item}</span>
-                  </li>
-                ))}
-              </ul>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                If the timing isn't right but you'd still like to apply, add a note below and we'll stay in touch.
-              </p>
-            </div>
+            <Collapsible
+              open={pilotDetailsOpen}
+              onOpenChange={setPilotDetailsOpen}
+            >
+              <div className="rounded-md bg-muted/30 p-4">
+                <div className="flex items-center justify-between gap-4">
+                  <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">
+                    Pilot Details
+                  </p>
+                  <CollapsibleTrigger asChild>
+                    <button
+                      type="button"
+                      className="inline-flex items-center gap-2 text-xs text-muted-foreground transition-colors hover:text-foreground"
+                    >
+                      {pilotDetailsOpen ? "Hide" : "Show"}
+                      <ChevronDown
+                        className={cn(
+                          "h-4 w-4 transition-transform",
+                          pilotDetailsOpen ? "rotate-180" : "rotate-0",
+                        )}
+                        aria-hidden="true"
+                      />
+                    </button>
+                  </CollapsibleTrigger>
+                </div>
+
+                {!pilotDetailsOpen ? (
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                    4-week March-April pilot • workshop week 1 • 5-10 orgs
+                  </p>
+                ) : null}
+
+                <CollapsibleContent>
+                  <div className="mt-4 grid gap-3 sm:grid-cols-[140px_1fr]">
+                    {(
+                      [
+                        [
+                          "Timing",
+                          "4-week pilot starting in March-April.",
+                        ],
+                        [
+                          "Week 1",
+                          "Fundraising team workshop to agree the workflows we'll test.",
+                        ],
+                        [
+                          "Ongoing",
+                          "A point person internally to coordinate setup and weekly check-ins.",
+                        ],
+                        [
+                          "Cohort",
+                          "We are selecting 5-10 organizations. The more context you share below, the easier it is to assess fit.",
+                        ],
+                        [
+                          "Follow-up",
+                          "We review applications as they come in and will reach out to schedule a short call if it looks like a good fit.",
+                        ],
+                        [
+                          "Launch",
+                          "The product will be launching later this year.",
+                        ],
+                      ] as const
+                    ).map(([label, value]) => (
+                      <div key={label} className="grid gap-1 sm:grid-cols-subgrid sm:col-span-2">
+                        <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">
+                          {label}
+                        </p>
+                        <p className="text-sm leading-relaxed text-muted-foreground">
+                          {value}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                  <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+                    If the timing isn't right but you'd still like to apply, add a note below and we'll stay in touch.
+                  </p>
+                </CollapsibleContent>
+              </div>
+            </Collapsible>
 
             <Label htmlFor={`${idPrefix}-pilotNotes`}>
               Anything else we should know?{" "}
@@ -536,19 +665,13 @@ export default function ApplicationForm({
 
       <div className="sticky bottom-0 -mx-6 border-t border-border bg-background/95 px-6 py-4 backdrop-blur">
         <div className="flex items-center justify-between gap-4">
-          <p className="text-xs text-muted-foreground">
+          <div className="text-xs text-muted-foreground">
             {attemptedSubmit && missingSummary ? (
               <>
                 Missing: <span className="text-foreground">{missingSummary}</span>
               </>
-            ) : activeSection !== "readiness" ? (
-              <>
-                Next: <span className="text-foreground">Confirm</span>
-              </>
-            ) : (
-              "No commitment required to apply."
-            )}
-          </p>
+            ) : null}
+          </div>
           <div className="flex items-center gap-2">
             <Button
               type="button"
@@ -559,7 +682,11 @@ export default function ApplicationForm({
               Back
             </Button>
             {activeSection === "readiness" ? (
-              <Button type="submit" disabled={Boolean(disabled)}>
+              <Button
+                type="button"
+                disabled={Boolean(disabled)}
+                onClick={handleSubmit}
+              >
                 {submitting ? "Submitting..." : "Submit application"}
               </Button>
             ) : (

@@ -3,6 +3,10 @@ import { useDetailsSheet } from "@/components/application/ApplicationSheetProvid
 const OutcomesSection = () => {
   const { openDetails } = useDetailsSheet();
 
+  const openAfterPilotDetails = () => {
+    openDetails("involved");
+  };
+
   return (
     <section className="container py-24 md:py-32">
       <div className="mb-12 max-w-2xl space-y-3">
@@ -17,14 +21,13 @@ const OutcomesSection = () => {
           <div className="space-y-2">
             <h3 className="text-lg font-semibold">Stop cleanly</h3>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              No obligation. Walk away with documented findings
-              and an honest assessment of fit.
+              No obligation. Walk away with documented findings and an honest assessment of fit.
             </p>
           </div>
           <ul className="space-y-2.5">
             {[
               "No cost, no commitment",
-              "Workflow + data readiness takeaways",
+              "Workflow and data readiness takeaways",
               "Your data stays yours",
             ].map((item) => (
               <li key={item} className="text-sm text-muted-foreground flex items-center gap-3">
@@ -54,16 +57,16 @@ const OutcomesSection = () => {
             </li>
             <li className="text-sm text-muted-foreground flex items-center gap-3">
               <span className="h-px w-4 bg-foreground/20 shrink-0" />
-              Full data migration + additional customization as needed
+              Full data migration and additional customization as needed
             </li>
             <li className="text-sm text-muted-foreground flex items-center gap-3">
               <span className="h-px w-4 bg-foreground/20 shrink-0" />
               <button
                 type="button"
-                onClick={openDetails}
+                onClick={openAfterPilotDetails}
                 className="underline underline-offset-2 transition-colors hover:text-foreground"
               >
-                Commercial terms discussed after evaluation
+                After the pilot: continuation and commercial terms
               </button>
             </li>
           </ul>

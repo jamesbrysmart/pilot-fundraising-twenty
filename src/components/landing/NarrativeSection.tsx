@@ -24,12 +24,7 @@ const NarrativeSection = () => {
                 key={item}
                 className="flex items-start gap-3 text-sm text-muted-foreground"
               >
-                <span className="relative mt-2 h-px w-4 bg-border shrink-0">
-                  <span
-                    aria-hidden="true"
-                    className="absolute left-0 top-0 h-px w-2 bg-[hsl(var(--shoot))] opacity-60"
-                  />
-                </span>
+                <span className="mt-2 h-px w-4 bg-border shrink-0" />
                 <span className="leading-relaxed">{item}</span>
               </li>
             ))}
@@ -43,10 +38,6 @@ const NarrativeSection = () => {
         {/* The response */}
         <div className="space-y-4 md:pt-12">
           <p className="text-[11px] uppercase tracking-wider text-muted-foreground">
-            <span
-              aria-hidden="true"
-              className="mr-2 inline-block h-1.5 w-1.5 translate-y-[-0.08em] rounded-full bg-[hsl(var(--shoot))]"
-            />
             This pilot
           </p>
           <h2 className="text-xl font-semibold tracking-tight md:text-2xl">
@@ -79,12 +70,7 @@ const NarrativeSection = () => {
                 key={item.label}
                 className="flex items-start gap-3 text-sm text-muted-foreground"
               >
-                <span className="relative mt-2 h-px w-4 bg-border shrink-0">
-                  <span
-                    aria-hidden="true"
-                    className="absolute left-0 top-0 h-px w-2 bg-[hsl(var(--shoot))] opacity-60"
-                  />
-                </span>
+                <span className="mt-2 h-px w-4 bg-border shrink-0" />
                 <span className="leading-relaxed">
                   <span className="font-medium text-foreground">{item.label}:</span>{" "}
                   {item.detail}
