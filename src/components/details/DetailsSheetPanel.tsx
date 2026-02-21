@@ -37,7 +37,7 @@ const sections: DetailsSection[] = [
         </p>
         <p className="text-sm leading-relaxed text-muted-foreground">
           This is early-stage software. We&apos;re being direct about that, and
-          we&apos;re keeping the cohort small so support stays responsive and the
+          we&apos;re keeping the pilot group small so support stays responsive and the
           experience stays real.
         </p>
         <p className="text-sm leading-relaxed text-muted-foreground">
@@ -147,7 +147,7 @@ const sections: DetailsSection[] = [
             },
             {
               title: "Clearer fundraising processes",
-              desc: "The workshop and parallel evaluation often surface process improvements you can apply regardless of which CRM you choose.",
+              desc: "The workshop and side-by-side trial often surface process improvements you can apply regardless of which CRM you choose.",
             },
             {
               title: "Early access to modern infrastructure",
@@ -173,7 +173,7 @@ const sections: DetailsSection[] = [
             </strong>{" "}
             we get real-world feedback from teams running real workflows. In
             exchange, you get a supported, time-bounded evaluation that produces
-            clear readiness takeaways and next-step options. If it's not a fit,
+            clear next-step findings and options. If it's not a fit,
             you stop cleanly. If it is, you can continue without restarting.
           </p>
         </div>
@@ -186,12 +186,12 @@ const sections: DetailsSection[] = [
     content: (
       <div className="space-y-6">
         <div className="space-y-3">
-          <p className="text-sm font-medium text-foreground">Cadence (4 weeks)</p>
+          <p className="text-sm font-medium text-foreground">Timeline (4 weeks)</p>
           <ul className="space-y-2.5">
             {[
-              "Week 1: workflow workshop, scope agreement, and initial setup (licenses, configuration, scoped data slice)",
-              "Weeks 2–4: run key workflows as a helpful mirror alongside your current system, with brief weekly check-ins",
-              "End: review what you learned and decide to stop cleanly or continue",
+              "Week 1: planning workshop, agree what to test, and set up with sample data.",
+              "Weeks 2-4: run day-to-day fundraising work in the pilot, with short weekly check-ins.",
+              "End: review what you learned and decide whether to stop or continue.",
             ].map((item) => (
               <li key={item} className="flex items-start gap-3 text-sm text-muted-foreground">
                 <span className="mt-2 h-px w-4 bg-border shrink-0" />
@@ -205,9 +205,9 @@ const sections: DetailsSection[] = [
           <p className="text-sm font-medium text-foreground">What we need from you</p>
           <ul className="space-y-2.5">
             {[
-              "One internal owner (point person) to coordinate the pilot",
-              "A scoped slice of data to support the workflows you want to evaluate",
-              "Willingness to use the system in real workflow enough to compare and learn (without running everything twice)",
+              "One main contact to coordinate the pilot.",
+              "A sample of your data that matches what you want to test.",
+              "Willingness to use the system enough to compare it with your current setup.",
             ].map((item) => (
               <li key={item} className="flex items-start gap-3 text-sm text-muted-foreground">
                 <span className="mt-2 h-px w-4 bg-border shrink-0" />
@@ -221,9 +221,9 @@ const sections: DetailsSection[] = [
           <p className="text-sm font-medium text-foreground">What we do</p>
           <ul className="space-y-2.5">
             {[
-              "Provision Twenty licenses and configure the fundraising module",
-              "Facilitate the workshop and keep scope explicit (in-scope vs out-of-scope)",
-              "Support weekly check-ins and document readiness takeaways and next-step options",
+              "Set up Twenty licenses and configure the fundraising setup.",
+              "Run the workshop and keep the plan clear and focused.",
+              "Support weekly check-ins and provide a clear end-of-pilot summary.",
             ].map((item) => (
               <li key={item} className="flex items-start gap-3 text-sm text-muted-foreground">
                 <span className="mt-2 h-px w-4 bg-border shrink-0" />
@@ -236,9 +236,8 @@ const sections: DetailsSection[] = [
         <div className="space-y-2 border-t border-border pt-5">
           <p className="text-sm font-medium text-foreground">After the pilot</p>
           <p className="text-sm leading-relaxed text-muted-foreground">
-            If you want more detail on what continuation could look like
-            (including commercial terms), contact us. We discuss options after
-            the evaluation, once scope and fit are clear.
+            If you want to continue, we&apos;ll discuss next steps, including
+            commercial terms, based on what you learned in the pilot.
           </p>
         </div>
       </div>
@@ -254,7 +253,7 @@ const sections: DetailsSection[] = [
         </p>
         <div className="space-y-4">
           {[
-            "This is a limited cohort - we're selecting 5–10 organizations, not running an open beta.",
+            "This is a limited pilot group - we're selecting 5–10 organisations, not opening this to everyone.",
             "The product is early-stage. Some features will be rough. Some workflows will need adjustment.",
             "We're building deliberately, not racing to ship features. Progress is steady but measured.",
             "You'll be working with a small team that's responsive but not a large support organization.",
@@ -269,10 +268,10 @@ const sections: DetailsSection[] = [
           ))}
         </div>
         <p className="text-sm leading-relaxed text-muted-foreground">
-          There&apos;s no hidden agenda. The pilot is free because we need real
-          organizations to build with. If it works, there&apos;s an optional path
-          forward. If it doesn&apos;t, you walk away with a clear assessment and no
-          obligations.
+          There&apos;s no hidden agenda. The pilot is free because we want to work
+          closely with organisations that can share practical feedback from real
+          fundraising work. If it works, there&apos;s a path to continue. If it
+          doesn&apos;t, you walk away with clear findings and no obligation.
         </p>
       </div>
     ),

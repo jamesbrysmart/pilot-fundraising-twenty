@@ -4,7 +4,7 @@ import GreenShootMark from "@/components/branding/GreenShootMark";
 
 const pilotJourney = [
   {
-    title: "Try a modern CRM in real workflows",
+    title: "Try a modern CRM in real fundraising work",
     detail:
       "See what modern donor management and campaign workflows feel like, at no cost.",
   },
@@ -35,14 +35,16 @@ const HeroSection = () => {
               </p>
             </div>
             <h1 className="text-4xl font-semibold tracking-tight md:text-5xl lg:text-[3.5rem] lg:leading-[1.1]">
-              A fundraising CRM
+              A new fundraising
               <br />
-              for nonprofits.
+              CRM for nonprofits.
             </h1>
             <p className="max-w-md text-base leading-relaxed text-muted-foreground">
-              A modern alternative to legacy nonprofit CRMs, built inside an
-              open-source CRM (Twenty) and evaluated through a small, supported
-              pilot.
+              Give your team the modern tools they need to manage donations and
+              build donor relationships you can trust.
+            </p>
+            <p className="text-sm text-muted-foreground">
+              Try it free for 4 weeks, with no commitment to switch.
             </p>
             <div className="flex items-center gap-4 pt-2">
               <ApplicationTriggerButton>Apply for the pilot</ApplicationTriggerButton>

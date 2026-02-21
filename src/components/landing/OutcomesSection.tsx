@@ -27,7 +27,7 @@ const OutcomesSection = () => {
           <ul className="space-y-2.5">
             {[
               "No cost, no commitment",
-              "Workflow and data readiness takeaways",
+              "What you learned about your process and data",
               "Your data stays yours",
             ].map((item) => (
               <li key={item} className="text-sm text-muted-foreground flex items-center gap-3">
@@ -57,7 +57,7 @@ const OutcomesSection = () => {
             </li>
             <li className="text-sm text-muted-foreground flex items-center gap-3">
               <span className="h-px w-4 bg-foreground/20 shrink-0" />
-              Full data migration and additional customization as needed
+              Move more data over and tailor setup if needed
             </li>
             <li className="text-sm text-muted-foreground flex items-center gap-3">
               <span className="h-px w-4 bg-foreground/20 shrink-0" />
@@ -66,7 +66,7 @@ const OutcomesSection = () => {
                 onClick={openAfterPilotDetails}
                 className="underline underline-offset-2 transition-colors hover:text-foreground"
               >
-                After the pilot: continuation and commercial terms
+                After the pilot: continuation and commercials
               </button>
             </li>
           </ul>

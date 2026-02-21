@@ -13,28 +13,28 @@ const faqs = [
   },
   {
     q: "Do we have to switch CRMs during the pilot?",
-    a: "No. The pilot runs alongside your current system so you can evaluate without a forced cutover.",
+    a: "No. The pilot runs alongside your current system so you can evaluate without a forced switch.",
   },
   {
     q: "What does “real data” mean?",
-    a: "It means you’ll test real workflows using representative data, so you can compare against your current system and make a confident decision.",
+    a: "It means you’ll use a realistic sample of your own data, so you can compare against your current system and make a confident decision.",
   },
   {
     q: "How much effort is required?",
-    a: "We’ll keep the cadence predictable: a workflow workshop up front, then normal usage during the pilot with brief weekly check-ins. You’ll want one internal owner (a point person) to run the pilot on your side.",
+    a: "We’ll keep the timeline predictable: a workflow workshop up front, then normal usage during the pilot with brief weekly catch-ups. You’ll want one internal owner (a main contact) to run the pilot on your side.",
   },
   {
     q: "What about data privacy and access?",
-    a: "We’ll agree the scope up front and keep access limited to what’s needed. We suggest using a scoped slice of your data so you can test real workflows and see what migration readiness looks like, without pulling everything in.",
+    a: "We’ll agree what’s included up front and keep access limited to what’s needed. We suggest using a small sample of your data so you can test real workflows and see how ready a move would be, without pulling everything in.",
     moreDetails: true,
   },
   {
     q: "How are organizations selected, and when will we hear back?",
-    a: "We’re selecting a small cohort (5–10 orgs) and looking for teams with active fundraising workflows and someone able to own the pilot internally. Applications are reviewed on a rolling basis.",
+    a: "We’re selecting a small pilot group (5–10 orgs) and looking for teams with active fundraising workflows and someone able to own the pilot internally. Applications are reviewed on a rolling basis.",
   },
   {
     q: "What happens after the pilot?",
-    a: "You can stop cleanly with what you learned, or continue into full migration + additional customization if it’s a good fit. Commercial terms are discussed after evaluation.",
+    a: "You can stop cleanly with what you learned, or continue into full migration + additional customization if it’s a good fit. Pricing and terms are discussed after evaluation.",
     moreDetails: true,
   },
 ];

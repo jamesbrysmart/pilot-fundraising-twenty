@@ -66,8 +66,7 @@ const revenueBands = [
   "Under £250k",
   "£250k-£1M",
   "£1M-£5M",
-  "£5M-£20M",
-  "£20M+",
+  "£5M+",
   "Not sure",
 ] as const;
 
@@ -75,8 +74,7 @@ const donationVolumeBands = [
   "0-50",
   "51-200",
   "201-500",
-  "501-2,000",
-  "2,000+",
+  "501+",
   "Not sure",
 ] as const;
 
@@ -163,7 +161,7 @@ function sectionComplete(form: ApplicationFormV1, section: ApplicationFormSectio
 function friendlyMissingLabel(key: FieldKey): string {
   switch (key) {
     case "orgName":
-      return "Organization name";
+      return "Organisation name";
     case "contactName":
       return "Primary contact name";
     case "contactEmail":
@@ -171,7 +169,7 @@ function friendlyMissingLabel(key: FieldKey): string {
     case "currentSystem":
       return "Current system";
     case "donationsPerMonthBand":
-      return "Gift transactions per month";
+      return "Donations processed per month";
     case "annualFundraisingVolumeBand":
       return "Annual fundraising volume";
   }
@@ -404,7 +402,7 @@ export default function ApplicationForm({
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor={`${idPrefix}-orgName`}>Organization</Label>
+            <Label htmlFor={`${idPrefix}-orgName`}>Organisation</Label>
             <Input
               id={`${idPrefix}-orgName`}
               value={form.orgName}
@@ -451,7 +449,7 @@ export default function ApplicationForm({
         <TabsContent value="setup" className="mt-0 space-y-5 pt-5">
           <div className="grid gap-5 sm:grid-cols-2">
             <div className="space-y-2">
-              <Label>Annual fundraising volume</Label>
+              <Label>What is your annual fundraising income?</Label>
               <Select
                 value={form.annualFundraisingVolumeBand}
                 onValueChange={(value) =>
@@ -480,7 +478,7 @@ export default function ApplicationForm({
             </div>
 
             <div className="space-y-2">
-              <Label>Gift transactions per month</Label>
+              <Label>How many donations do you process each month?</Label>
               <Select
                 value={form.donationsPerMonthBand}
                 onValueChange={(value) => setForm((p) => ({ ...p, donationsPerMonthBand: value }))}
@@ -508,7 +506,7 @@ export default function ApplicationForm({
           </div>
 
           <div className="space-y-2">
-            <Label>What system are you currently using?</Label>
+            <Label>Which system does your team currently use to track donations?</Label>
             <Select
               value={form.currentSystem}
               onValueChange={(value) =>
@@ -551,7 +549,7 @@ export default function ApplicationForm({
 
           <div className="space-y-2">
             <Label htmlFor={`${idPrefix}-crmChangeReason`}>
-              What&apos;s prompting you to evaluate a new CRM right now?{" "}
+              Why are you exploring a new CRM right now?{" "}
               <span className="text-muted-foreground">(optional)</span>
             </Label>
             <Textarea
@@ -615,7 +613,7 @@ export default function ApplicationForm({
                           "A point person internally to coordinate setup and weekly check-ins.",
                         ],
                         [
-                          "Cohort",
+                          "Pilot group",
                           "We are selecting 5-10 organizations. The more context you share below, the easier it is to assess fit.",
                         ],
                         [

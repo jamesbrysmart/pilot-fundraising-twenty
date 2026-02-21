@@ -15,7 +15,7 @@ const scenarios = [
   {
     id: "02",
     anchorId: "workflow-gift-intake",
-    thesis: "Gift intake + batches",
+    thesis: "Donation processing",
     headline: "Process donations with confidence.",
     description:
       "Handle large volumes, prevent duplicates, and resolve errors before donations ever hit your records.",
@@ -25,7 +25,7 @@ const scenarios = [
   {
     id: "03",
     anchorId: "workflow-recurring",
-    thesis: "Recurring lifecycle",
+    thesis: "Recurring donations",
     headline: "Stay in control of recurring donations.",
     description:
       "See what’s paid, what’s missed, and what needs attention - all in one place.",
@@ -35,17 +35,17 @@ const scenarios = [
   {
     id: "04",
     anchorId: "workflow-pipeline",
-    thesis: "Pipeline kanban",
+    thesis: "Major gifts + grants",
     headline: "Structured tracking for high-value fundraising.",
     description:
       "Manage major donors and grant applications through clear stages, with full visibility into progress and next steps.",
     imageSrc: "/images/proof/fundraising-pipeline-kanban.webp",
-    imageAlt: "Fundraising pipeline kanban showing opportunities in stages.",
+    imageAlt: "Fundraising pipeline board showing opportunities in stages.",
   },
   {
     id: "05",
     anchorId: "workflow-dashboard",
-    thesis: "Performance dashboard",
+    thesis: "Fundraising dashboard",
     headline: "Real-time fundraising insight.",
     description:
       "Customizable dashboards with clear metrics, goal tracking, and instant visibility across income and pipeline.",
