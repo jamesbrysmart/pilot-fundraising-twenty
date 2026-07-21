@@ -1,0 +1,195 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-07-21T12:46:44+01:00",
+  "title": "Design System: Fundraising for Twenty",
+  "extensions": {
+    "colorMeta": {
+      "product-ink": {
+        "role": "neutral",
+        "displayName": "Product Ink",
+        "canonical": "#14181F",
+        "tonalRamp": ["oklch(15% 0.018 260)", "oklch(26% 0.018 260)", "oklch(38% 0.018 260)", "oklch(50% 0.018 260)", "oklch(62% 0.018 260)", "oklch(74% 0.018 260)", "oklch(86% 0.018 260)", "oklch(95% 0.018 260)"]
+      },
+      "clear-canvas": {
+        "role": "neutral",
+        "displayName": "Clear Canvas",
+        "canonical": "#FCFCFC",
+        "tonalRamp": ["oklch(15% 0.003 260)", "oklch(26% 0.003 260)", "oklch(38% 0.003 260)", "oklch(50% 0.003 260)", "oklch(62% 0.003 260)", "oklch(74% 0.003 260)", "oklch(86% 0.003 260)", "oklch(95% 0.003 260)"]
+      },
+      "card-white": {
+        "role": "neutral",
+        "displayName": "Card White",
+        "canonical": "#FFFFFF",
+        "tonalRamp": ["oklch(15% 0 0)", "oklch(26% 0 0)", "oklch(38% 0 0)", "oklch(50% 0 0)", "oklch(62% 0 0)", "oklch(74% 0 0)", "oklch(86% 0 0)", "oklch(95% 0 0)"]
+      },
+      "quiet-surface": {
+        "role": "neutral",
+        "displayName": "Quiet Surface",
+        "canonical": "#F4F4F6",
+        "tonalRamp": ["oklch(15% 0.006 260)", "oklch(26% 0.006 260)", "oklch(38% 0.006 260)", "oklch(50% 0.006 260)", "oklch(62% 0.006 260)", "oklch(74% 0.006 260)", "oklch(86% 0.006 260)", "oklch(95% 0.006 260)"]
+      },
+      "soft-accent": {
+        "role": "neutral",
+        "displayName": "Soft Accent",
+        "canonical": "#EBEDEF",
+        "tonalRamp": ["oklch(15% 0.008 250)", "oklch(26% 0.008 250)", "oklch(38% 0.008 250)", "oklch(50% 0.008 250)", "oklch(62% 0.008 250)", "oklch(74% 0.008 250)", "oklch(86% 0.008 250)", "oklch(95% 0.008 250)"]
+      },
+      "muted-copy": {
+        "role": "neutral",
+        "displayName": "Muted Copy",
+        "canonical": "#6A7181",
+        "tonalRamp": ["oklch(15% 0.025 260)", "oklch(26% 0.025 260)", "oklch(38% 0.025 260)", "oklch(50% 0.025 260)", "oklch(62% 0.025 260)", "oklch(74% 0.025 260)", "oklch(86% 0.025 260)", "oklch(95% 0.025 260)"]
+      },
+      "structural-line": {
+        "role": "neutral",
+        "displayName": "Structural Line",
+        "canonical": "#E3E5E8",
+        "tonalRamp": ["oklch(15% 0.008 255)", "oklch(26% 0.008 255)", "oklch(38% 0.008 255)", "oklch(50% 0.008 255)", "oklch(62% 0.008 255)", "oklch(74% 0.008 255)", "oklch(86% 0.008 255)", "oklch(95% 0.008 255)"]
+      },
+      "shoot-green": {
+        "role": "primary",
+        "displayName": "Shoot Green",
+        "canonical": "#4FA168",
+        "tonalRamp": ["oklch(15% 0.11 150)", "oklch(26% 0.11 150)", "oklch(38% 0.11 150)", "oklch(50% 0.11 150)", "oklch(62% 0.11 150)", "oklch(74% 0.11 150)", "oklch(86% 0.11 150)", "oklch(95% 0.11 150)"]
+      },
+      "error-red": {
+        "role": "tertiary",
+        "displayName": "Error Red",
+        "canonical": "#EF4343",
+        "tonalRamp": ["oklch(15% 0.18 25)", "oklch(26% 0.18 25)", "oklch(38% 0.18 25)", "oklch(50% 0.18 25)", "oklch(62% 0.18 25)", "oklch(74% 0.18 25)", "oklch(86% 0.18 25)", "oklch(95% 0.18 25)"]
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "The hero proposition only, scaling from 36px to 56px across breakpoints." },
+      "headline": { "displayName": "Headline", "purpose": "Section-level arguments and major evaluation points." },
+      "title": { "displayName": "Title", "purpose": "Workflow claims, component headings and compact explanatory structure." },
+      "body": { "displayName": "Body", "purpose": "Evidence, implementation detail and explanatory copy." },
+      "label": { "displayName": "Label", "purpose": "Short uppercase eyebrows, evidence categories and metadata." }
+    },
+    "shadows": [
+      { "name": "surface-low", "value": "0 1px 2px 0 rgb(0 0 0 / 0.05)", "purpose": "Maximum resting shadow for an ordinary card or small fixed utility control." },
+      { "name": "overlay-medium", "value": "0 4px 6px -1px rgb(0 0 0 / 0.10), 0 2px 4px -2px rgb(0 0 0 / 0.10)", "purpose": "Menus, popovers and compact floating panels." },
+      { "name": "overlay-high", "value": "0 10px 15px -3px rgb(0 0 0 / 0.10), 0 4px 6px -4px rgb(0 0 0 / 0.10)", "purpose": "Sheets and dialogs that must visibly separate from the page." }
+    ],
+    "motion": [
+      { "name": "state-standard", "value": "150ms cubic-bezier(0.4, 0, 0.2, 1)", "purpose": "Default color and opacity feedback for interactive states." },
+      { "name": "disclosure", "value": "200ms ease-out", "purpose": "Accordion expansion and chevron rotation." },
+      { "name": "sheet-close", "value": "300ms ease-in-out", "purpose": "Closing a modal side panel." },
+      { "name": "sheet-open", "value": "500ms ease-in-out", "purpose": "Opening a modal side panel; disable or simplify for reduced-motion preferences." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "xl", "value": "1280px" },
+      { "name": "2xl", "value": "1536px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The strongest, low-pressure action for starting a structured enquiry.",
+      "html": "<button class=\"ds-btn-primary\">Tell us about your organisation</button>",
+      "css": ".ds-btn-primary { display:inline-flex; align-items:center; justify-content:center; min-height:40px; padding:8px 16px; border:0; border-radius:6px; background:#14181F; color:#FCFCFC; font:500 14px/20px Inter,system-ui,sans-serif; transition:background-color 150ms cubic-bezier(.4,0,.2,1); } .ds-btn-primary:hover { background:#2C3037; } .ds-btn-primary:active { background:#0E1116; } .ds-btn-primary:focus-visible { outline:2px solid #14181F; outline-offset:2px; }"
+    },
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "A quieter compact action for navigation and secondary entry points.",
+      "html": "<button class=\"ds-btn-outline\">Enquire</button>",
+      "css": ".ds-btn-outline { display:inline-flex; align-items:center; justify-content:center; min-height:36px; padding:6px 12px; border:1px solid #E3E5E8; border-radius:6px; background:#FCFCFC; color:#14181F; font:500 14px/20px Inter,system-ui,sans-serif; transition:background-color 150ms cubic-bezier(.4,0,.2,1); } .ds-btn-outline:hover { background:#EBEDEF; } .ds-btn-outline:active { background:#E3E5E8; } .ds-btn-outline:focus-visible { outline:2px solid #14181F; outline-offset:2px; }"
+    },
+    {
+      "name": "Evaluation Link",
+      "kind": "button",
+      "refersTo": "label-eyebrow",
+      "description": "The visible secondary route for visitors who need more confidence before enquiring.",
+      "html": "<button class=\"ds-evaluation-link\">What to expect</button>",
+      "css": ".ds-evaluation-link { padding:4px 0; border:0; background:transparent; color:#6A7181; font:400 14px/20px Inter,system-ui,sans-serif; text-decoration:underline; text-decoration-color:#E3E5E8; text-underline-offset:2px; transition:color 150ms cubic-bezier(.4,0,.2,1),text-decoration-color 150ms cubic-bezier(.4,0,.2,1); } .ds-evaluation-link:hover { color:#14181F; text-decoration-color:#4FA168; } .ds-evaluation-link:active { color:#14181F; } .ds-evaluation-link:focus-visible { outline:2px solid #14181F; outline-offset:3px; text-decoration-color:#4FA168; }"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "input-default",
+      "description": "A familiar, persistent-label field for the structured enquiry.",
+      "html": "<label class=\"ds-field\"><span class=\"ds-field-label\">Organisation name</span><input class=\"ds-field-input\" placeholder=\"Your organisation\"></label>",
+      "css": ".ds-field { display:grid; gap:8px; color:#14181F; font-family:Inter,system-ui,sans-serif; } .ds-field-label { font-size:14px; line-height:20px; font-weight:500; } .ds-field-input { min-height:40px; padding:8px 12px; border:1px solid #E3E5E8; border-radius:6px; background:#FCFCFC; color:#14181F; font:400 16px/24px Inter,system-ui,sans-serif; } .ds-field-input::placeholder { color:#6A7181; } .ds-field-input:hover { border-color:#BFC3CA; } .ds-field-input:focus-visible { outline:2px solid #14181F; outline-offset:2px; } .ds-field-input:disabled { cursor:not-allowed; opacity:.5; }"
+    },
+    {
+      "name": "Product Navigation",
+      "kind": "nav",
+      "refersTo": "button-outline",
+      "description": "A compact product header grounded by the shoot mark and a fine structural rule.",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-nav-brand\" href=\"#\"><svg class=\"ds-nav-mark\" viewBox=\"0 0 36 36\" aria-hidden=\"true\"><path d=\"M18 28.4C17.7 24.5 17.5 20.6 18.3 16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\"/><path d=\"M18 17C18 11.5 22.4 8.2 28.5 8.2C28.5 13.7 24.1 17 18 17Z\" fill=\"currentColor\"/><path d=\"M18 20.5C18 15.6 14.2 12.8 9 12.8C9 17.7 12.7 20.5 18 20.5Z\" fill=\"currentColor\" opacity=\".82\"/></svg><span>Fundraising for Twenty</span></a><button class=\"ds-nav-action\">Enquire</button></nav>",
+      "css": ".ds-nav { display:flex; align-items:center; justify-content:space-between; min-height:56px; padding:0 24px; border-bottom:1px solid #E3E5E8; background:#FCFCFC; font-family:Inter,system-ui,sans-serif; } .ds-nav-brand { display:inline-flex; align-items:center; gap:8px; color:#14181F; font-size:14px; line-height:20px; font-weight:600; letter-spacing:-.025em; text-decoration:none; } .ds-nav-mark { width:28px; height:28px; color:#4FA168; } .ds-nav-action { min-height:36px; padding:6px 12px; border:1px solid #E3E5E8; border-radius:6px; background:#FCFCFC; color:#14181F; font:500 14px/20px Inter,system-ui,sans-serif; } .ds-nav-brand:hover,.ds-nav-action:hover { color:#14181F; } .ds-nav-action:hover { background:#EBEDEF; } .ds-nav-brand:focus-visible,.ds-nav-action:focus-visible { outline:2px solid #14181F; outline-offset:2px; }"
+    },
+    {
+      "name": "Product Evidence Card",
+      "kind": "card",
+      "refersTo": "card-default",
+      "description": "The signature proof frame that gives a real workflow screenshot a claim and context.",
+      "html": "<article class=\"ds-proof-card\"><div class=\"ds-proof-label\">DONATION PROCESSING</div><div class=\"ds-proof-frame\"><div class=\"ds-proof-window\"><span></span><span></span><span></span></div><div class=\"ds-proof-row ds-proof-row-wide\"></div><div class=\"ds-proof-row\"></div><div class=\"ds-proof-row ds-proof-row-short\"></div></div><div class=\"ds-proof-copy\"><strong>Process donations with confidence.</strong><p>Review, match and resolve issues before donations become committed records.</p></div></article>",
+      "css": ".ds-proof-card { overflow:hidden; border:1px solid #E3E5E8; border-radius:8px; background:#FFF; color:#14181F; font-family:Inter,system-ui,sans-serif; } .ds-proof-label { padding:12px 20px; border-bottom:1px solid #E3E5E8; color:#6A7181; font-size:11px; line-height:14px; font-weight:500; letter-spacing:.05em; } .ds-proof-frame { min-height:180px; padding:22px; border-bottom:1px solid #E3E5E8; box-shadow:inset 0 0 0 2px rgb(79 161 104 / .55); background:linear-gradient(to top,rgb(252 252 252 / .6),transparent),rgb(79 161 104 / .08); transform:rotate(-1.25deg) scale(1.01); } .ds-proof-window { display:flex; gap:5px; margin-bottom:26px; } .ds-proof-window span { width:7px; height:7px; border-radius:50%; background:#6A7181; opacity:.35; } .ds-proof-row { width:72%; height:12px; margin-top:12px; border-radius:4px; background:#E3E5E8; } .ds-proof-row-wide { width:92%; } .ds-proof-row-short { width:48%; } .ds-proof-copy { padding:20px 24px 24px; } .ds-proof-copy strong { font-size:14px; line-height:22px; font-weight:500; } .ds-proof-copy p { margin:8px 0 0; color:#6A7181; font-size:14px; line-height:22px; } .ds-proof-card:hover { border-color:#C9CDD2; } .ds-proof-card:focus-within { outline:2px solid #14181F; outline-offset:2px; }"
+    },
+    {
+      "name": "Workflow Index Item",
+      "kind": "nav",
+      "refersTo": "label-eyebrow",
+      "description": "A quiet in-page evidence index with a paired active cue.",
+      "html": "<nav class=\"ds-workflow-index\"><a class=\"ds-workflow-item\" href=\"#\">Donor profile + history</a><a class=\"ds-workflow-item ds-workflow-item-active\" href=\"#\" aria-current=\"true\">Donation processing</a><a class=\"ds-workflow-item\" href=\"#\">Recurring donations</a></nav>",
+      "css": ".ds-workflow-index { display:grid; gap:4px; padding-left:16px; border-left:1px solid #E3E5E8; font-family:Inter,system-ui,sans-serif; } .ds-workflow-item { position:relative; padding:8px; border-radius:6px; color:#6A7181; font-size:14px; line-height:20px; text-decoration:none; transition:background-color 150ms cubic-bezier(.4,0,.2,1),color 150ms cubic-bezier(.4,0,.2,1); } .ds-workflow-item:hover { background:#FCFCFC; color:#14181F; } .ds-workflow-item-active { color:#14181F; font-weight:500; } .ds-workflow-item-active::before { content:\"\"; position:absolute; left:-17px; top:4px; bottom:4px; width:1px; background:#4FA168; } .ds-workflow-item:focus-visible { outline:2px solid #14181F; outline-offset:2px; }"
+    },
+    {
+      "name": "FAQ Row",
+      "kind": "custom",
+      "refersTo": "card-default",
+      "description": "A familiar disclosure row for candid product and implementation detail.",
+      "html": "<details class=\"ds-faq\"><summary>How much does it cost?<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"m6 9 6 6 6-6\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></summary><p>The app is free for nonprofits. Twenty and agreed implementation services are separate.</p></details>",
+      "css": ".ds-faq { border-bottom:1px solid #E3E5E8; color:#14181F; font-family:Inter,system-ui,sans-serif; } .ds-faq summary { display:flex; align-items:center; justify-content:space-between; gap:16px; padding:16px 0; cursor:pointer; font-size:14px; line-height:20px; font-weight:500; list-style:none; } .ds-faq summary::-webkit-details-marker { display:none; } .ds-faq summary svg { width:16px; height:16px; flex:none; transition:transform 200ms ease-out; } .ds-faq[open] summary svg { transform:rotate(180deg); } .ds-faq summary:hover { text-decoration:underline; text-underline-offset:3px; } .ds-faq summary:focus-visible { outline:2px solid #14181F; outline-offset:2px; } .ds-faq p { margin:0; padding:0 32px 16px 0; color:#6A7181; font-size:14px; line-height:22px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Clear Working Model",
+    "overview": "Fundraising for Twenty should feel like a functioning product laid out clearly for inspection. Real workflows, implementation relationships and next steps are arranged with the care of a working model: visitors can grasp the whole quickly, then move closer to examine the evidence. The atmosphere is calm, capable and considered—quiet product confidence rather than sales theatre.\n\nThe system uses generous whitespace, a disciplined type hierarchy, fine structural rules and a rare green signal. Warmth comes through clarity, candid explanations and manageable interactions rather than soft illustration or sentimental nonprofit conventions. Layouts support fast strategic scanning and deeper operational inspection; neither reading speed should compromise the other.\n\nThe visual language explicitly rejects generic nonprofit softness, loud SaaS spectacle, dark developer-tool exclusivity, abstract corporate CRM consultancy language, overly editorial concepts that hide the product, and feature-heavy card inventories. Product evidence remains the centre of gravity.",
+    "keyCharacteristics": [
+      "Quiet product confidence with high information clarity.",
+      "Generous section rhythm (96px on compact layouts; 128px from medium screens).",
+      "Fine 1px rules and subtle tonal surfaces instead of decorative effects.",
+      "Real screenshots treated as legible evidence, not background decoration.",
+      "One restrained green accent used to guide attention and express growth.",
+      "Familiar, accessible controls with visible states and low-pressure calls to action."
+    ],
+    "rules": [
+      { "name": "The One Living Signal Rule", "body": "Shoot Green is the only expressive accent and should occupy less than 10% of any view. Its rarity is what gives it meaning.", "section": "colors" },
+      { "name": "The Evidence First Rule", "body": "Color must frame and clarify screenshots, never tint, obscure or overpower the evidence they contain.", "section": "colors" },
+      { "name": "The One Voice Rule", "body": "Inter is the active interface voice. Imported but unused display or mono fonts are not part of the design system unless a later, deliberate redesign establishes a clear role for them.", "section": "typography" },
+      { "name": "The Plain Language Rule", "body": "Typographic polish never compensates for vague copy. Important product and implementation information must remain understandable without dense terminology or ornamental presentation.", "section": "typography" },
+      { "name": "The Flat-by-Default Rule", "body": "If an ordinary section needs a shadow to be understood, its spacing, border or tonal hierarchy is unresolved.", "section": "elevation" },
+      { "name": "The Honest Layer Rule", "body": "Elevation communicates actual interface layering, never prestige or decoration.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do make the ten-second proposition, real workflow evidence and next step legible at a glance.",
+      "Do support fast strategic scanning and deeper operational inspection with clear heading levels, concise labels and generous section rhythm.",
+      "Do use Shoot Green (#4FA168) sparingly for active indicators, fine emphasis and the growth mark.",
+      "Do let borders, whitespace and tonal surfaces establish hierarchy before introducing shadow.",
+      "Do present screenshots at a size and contrast that allows visitors to inspect real product detail.",
+      "Do keep the primary enquiry action prominent while preserving a genuinely visible “What to expect” evaluation route.",
+      "Do maintain WCAG 2.2 AA contrast, keyboard access, visible focus, reduced-motion support and understandable non-color states.",
+      "Do be visually direct about costs, implementation, scope, availability and maturity."
+    ],
+    "donts": [
+      "Don't create a generic nonprofit site that relies on soft colors, friendly illustrations and emotional campaign language while underplaying the product, workflows and implementation reality.",
+      "Don't create a loud startup or SaaS page with gradients, oversized claims, urgency, decorative motion and conversion pressure.",
+      "Don't use a dark developer-tool aesthetic that makes the product feel technical, exclusive or inaccessible.",
+      "Don't turn the page into a corporate CRM consultancy site dominated by abstract promises, service language and generic transformation claims.",
+      "Don't create an overly editorial or typographic concept that looks sophisticated but hides the product evidence.",
+      "Don't create a feature-heavy CRM page with too many cards, labels and capability inventories competing for attention.",
+      "Don't imply testimonials, quantified outcomes, customer logos, marketplace traction or official Twenty endorsement through decorative trust treatments.",
+      "Don't rely on hover, animation, color alone or dense technical language to communicate important product and implementation information.",
+      "Don't use large green fields, repeated green buttons or ornamental green decoration; if the accent stops feeling rare, the signal has been lost."
+    ]
+  }
+}
