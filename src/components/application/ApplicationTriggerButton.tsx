@@ -23,7 +23,7 @@ const ApplicationTriggerButton = ({
         }
       }}
     >
-      {children ?? "Apply"}
+      {children ?? "Enquire"}
     </Button>
   );
 };

@@ -17,16 +17,17 @@ const Footer = () => {
 
       <div className="container">
         <p className="text-xs text-muted-foreground">
-          A community-built extension for{" "}
+          Fundraising for Twenty is a specialist fundraising app for{" "}
           <a
             href="https://twenty.com"
             target="_blank"
             rel="noopener noreferrer"
             className="underline underline-offset-2 transition-colors hover:text-foreground"
           >
-            Twenty
+            Twenty CRM
           </a>
-          . Not an official Twenty product.
+          , developed and supported by 3Trees Digital. It is not an official
+          Twenty product.
         </p>
       </div>
     </footer>

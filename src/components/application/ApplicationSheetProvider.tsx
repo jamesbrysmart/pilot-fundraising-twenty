@@ -158,11 +158,11 @@ const ApplicationSheetProvider = ({ children }: { children: ReactNode }) => {
           onClick={toggleApplication}
           aria-expanded={isOpen}
           aria-controls="application-sheet"
-          aria-label={isOpen ? "Close application panel" : "Open application panel"}
+          aria-label={isOpen ? "Close enquiry panel" : "Open enquiry panel"}
           className="fixed right-0 top-1/2 z-40 -translate-y-1/2 rounded-l-md border border-r-0 border-border bg-background/95 px-2 py-3 text-[11px] uppercase tracking-wider text-muted-foreground shadow-sm backdrop-blur transition-colors hover:text-foreground"
         >
           <span className="[writing-mode:vertical-rl] [text-orientation:mixed]">
-            {isOpen ? "Close Application" : "Apply For Pilot"}
+            {isOpen ? "Close Enquiry" : "Enquire"}
           </span>
         </button>
       ) : null}
@@ -184,11 +184,11 @@ const ApplicationSheetProvider = ({ children }: { children: ReactNode }) => {
           {submitted ? (
             <div className="px-6 pb-10 pt-12">
               <h2 className="text-2xl font-semibold tracking-tight">
-                Application received
+                Enquiry received
               </h2>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                Thanks for applying. We&apos;ll review your submission and follow
-                up within a few days.
+                Thanks for getting in touch. We&apos;ll review what you&apos;ve shared
+                and contact you to discuss fit and the most useful next step.
               </p>
               <div className="mt-6 flex items-center gap-3">
                 <Button onClick={resetAndClose}>Close panel</Button>
@@ -200,10 +200,10 @@ const ApplicationSheetProvider = ({ children }: { children: ReactNode }) => {
                 <div className="flex items-start justify-between gap-4">
                   <div className="space-y-2">
                     <SheetTitle className="text-xl tracking-tight">
-                      Apply for Pilot
+                      Tell us about your organisation
                     </SheetTitle>
                     <SheetDescription>
-                      Short application: three sections, about 3-5 minutes.
+                      Short enquiry: three sections, about 3-5 minutes.
                     </SheetDescription>
                     <p className="text-xs leading-relaxed text-muted-foreground">
                       You can hide this panel without losing what you’ve entered. Progress isn’t saved if you refresh.

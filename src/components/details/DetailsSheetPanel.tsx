@@ -16,263 +16,206 @@ type DetailsSection = {
   content: JSX.Element;
 };
 
+const DetailList = ({ items }: { items: Array<{ title: string; detail: string }> }) => (
+  <div className="space-y-4">
+    {items.map((item) => (
+      <div key={item.title} className="space-y-1">
+        <p className="text-sm font-medium text-foreground">{item.title}</p>
+        <p className="text-sm leading-relaxed text-muted-foreground">{item.detail}</p>
+      </div>
+    ))}
+  </div>
+);
+
 const sections: DetailsSection[] = [
   {
-    id: "trust",
-    label: "Can we trust this?",
+    id: "starting-point",
+    label: "What you start with",
     content: (
       <div className="space-y-6">
         <p className="text-sm leading-relaxed text-muted-foreground">
-          This fundraising module is built on{" "}
+          Fundraising for Twenty is a developed specialist fundraising app built
+          on{" "}
           <a
             href="https://twenty.com"
             target="_blank"
             rel="noopener noreferrer"
             className="font-medium text-foreground underline underline-offset-2 transition-colors hover:text-foreground/80"
           >
-            Twenty
-          </a>{" "}
-          - a modern open-source CRM platform. This pilot is a community-built
-          extension, not an official Twenty product.
+            Twenty CRM
+          </a>
+          . Its core model covers donors, gifts, recurring giving, appeals and
+          funding opportunities.
         </p>
         <p className="text-sm leading-relaxed text-muted-foreground">
-          This is early-stage software. We&apos;re being direct about that, and
-          we&apos;re keeping the pilot group small so support stays responsive and the
-          experience stays real.
+          This provides a strong starting point rather than a finished
+          organisation-specific implementation. Data migration, reporting,
+          integrations and the wider CRM are shaped around what your organisation
+          needs.
         </p>
         <p className="text-sm leading-relaxed text-muted-foreground">
-          The pilot is designed to be safe to evaluate: it runs alongside your
-          current system, with a clean stop whenever you choose. No forced
-          cutover during the pilot.
-        </p>
-        <p className="text-sm leading-relaxed text-muted-foreground">
-          We&apos;ll agree the data scope up front and keep access limited to
-          what&apos;s needed for the pilot.
+          Fundraising for Twenty is developed and supported by 3Trees Digital. It
+          is built on Twenty CRM but is not an official Twenty product.
         </p>
       </div>
     ),
   },
   {
-    id: "capabilities",
-    label: "Will this work for us?",
+    id: "fit",
+    label: "Is it a good fit?",
     content: (
       <div className="space-y-6">
         <p className="text-sm leading-relaxed text-muted-foreground">
-          The fundraising module covers core donor management workflows:
+          Fundraising for Twenty is designed for small and mid-sized nonprofits,
+          but fit depends more on your needs and working approach than organisation
+          size alone.
         </p>
-        <div className="grid gap-3 sm:grid-cols-2">
-          {[
-            "Donation tracking & history",
-            "Recurring gift management",
-            "Gift batching & processing",
-            "Campaign & fund attribution",
-            "Donor reporting & analytics",
-            "Integration-ready architecture",
-          ].map((item) => (
-            <div
-              key={item}
-              className="flex items-start gap-2 text-sm text-muted-foreground"
-            >
-              <span className="mt-1.5 h-1 w-1 rounded-full bg-foreground/40 shrink-0" />
-              {item}
-            </div>
-          ))}
-        </div>
+        <DetailList
+          items={[
+            {
+              title: "You need a stronger fundraising foundation",
+              detail:
+                "Your current CRM, spreadsheets or separate tools do not give the team a coherent view of fundraising work and relationships.",
+            },
+            {
+              title: "You need flexibility around the core",
+              detail:
+                "Fundraising needs to connect with grants, partnerships, memberships, volunteers or other stakeholder relationships.",
+            },
+            {
+              title: "You are prepared to take part in implementation",
+              detail:
+                "Someone in the organisation can explain current processes, help make decisions and test the setup against real scenarios.",
+            },
+          ]}
+        />
         <p className="text-sm leading-relaxed text-muted-foreground">
-          These capabilities were designed around real fundraising workflows -
-          unlike legacy platforms, the
-          underlying architecture is modern, extensible, and doesn&apos;t carry
-          decades of technical debt.
-        </p>
-        <p className="text-sm leading-relaxed text-muted-foreground">
-          The module is actively evolving. Pilot participants directly shape
-          what gets built next based on their actual operational needs.
+          If you need a completely self-service product or depend on advanced
+          integrations that have not yet been scoped, we should discuss that
+          before deciding whether this is the right route.
         </p>
       </div>
     ),
   },
   {
-    id: "audience",
-    label: "Who is this for?",
+    id: "getting-started",
+    label: "How getting started works",
     content: (
       <div className="space-y-6">
         <p className="text-sm leading-relaxed text-muted-foreground">
-          This pilot is designed for a specific kind of organization:
+          We begin with a conversation about your current systems, fundraising
+          processes, data and wider CRM needs. From there, 3Trees proposes a
+          proportionate first implementation.
         </p>
+        <DetailList
+          items={[
+            {
+              title: "Agree the first scope",
+              detail:
+                "Decide what should be included first, how the system should be structured and what needs to connect.",
+            },
+            {
+              title: "Prepare and validate",
+              detail:
+                "Move the agreed data, configure the setup and test it against real fundraising scenarios.",
+            },
+            {
+              title: "Launch and improve",
+              detail:
+                "Support the team into live use, then refine the system as needs evolve.",
+            },
+          ]}
+        />
+        <p className="text-sm leading-relaxed text-muted-foreground">
+          The scope and pace depend on your starting point. There is no fixed
+          programme or standard migration timeline.
+        </p>
+      </div>
+    ),
+  },
+  {
+    id: "working-together",
+    label: "How we work together",
+    content: (
+      <div className="space-y-7">
         <div className="space-y-4">
-          {[
-            {
-              title: "Active fundraising operations",
-              desc: "You run campaigns, track donors, and manage recurring gifts as a core part of your work.",
-            },
-            {
-              title: "Considering CRM migration",
-              desc: "You're planning or actively evaluating a move within the next 12 months.",
-            },
-            {
-              title: "Small-to-mid-sized team",
-              desc: "Lean enough to move quickly, large enough to have real operational complexity.",
-            },
-            {
-              title: "Willing to shape what comes next",
-              desc: "Excited to be part of the next generation of open-source, community-owned nonprofit CRM (this pilot is the start).",
-            },
-          ].map((item) => (
-            <div key={item.title} className="space-y-1">
-              <p className="text-sm font-medium text-foreground">{item.title}</p>
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                {item.desc}
-              </p>
-            </div>
-          ))}
-        </div>
-        <p className="text-xs text-muted-foreground/70 leading-relaxed">
-          If your CRM is also a full system of record for volunteers, grants, or
-          programs/services, this pilot may not be the right fit yet. That scope
-          is on the roadmap, but fundraising is the first module.
-        </p>
-      </div>
-    ),
-  },
-  {
-    id: "reasons",
-    label: "Why would we do this?",
-    content: (
-      <div className="space-y-6">
-        <div className="space-y-4">
-          {[
-            {
-              title: "Meaningful migration groundwork",
-              desc: "Even if you don't continue, you leave with clearer workflow requirements, data readiness takeaways, and a sharper view of gaps.",
-            },
-            {
-              title: "Clearer fundraising processes",
-              desc: "The workshop and side-by-side trial often surface process improvements you can apply regardless of which CRM you choose.",
-            },
-            {
-              title: "Early access to modern infrastructure",
-              desc: "Evaluate tools built on a modern foundation, without taking on the risk of a forced switch.",
-            },
-            {
-              title: "Be part of what comes next",
-              desc: "Fundraising is the first module. The longer-term goal is a series of nonprofit tools built on open-source foundations, with a community-owned direction over time.",
-            },
-          ].map((item) => (
-            <div key={item.title} className="space-y-1">
-              <p className="text-sm font-medium text-foreground">{item.title}</p>
-              <p className="text-sm leading-relaxed text-muted-foreground">
-                {item.desc}
-              </p>
-            </div>
-          ))}
-        </div>
-        <div className="rounded-md border border-border bg-secondary/40 p-4">
-          <p className="text-sm leading-relaxed text-muted-foreground">
-            <strong className="text-foreground font-medium">
-              The trade is simple:
-            </strong>{" "}
-            we get real-world feedback from teams running real workflows. In
-            exchange, you get a supported, time-bounded evaluation that produces
-            clear next-step findings and options. If it's not a fit,
-            you stop cleanly. If it is, you can continue without restarting.
-          </p>
-        </div>
-      </div>
-    ),
-  },
-  {
-    id: "involved",
-    label: "What's involved?",
-    content: (
-      <div className="space-y-6">
-        <div className="space-y-3">
-          <p className="text-sm font-medium text-foreground">Timeline (4 weeks)</p>
+          <p className="text-sm font-medium text-foreground">What 3Trees does</p>
           <ul className="space-y-2.5">
             {[
-              "Week 1: planning workshop, agree what to test, and set up with sample data.",
-              "Weeks 2-4: run day-to-day fundraising work in the pilot, with short weekly check-ins.",
-              "End: review what you learned and decide whether to stop or continue.",
+              "Understand your workflows, data and wider system needs.",
+              "Decide what belongs in Fundraising for Twenty, wider Twenty configuration, integrations or tailored functionality.",
+              "Support setup, data migration, testing, rollout and continued improvement.",
             ].map((item) => (
-              <li key={item} className="flex items-start gap-3 text-sm text-muted-foreground">
-                <span className="mt-2 h-px w-4 bg-border shrink-0" />
+              <li
+                key={item}
+                className="flex items-start gap-3 text-sm text-muted-foreground"
+              >
+                <span className="mt-2 h-px w-4 shrink-0 bg-border" />
                 <span className="leading-relaxed">{item}</span>
               </li>
             ))}
           </ul>
         </div>
 
-        <div className="space-y-3">
+        <div className="space-y-4 border-t border-border pt-6">
           <p className="text-sm font-medium text-foreground">What we need from you</p>
           <ul className="space-y-2.5">
             {[
-              "One main contact to coordinate the pilot.",
-              "A sample of your data that matches what you want to test.",
-              "Willingness to use the system enough to compare it with your current setup.",
+              "A main contact who can coordinate decisions and involve the right people.",
+              "Practical knowledge of current fundraising processes, priorities and constraints.",
+              "Access to the agreed data and time to test the system against real scenarios.",
             ].map((item) => (
-              <li key={item} className="flex items-start gap-3 text-sm text-muted-foreground">
-                <span className="mt-2 h-px w-4 bg-border shrink-0" />
+              <li
+                key={item}
+                className="flex items-start gap-3 text-sm text-muted-foreground"
+              >
+                <span className="mt-2 h-px w-4 shrink-0 bg-border" />
                 <span className="leading-relaxed">{item}</span>
               </li>
             ))}
           </ul>
-        </div>
-
-        <div className="space-y-3">
-          <p className="text-sm font-medium text-foreground">What we do</p>
-          <ul className="space-y-2.5">
-            {[
-              "Set up Twenty licenses and configure the fundraising setup.",
-              "Run the workshop and keep the plan clear and focused.",
-              "Support weekly check-ins and provide a clear end-of-pilot summary.",
-            ].map((item) => (
-              <li key={item} className="flex items-start gap-3 text-sm text-muted-foreground">
-                <span className="mt-2 h-px w-4 bg-border shrink-0" />
-                <span className="leading-relaxed">{item}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div className="space-y-2 border-t border-border pt-5">
-          <p className="text-sm font-medium text-foreground">After the pilot</p>
-          <p className="text-sm leading-relaxed text-muted-foreground">
-            If you want to continue, we&apos;ll discuss next steps, including
-            commercial terms, based on what you learned in the pilot.
-          </p>
         </div>
       </div>
     ),
   },
   {
-    id: "catch",
-    label: "Is there a catch?",
+    id: "costs-scope",
+    label: "Costs and current scope",
     content: (
       <div className="space-y-6">
         <p className="text-sm leading-relaxed text-muted-foreground">
-          We&apos;d rather be direct about the trade-offs:
+          The Fundraising for Twenty app is free for nonprofits. Any Twenty
+          workspace or hosting costs, and 3Trees implementation and support
+          services, are separate.
         </p>
-        <div className="space-y-4">
-          {[
-            "This is a limited pilot group - we're selecting 5–10 organisations, not opening this to everyone.",
-            "The product is early-stage. Some features will be rough. Some workflows will need adjustment.",
-            "We're building deliberately, not racing to ship features. Progress is steady but measured.",
-            "You'll be working with a small team that's responsive but not a large support organization.",
-          ].map((item, i) => (
-            <div
-              key={i}
-              className="flex items-start gap-3 text-sm text-muted-foreground"
-            >
-              <span className="mt-1.5 h-1 w-1 rounded-full bg-foreground/40 shrink-0" />
-              <span className="leading-relaxed">{item}</span>
-            </div>
-          ))}
+        <DetailList
+          items={[
+            {
+              title: "The app",
+              detail:
+                "There is no separate product or licence fee from 3Trees Digital for nonprofits to use Fundraising for Twenty.",
+            },
+            {
+              title: "Twenty",
+              detail:
+                "You may still need to pay for a Twenty workspace, hosting or related infrastructure.",
+            },
+            {
+              title: "3Trees services",
+              detail:
+                "Implementation, data migration, configuration, integrations and training are scoped and charged separately. Ongoing support or further development can also be agreed where needed.",
+            },
+          ]}
+        />
+        <div className="border-t border-border pt-6">
+          <p className="text-sm font-medium text-foreground">Current scope</p>
+          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+            The core fundraising model and workflows are available now through
+            implementations with 3Trees. Integrations, advanced reporting and
+            organisation-specific functionality are scoped where needed rather
+            than included automatically.
+          </p>
         </div>
-        <p className="text-sm leading-relaxed text-muted-foreground">
-          There&apos;s no hidden agenda. The pilot is free because we want to work
-          closely with organisations that can share practical feedback from real
-          fundraising work. If it works, there&apos;s a path to continue. If it
-          doesn&apos;t, you walk away with clear findings and no obligation.
-        </p>
       </div>
     ),
   },
@@ -315,11 +258,9 @@ const DetailsSheetPanel = ({
       >
         <SheetHeader className="space-y-2 border-b border-border px-6 py-6 text-left">
           <div className="space-y-2">
-            <SheetTitle className="text-xl tracking-tight">
-              Pilot details
-            </SheetTitle>
+            <SheetTitle className="text-xl tracking-tight">What to expect</SheetTitle>
             <SheetDescription>
-              Structured answers for key fit, risk, and commitment questions.
+              How the product, implementation and next steps work.
             </SheetDescription>
           </div>
         </SheetHeader>
@@ -343,8 +284,11 @@ const DetailsSheetPanel = ({
                 </button>
               ))}
               <div className="mt-auto border-t border-border pt-4">
-                <Button className="w-full" onClick={onOpenApplication}>
-                  Apply for Pilot
+                <Button
+                  className="h-auto min-h-10 w-full whitespace-normal py-2 leading-snug"
+                  onClick={onOpenApplication}
+                >
+                  Tell us about your organisation
                 </Button>
                 <button
                   type="button"
@@ -383,8 +327,10 @@ const DetailsSheetPanel = ({
                 </h2>
                 {current?.content}
                 <div className="border-t border-border pt-6 md:hidden">
-                  <div className="flex items-center gap-3">
-                    <Button onClick={onOpenApplication}>Apply for Pilot</Button>
+                  <div className="flex flex-wrap items-center gap-3">
+                    <Button onClick={onOpenApplication}>
+                      Tell us about your organisation
+                    </Button>
                     <button
                       type="button"
                       onClick={() => openContact("details-sheet")}

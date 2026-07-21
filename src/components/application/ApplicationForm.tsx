@@ -12,12 +12,7 @@ import {
 } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
-import { Check, ChevronDown } from "lucide-react";
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible";
+import { Check } from "lucide-react";
 
 export type ApplicationFormSection = "org" | "setup" | "readiness";
 
@@ -197,7 +192,10 @@ export default function ApplicationForm({
       | ApplicationFormV1
       | ((previous: ApplicationFormV1) => ApplicationFormV1),
   ) => {
-    const next = typeof updater === "function" ? (updater as any)(form) : updater;
+    const next =
+      typeof updater === "function"
+        ? updater(form)
+        : updater;
     if (onChange) {
       onChange(next);
     } else {
@@ -212,7 +210,7 @@ export default function ApplicationForm({
   ) => {
     const next =
       typeof updater === "function"
-        ? (updater as any)(activeSection)
+        ? updater(activeSection)
         : updater;
     if (onActiveSectionChange) {
       onActiveSectionChange(next);
@@ -222,8 +220,6 @@ export default function ApplicationForm({
   };
   const [honeypot, setHoneypot] = useState("");
   const [attemptedSubmit, setAttemptedSubmit] = useState(false);
-  const [pilotDetailsOpen, setPilotDetailsOpen] = useState(false);
-
   const fieldRefs = useRef<Record<string, HTMLElement | null>>({});
 
   const missing = useMemo(() => requiredMissing(form), [form]);
@@ -257,8 +253,8 @@ export default function ApplicationForm({
     setActiveSection(section);
     requestAnimationFrame(() => {
       const el = fieldRefs.current[field];
-      if (el && "focus" in el) {
-        (el as any).focus();
+      if (el) {
+        el.focus();
       }
     });
   };
@@ -281,7 +277,7 @@ export default function ApplicationForm({
     const crmChangeReason = form.crmChangeReason.trim();
     const pilotNotes = form.pilotNotes.trim();
     if (crmChangeReason) details.push(`CRM context:\n${crmChangeReason}`);
-    if (pilotNotes) details.push(`Pilot notes:\n${pilotNotes}`);
+    if (pilotNotes) details.push(`Additional context:\n${pilotNotes}`);
 
     onSubmit({
       formVersion: "v1",
@@ -564,87 +560,19 @@ export default function ApplicationForm({
 
         <TabsContent value="readiness" className="mt-0 space-y-5 pt-5">
           <div className="space-y-2">
-            <Collapsible
-              open={pilotDetailsOpen}
-              onOpenChange={setPilotDetailsOpen}
-            >
-              <div className="rounded-md bg-muted/30 p-4">
-                <div className="flex items-center justify-between gap-4">
-                  <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">
-                    Pilot Details
-                  </p>
-                  <CollapsibleTrigger asChild>
-                    <button
-                      type="button"
-                      className="inline-flex items-center gap-2 text-xs text-muted-foreground transition-colors hover:text-foreground"
-                    >
-                      {pilotDetailsOpen ? "Hide" : "Show"}
-                      <ChevronDown
-                        className={cn(
-                          "h-4 w-4 transition-transform",
-                          pilotDetailsOpen ? "rotate-180" : "rotate-0",
-                        )}
-                        aria-hidden="true"
-                      />
-                    </button>
-                  </CollapsibleTrigger>
-                </div>
-
-                {!pilotDetailsOpen ? (
-                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                    4-week March-April pilot • workshop week 1 • 5-10 orgs
-                  </p>
-                ) : null}
-
-                <CollapsibleContent>
-                  <div className="mt-4 grid gap-3 sm:grid-cols-[140px_1fr]">
-                    {(
-                      [
-                        [
-                          "Timing",
-                          "4-week pilot starting in March-April.",
-                        ],
-                        [
-                          "Week 1",
-                          "Fundraising team workshop to agree the workflows we'll test.",
-                        ],
-                        [
-                          "Ongoing",
-                          "A point person internally to coordinate setup and weekly check-ins.",
-                        ],
-                        [
-                          "Pilot group",
-                          "We are selecting 5-10 organizations. The more context you share below, the easier it is to assess fit.",
-                        ],
-                        [
-                          "Follow-up",
-                          "We review applications as they come in and will reach out to schedule a short call if it looks like a good fit.",
-                        ],
-                        [
-                          "Launch",
-                          "The product will be launching later this year.",
-                        ],
-                      ] as const
-                    ).map(([label, value]) => (
-                      <div key={label} className="grid gap-1 sm:grid-cols-subgrid sm:col-span-2">
-                        <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">
-                          {label}
-                        </p>
-                        <p className="text-sm leading-relaxed text-muted-foreground">
-                          {value}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                  <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-                    If the timing isn't right but you'd still like to apply, add a note below and we'll stay in touch.
-                  </p>
-                </CollapsibleContent>
-              </div>
-            </Collapsible>
+            <div className="rounded-md bg-muted/30 p-4">
+              <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">
+                What happens next
+              </p>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                We&apos;ll review what you&apos;ve shared and contact you to discuss
+                your current setup, whether Fundraising for Twenty could be a
+                good fit and the most useful next step.
+              </p>
+            </div>
 
             <Label htmlFor={`${idPrefix}-pilotNotes`}>
-              Anything else we should know?{" "}
+              Additional context{" "}
               <span className="text-muted-foreground">(optional)</span>
             </Label>
             <Textarea
@@ -655,7 +583,7 @@ export default function ApplicationForm({
               ref={(el) => {
                 fieldRefs.current.pilotNotes = el;
               }}
-              placeholder="Anything that helps us evaluate fit or make the pilot successful."
+              placeholder="Tell us about any priorities, timing, wider CRM needs or implementation questions."
             />
           </div>
         </TabsContent>
@@ -685,7 +613,7 @@ export default function ApplicationForm({
                 disabled={Boolean(disabled)}
                 onClick={handleSubmit}
               >
-                {submitting ? "Submitting..." : "Submit application"}
+                {submitting ? "Sending..." : "Send enquiry"}
               </Button>
             ) : (
               <Button type="button" disabled={Boolean(disabled)} onClick={goToNextSection}>

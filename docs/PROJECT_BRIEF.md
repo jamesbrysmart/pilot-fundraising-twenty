@@ -1,5 +1,9 @@
 # Project Brief
 
+Status: Pilot-era brief. The active product-page direction is maintained in
+`docs/PRODUCT_PAGE_REORIENTATION_WORKING_DOC.md` while the broader project brief
+is reconsidered.
+
 ## Document Role
 This is stable project context and success criteria.
 It should not prescribe layout, UI patterns, or final copy.
@@ -55,5 +59,6 @@ Only then write final page copy.
 Treat all current statements as provisional until validated against live pilot decisions and direct conversations.
 
 ## Canonical Direction Docs
-- Messaging spine: `docs/LANDING_PAGE_MESSAGING_WORKING_DOC.md`
+- Active product-page direction: `docs/PRODUCT_PAGE_REORIENTATION_WORKING_DOC.md`
+- Archived pilot messaging: `docs/LANDING_PAGE_MESSAGING_WORKING_DOC.md`
 - Design execution notes (if used): `docs/PILOT_LANDING_PAGE_DESIGN_WORKING_DOC.md`

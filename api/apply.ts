@@ -1,8 +1,10 @@
 import crypto from "node:crypto";
 import fs from "node:fs/promises";
+import type { IncomingMessage, ServerResponse } from "node:http";
 import { URLSearchParams } from "node:url";
 
 type JsonRecord = Record<string, unknown>;
+type ApiRequest = IncomingMessage & { body?: unknown };
 
 function getEnv(name: string): string | undefined {
   const value = process.env[name];
@@ -23,7 +25,7 @@ function parsePrivateKey(raw: string): string {
   return raw.replace(/\\n/g, "\n");
 }
 
-async function readJsonBody(req: any): Promise<JsonRecord> {
+async function readJsonBody(req: ApiRequest): Promise<JsonRecord> {
   if (req?.body && typeof req.body === "object") {
     return req.body as JsonRecord;
   }
@@ -37,7 +39,7 @@ async function readJsonBody(req: any): Promise<JsonRecord> {
   return JSON.parse(text) as JsonRecord;
 }
 
-function json(res: any, status: number, payload: JsonRecord) {
+function json(res: ServerResponse, status: number, payload: JsonRecord) {
   res.statusCode = status;
   res.setHeader("Content-Type", "application/json; charset=utf-8");
   res.end(JSON.stringify(payload));
@@ -160,7 +162,7 @@ async function appendToGoogleSheet(params: {
   }
 }
 
-export default async function handler(req: any, res: any) {
+export default async function handler(req: ApiRequest, res: ServerResponse) {
   // Minimal CORS for local/proxy scenarios. Same-origin requests won't need this.
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
@@ -291,10 +293,11 @@ export default async function handler(req: any, res: any) {
     const submissionsPath = getEnv("SUBMISSIONS_PATH") ?? defaultPath;
     await appendToNdjson(submissionsPath, record);
     json(res, 200, { ok: true });
-  } catch (error: any) {
+  } catch (error: unknown) {
     const requestId = crypto.randomUUID?.() ?? crypto.randomBytes(16).toString("hex");
     const message = safeErrorMessage(error);
-    console.error("[apply]", { requestId, error: message, stack: error?.stack });
+    const stack = error instanceof Error ? error.stack : undefined;
+    console.error("[apply]", { requestId, error: message, stack });
 
     // Avoid returning internals in detail by default. If APPLY_DEBUG=1, return the message.
     json(res, 500, {

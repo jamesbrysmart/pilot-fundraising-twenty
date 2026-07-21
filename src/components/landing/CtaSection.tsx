@@ -12,16 +12,19 @@ const CtaSection = () => {
             Interested?
           </h2>
           <p className="text-sm text-muted-foreground leading-relaxed">
-            Applications are reviewed on a rolling basis. We&apos;re selecting 5–10 organisations and will close applications once the pilot is full.
+            Tell us what you use today, what is getting in the way and what you
+            need your fundraising CRM to support. We&apos;ll help you assess whether
+            Fundraising for Twenty is the right fit and what a sensible first
+            implementation could look like.
           </p>
           <div className="flex items-center gap-4 pt-2">
-            <ApplicationTriggerButton>Apply for the pilot</ApplicationTriggerButton>
+            <ApplicationTriggerButton>Tell us about your organisation</ApplicationTriggerButton>
             <button
               type="button"
               onClick={openDetails}
               className="text-sm text-muted-foreground underline underline-offset-2 transition-colors hover:text-foreground"
             >
-              More details
+              What to expect
             </button>
           </div>
         </div>

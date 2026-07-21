@@ -1,75 +1,94 @@
-import { useDetailsSheet } from "@/components/application/ApplicationSheetProvider";
+import { ArrowRight } from "lucide-react";
+
+const responsibilities = [
+  {
+    title: "System design",
+    detail:
+      "Decide how fundraising connects with grants, partnerships and wider relationships.",
+  },
+  {
+    title: "Data and migration",
+    detail:
+      "Prepare, map and validate the information moving into Twenty.",
+  },
+  {
+    title: "Implementation and improvement",
+    detail:
+      "Support setup, rollout, adoption and continued development.",
+  },
+];
 
 const OutcomesSection = () => {
-  const { openDetails } = useDetailsSheet();
-
-  const openAfterPilotDetails = () => {
-    openDetails("involved");
-  };
-
   return (
     <section className="container py-24 md:py-32">
-      <div className="mb-12 max-w-2xl space-y-3">
-        <h2 className="text-xl font-semibold tracking-tight md:text-2xl">
-          Clear next-step outcomes
-        </h2>
-      </div>
-
-      <div className="grid md:grid-cols-2 gap-px bg-border rounded-lg overflow-hidden">
-        {/* Stop */}
-        <div className="bg-background p-8 md:p-12 space-y-6">
-          <div className="space-y-2">
-            <h3 className="text-lg font-semibold">Stop cleanly</h3>
-            <p className="text-sm text-muted-foreground leading-relaxed">
-              No obligation. Walk away with documented findings and an honest assessment of fit.
-            </p>
-          </div>
-          <ul className="space-y-2.5">
-            {[
-              "No cost, no commitment",
-              "What you learned about your process and data",
-              "Your data stays yours",
-            ].map((item) => (
-              <li key={item} className="text-sm text-muted-foreground flex items-center gap-3">
-                <span className="h-px w-4 bg-border shrink-0" />
-                {item}
-              </li>
-            ))}
-          </ul>
+      <div className="border-y border-border py-10 md:py-14">
+        <div className="mb-10 max-w-3xl space-y-3 md:mb-12">
+          <p className="text-[11px] uppercase tracking-wider text-muted-foreground">
+            Product + implementation
+          </p>
+          <h2 className="text-xl font-semibold tracking-tight md:text-2xl">
+            A developed product, shaped around your organisation.
+          </h2>
+          <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
+            Fundraising for Twenty provides a strong fundraising starting point.
+            3Trees Digital helps design and implement the wider CRM around how
+            your organisation works.
+          </p>
         </div>
 
-        {/* Continue */}
-        <div className="relative bg-secondary/50 p-8 md:p-12 space-y-6">
-          <span
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-x-0 top-0 h-px bg-[hsl(var(--shoot))] opacity-50"
-          />
-          <div className="space-y-2">
-            <h3 className="text-lg font-semibold">Continue smoothly</h3>
-            <p className="text-sm text-muted-foreground leading-relaxed">
-              If it's a good fit for the team, continue without restarting or rework.
+        <div className="grid md:grid-cols-[0.38fr_0.62fr]">
+          <div className="md:pr-10 lg:pr-14">
+            <p className="text-[11px] uppercase tracking-wider text-muted-foreground">
+              Fundraising for Twenty
+            </p>
+            <h3 className="mt-3 max-w-xs text-lg font-semibold leading-snug">
+              Start with substantial fundraising capability.
+            </h3>
+            <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">
+              The core fundraising model and workflows are already developed on
+              Twenty, so you are not starting from a blank CRM.
             </p>
           </div>
-          <ul className="space-y-2.5">
-            <li className="text-sm text-muted-foreground flex items-center gap-3">
-              <span className="h-px w-4 bg-foreground/20 shrink-0" />
-              Build on what's already set up
-            </li>
-            <li className="text-sm text-muted-foreground flex items-center gap-3">
-              <span className="h-px w-4 bg-foreground/20 shrink-0" />
-              Move more data over and tailor setup if needed
-            </li>
-            <li className="text-sm text-muted-foreground flex items-center gap-3">
-              <span className="h-px w-4 bg-foreground/20 shrink-0" />
-              <button
-                type="button"
-                onClick={openAfterPilotDetails}
-                className="underline underline-offset-2 transition-colors hover:text-foreground"
-              >
-                After the pilot: continuation and commercials
-              </button>
-            </li>
-          </ul>
+
+          <div className="mt-9 border-t border-border pt-9 md:mt-0 md:border-l md:border-t-0 md:pl-10 md:pt-0 lg:pl-14">
+            <p className="text-[11px] uppercase tracking-wider text-[hsl(var(--shoot))]">
+              3Trees Digital
+            </p>
+            <h3 className="mt-3 text-lg font-semibold leading-snug">
+              Shape the wider system around your organisation.
+            </h3>
+            <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+              3Trees works with your team to understand how the organisation
+              operates and decide how Fundraising for Twenty, the wider CRM and
+              connected systems should fit together.
+            </p>
+
+            <dl className="mt-7 divide-y divide-border border-y border-border">
+              {responsibilities.map((responsibility) => (
+                <div
+                  key={responsibility.title}
+                  className="grid gap-1 py-4 sm:grid-cols-[190px_minmax(0,1fr)] sm:gap-5"
+                >
+                  <dt className="text-sm font-medium text-foreground">
+                    {responsibility.title}
+                  </dt>
+                  <dd className="text-sm leading-relaxed text-muted-foreground">
+                    {responsibility.detail}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+
+            <span
+              aria-disabled="true"
+              title="3Trees Digital website coming soon"
+              className="mt-7 inline-flex cursor-not-allowed items-center text-sm text-muted-foreground opacity-55"
+            >
+              Learn more about 3Trees Digital and how we work
+              <ArrowRight aria-hidden="true" className="ml-1.5 h-3.5 w-3.5" />
+              <span className="sr-only"> (website coming soon)</span>
+            </span>
+          </div>
         </div>
       </div>
     </section>

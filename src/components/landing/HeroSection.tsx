@@ -4,19 +4,19 @@ import GreenShootMark from "@/components/branding/GreenShootMark";
 
 const pilotJourney = [
   {
-    title: "Try a modern CRM in real fundraising work",
+    title: "Bring your fundraising work into Twenty",
     detail:
-      "See what modern donor management and campaign workflows feel like, at no cost.",
+      "Manage donors, gifts, recurring giving, appeals, and funding opportunities in one connected CRM.",
   },
   {
-    title: "Leave with clarity and next steps",
+    title: "Start with a developed fundraising model",
     detail:
-      "Get a clear assessment of fit and next-step options, even if you do not continue.",
+      "Use an app designed around charity fundraising rather than configuring a generic CRM from scratch.",
   },
   {
-    title: "Help prove a better path forward",
+    title: "Get practical implementation support",
     detail:
-      "Open-source foundations now, with a community-led direction over time.",
+      "3Trees Digital can help with setup, imports, migration, and rollout.",
   },
 ];
 
@@ -31,7 +31,7 @@ const HeroSection = () => {
             <div className="flex items-center gap-3">
               <span className="h-px w-8 bg-[hsl(var(--shoot))] opacity-60" />
               <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground">
-                Launch pilot
+                Built on Twenty CRM
               </p>
             </div>
             <h1 className="text-4xl font-semibold tracking-tight md:text-5xl lg:text-[3.5rem] lg:leading-[1.1]">
@@ -44,10 +44,10 @@ const HeroSection = () => {
               build donor relationships you can trust.
             </p>
             <p className="text-sm text-muted-foreground">
-              Try it free for 4 weeks, with no commitment to switch.
+              Available with setup and implementation support from 3Trees Digital.
             </p>
             <div className="flex items-center gap-4 pt-2">
-              <ApplicationTriggerButton>Apply for the pilot</ApplicationTriggerButton>
+              <ApplicationTriggerButton>Tell us about your organisation</ApplicationTriggerButton>
               <button
                 type="button"
                 onClick={openDetails}

@@ -29,7 +29,7 @@ const Navbar = () => {
         </div>
         <div className="flex items-center gap-2">
           <ApplicationTriggerButton size="sm" variant="outline">
-            Apply
+            Enquire
           </ApplicationTriggerButton>
         </div>
       </div>

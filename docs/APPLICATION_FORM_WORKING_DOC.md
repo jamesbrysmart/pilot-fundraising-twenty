@@ -1,6 +1,8 @@
 # Application Form Working Doc
 
-Status: Working
+Status: Pilot-era archive. Superseded for public messaging by
+`docs/PRODUCT_PAGE_REORIENTATION_WORKING_DOC.md`. The implementation notes remain
+useful while the existing capture endpoint and payload shape are retained.
 Owner: Product / Engineering
 Last updated: 2026-02-19
 

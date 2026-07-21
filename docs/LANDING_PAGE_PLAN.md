@@ -1,5 +1,9 @@
 # Landing Page Plan
 
+Status: Pilot-era plan. Retained as historical context. See
+`docs/PRODUCT_PAGE_REORIENTATION_WORKING_DOC.md` for the active product-page
+iteration.
+
 ## Purpose
 Define the foundation for a high-conviction pilot landing page that helps the right nonprofits decide to apply.
 

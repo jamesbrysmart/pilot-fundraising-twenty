@@ -168,7 +168,7 @@ const ContactSheetProvider = ({ children }: { children: ReactNode }) => {
                 <div className="space-y-2">
                   <SheetTitle className="text-xl tracking-tight">Get in touch</SheetTitle>
                   <SheetDescription>
-                    Questions, collaboration, or pilot interest - send us a note.
+                    Questions, implementation, or product interest - send us a note.
                   </SheetDescription>
                 </div>
               </SheetHeader>

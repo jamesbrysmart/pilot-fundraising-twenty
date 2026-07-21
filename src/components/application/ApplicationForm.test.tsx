@@ -47,7 +47,7 @@ describe("ApplicationForm submit behavior", () => {
       />,
     );
 
-    fireEvent.click(screen.getByRole("button", { name: /submit application/i }));
+    fireEvent.click(screen.getByRole("button", { name: /send enquiry/i }));
     expect(onSubmit).toHaveBeenCalledTimes(1);
   });
 });

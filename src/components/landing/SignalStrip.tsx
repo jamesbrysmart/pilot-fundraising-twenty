@@ -6,9 +6,9 @@ const signals = [
     iconSrc: "/twenty-logo.svg",
     iconAlt: "Twenty",
   },
-  { label: "Pilot size", value: "5–10 orgs" },
-  { label: "Duration", value: "4 weeks" },
-  { label: "Cost", value: "Free" },
+  { label: "Built by", value: "3Trees Digital" },
+  { label: "Designed for", value: "Small + mid-sized nonprofits" },
+  { label: "Available with", value: "Setup + implementation support" },
 ];
 
 const SignalStrip = () => {

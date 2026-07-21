@@ -1,4 +1,11 @@
-# Landing Page Messaging Operating Brief (Canonical)
+# Landing Page Messaging Operating Brief (Pilot Archive)
+
+Status: Superseded on 17 July 2026 by
+`docs/PRODUCT_PAGE_REORIENTATION_WORKING_DOC.md`.
+
+This document records the former pilot-recruitment messaging direction. It is
+retained as historical context and is no longer the source of truth for public
+landing-page changes.
 
 Owner: Copy / Content Lead  
 

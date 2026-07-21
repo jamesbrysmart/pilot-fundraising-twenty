@@ -1,6 +1,9 @@
 # Pilot Landing Page Design Working Doc (Baseline Optimization)
 
-Status: Active  
+Status: Pilot-era design record. Retained as historical context. Any new design
+work should follow the active direction in
+`docs/PRODUCT_PAGE_REORIENTATION_WORKING_DOC.md`.
+
 Owner: Design Lead  
 Purpose: Operating brief for improving the baseline landing page through small, high-impact changes.
 
