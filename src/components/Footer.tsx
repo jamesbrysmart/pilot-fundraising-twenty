@@ -26,8 +26,16 @@ const Footer = () => {
           >
             Twenty CRM
           </a>
-          , developed and supported by 3Trees Digital. It is not an official
-          Twenty product.
+          , developed and supported by{" "}
+          <a
+            href="https://3trees.digital"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline underline-offset-2 transition-colors hover:text-foreground"
+          >
+            3Trees Digital
+          </a>
+          . It is not an official Twenty product.
         </p>
       </div>
     </footer>

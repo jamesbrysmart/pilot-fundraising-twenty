@@ -87,13 +87,15 @@ const OutcomesSection = () => {
       </div>
 
       <div className="container pb-20 md:pb-24">
-        <span
-          aria-disabled="true"
-          className="mt-6 inline-flex items-center text-sm text-[hsl(var(--brand-soft-foreground))]"
+        <a
+          href="https://3trees.digital"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-6 inline-flex items-center text-sm text-[hsl(var(--brand-soft-foreground))] underline-offset-4 transition-colors hover:text-foreground hover:underline"
         >
           Learn more about 3Trees Digital and how we work
           <ArrowRight aria-hidden="true" className="ml-1.5 h-3.5 w-3.5" />
-        </span>
+        </a>
       </div>
     </section>
   );

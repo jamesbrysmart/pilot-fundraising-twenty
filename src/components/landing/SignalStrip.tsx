@@ -6,7 +6,11 @@ const signals = [
     iconSrc: "/twenty-logo.svg",
     iconAlt: "Twenty",
   },
-  { label: "Built by", value: "3Trees Digital" },
+  {
+    label: "Built by",
+    value: "3Trees Digital",
+    href: "https://3trees.digital",
+  },
   { label: "Designed for", value: "Small + mid-sized nonprofits" },
   { label: "Available with", value: "Setup + implementation support" },
 ];

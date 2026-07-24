@@ -54,8 +54,16 @@ const sections: DetailsSection[] = [
           needs.
         </p>
         <p className="text-sm leading-relaxed text-muted-foreground">
-          Fundraising for Twenty is developed and supported by 3Trees Digital. It
-          is built on Twenty CRM but is not an official Twenty product.
+          Fundraising for Twenty is developed and supported by{" "}
+          <a
+            href="https://3trees.digital"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-medium text-foreground underline underline-offset-2 transition-colors hover:text-foreground/80"
+          >
+            3Trees Digital
+          </a>
+          . It is built on Twenty CRM but is not an official Twenty product.
         </p>
       </div>
     ),
