@@ -1,95 +1,99 @@
+import GreenShootMark from "@/components/branding/GreenShootMark";
 import { ArrowRight } from "lucide-react";
 
-const responsibilities = [
+const partnershipThemes = [
   {
-    title: "System design",
+    title: "Understand how you work",
     detail:
-      "Decide how fundraising connects with grants, partnerships and wider relationships.",
+      "Understand your people, processes, data and wider priorities—not fundraising in isolation.",
   },
   {
-    title: "Data and migration",
+    title: "Shape the right system",
     detail:
-      "Prepare, map and validate the information moving into Twenty.",
+      "Design a coherent CRM: how information connects, what belongs in Twenty and where specialist workflows are needed.",
   },
   {
-    title: "Implementation and improvement",
+    title: "Grow it with you",
     detail:
-      "Support setup, rollout, adoption and continued development.",
+      "Stay involved after launch to support, improve and extend the CRM as your organisation’s needs change.",
   },
 ];
 
 const OutcomesSection = () => {
   return (
-    <section className="container py-24 md:py-32">
-      <div className="border-y border-border py-10 md:py-14">
-        <div className="mb-10 max-w-3xl space-y-3 md:mb-12">
+    <section className="border-y border-[hsl(var(--brand-line))] bg-background">
+      <div className="container pt-20 md:pt-24">
+        <div className="max-w-3xl">
           <p className="text-[11px] uppercase tracking-wider text-muted-foreground">
-            Product + implementation
+            Working with 3Trees Digital
           </p>
-          <h2 className="text-xl font-semibold tracking-tight md:text-2xl">
-            A developed product, shaped around your organisation.
+          <h2 className="mt-4 text-xl font-semibold tracking-tight md:text-2xl">
+            A developed fundraising product is the starting point.
+            <br />
+            Your CRM should grow from there.
           </h2>
-          <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
-            Fundraising for Twenty provides a strong fundraising starting point.
-            3Trees Digital helps design and implement the wider CRM around how
-            your organisation works.
+          <p className="mt-5 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+            Fundraising for Twenty provides the foundation. 3Trees brings
+            nonprofit CRM, data, migration and implementation experience to
+            shape the wider system—and help it grow with you.
+          </p>
+          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+            Beyond fundraising, that might include volunteer coordination,
+            membership management, programme participation and other workflows
+            particular to your organisation.
           </p>
         </div>
+      </div>
 
-        <div className="grid md:grid-cols-[0.38fr_0.62fr]">
-          <div className="md:pr-10 lg:pr-14">
-            <p className="text-[11px] uppercase tracking-wider text-muted-foreground">
-              Fundraising for Twenty
-            </p>
-            <h3 className="mt-3 max-w-xs text-lg font-semibold leading-snug">
-              Start with substantial fundraising capability.
-            </h3>
-            <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">
-              The core fundraising model and workflows are already developed on
-              Twenty, so you are not starting from a blank CRM.
-            </p>
-          </div>
-
-          <div className="mt-9 border-t border-border pt-9 md:mt-0 md:border-l md:border-t-0 md:pl-10 md:pt-0 lg:pl-14">
-            <p className="text-[11px] uppercase tracking-wider text-[hsl(var(--shoot))]">
-              3Trees Digital
-            </p>
-            <h3 className="mt-3 text-lg font-semibold leading-snug">
-              Shape the wider system around your organisation.
-            </h3>
-            <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-              3Trees works with your team to understand how the organisation
-              operates and decide how Fundraising for Twenty, the wider CRM and
-              connected systems should fit together.
-            </p>
-
-            <dl className="mt-7 divide-y divide-border border-y border-border">
-              {responsibilities.map((responsibility) => (
-                <div
-                  key={responsibility.title}
-                  className="grid gap-1 py-4 sm:grid-cols-[190px_minmax(0,1fr)] sm:gap-5"
-                >
-                  <dt className="text-sm font-medium text-foreground">
-                    {responsibility.title}
-                  </dt>
-                  <dd className="text-sm leading-relaxed text-muted-foreground">
-                    {responsibility.detail}
-                  </dd>
+      <div className="relative mt-10 border-y border-[hsl(var(--brand-line))] bg-[hsl(var(--brand-wash))]">
+        <span
+          aria-hidden="true"
+          className="absolute bottom-7 left-0 right-12 hidden h-px bg-[hsl(var(--shoot))] lg:block"
+        />
+        <GreenShootMark className="absolute bottom-4 right-4 hidden h-14 w-14 lg:block" />
+        <div className="container">
+          <ol className="relative grid divide-y divide-[hsl(var(--brand-line))] lg:grid-cols-3 lg:divide-y-0">
+            {partnershipThemes.map((theme, index) => (
+              <li
+                key={theme.title}
+                className="relative px-6 py-6 sm:px-8 lg:px-8 lg:pb-16 lg:pt-7"
+              >
+                <div className="flex items-center gap-3">
+                  <span
+                    aria-hidden="true"
+                    className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[hsl(var(--brand-soft))] text-xs font-semibold text-[hsl(var(--brand-soft-foreground))]"
+                  >
+                    {index + 1}
+                  </span>
+                  <h3 className="text-base font-semibold text-foreground">
+                    {theme.title}
+                  </h3>
                 </div>
-              ))}
-            </dl>
-
-            <span
-              aria-disabled="true"
-              title="3Trees Digital website coming soon"
-              className="mt-7 inline-flex cursor-not-allowed items-center text-sm text-muted-foreground opacity-55"
-            >
-              Learn more about 3Trees Digital and how we work
-              <ArrowRight aria-hidden="true" className="ml-1.5 h-3.5 w-3.5" />
-              <span className="sr-only"> (website coming soon)</span>
-            </span>
-          </div>
+                <p className="ml-10 mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">
+                  {theme.detail}
+                </p>
+                <span
+                  aria-hidden="true"
+                  className="absolute bottom-7 left-1/2 hidden h-5 w-px -translate-x-1/2 bg-[hsl(var(--brand-transition))] lg:block"
+                />
+                <span
+                  aria-hidden="true"
+                  className="absolute bottom-6 left-1/2 z-10 hidden h-2 w-2 -translate-x-1/2 rounded-full bg-[hsl(var(--shoot))] lg:block"
+                />
+              </li>
+            ))}
+          </ol>
         </div>
+      </div>
+
+      <div className="container pb-20 md:pb-24">
+        <span
+          aria-disabled="true"
+          className="mt-6 inline-flex items-center text-sm text-[hsl(var(--brand-soft-foreground))]"
+        >
+          Learn more about 3Trees Digital and how we work
+          <ArrowRight aria-hidden="true" className="ml-1.5 h-3.5 w-3.5" />
+        </span>
       </div>
     </section>
   );

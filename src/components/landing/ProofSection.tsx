@@ -1,4 +1,10 @@
+import ApplicationTriggerButton from "@/components/application/ApplicationTriggerButton";
 import { useContactSheet } from "@/components/contact/ContactSheetProvider";
+import DonorRecordVisual from "@/components/landing/DonorRecordVisual";
+import DonationProcessingVisual from "@/components/landing/DonationProcessingVisual";
+import FundraisingDashboardVisual from "@/components/landing/FundraisingDashboardVisual";
+import FundraisingPipelineVisual from "@/components/landing/FundraisingPipelineVisual";
+import RecurringGivingVisual from "@/components/landing/RecurringGivingVisual";
 import { useEffect, useMemo, useRef, useState } from "react";
 
 const scenarios = [
@@ -131,19 +137,28 @@ const ProofSection = () => {
 
             <div className="mt-6 border-t border-border pt-6">
               <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">
-                What we're building
+                See it working
               </p>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                Fundraising is the first module. More nonprofit workflows are
-                planned over time, built on open-source foundations.
+                Fundraising for Twenty is available now. We can demonstrate
+                these workflows in the product and discuss how they could
+                support your team.
               </p>
-              <button
-                type="button"
-                onClick={() => openContact("proof-section")}
-                className="mt-3 text-sm text-muted-foreground underline underline-offset-2 transition-colors hover:text-foreground"
-              >
-                Want to help build it? Contact us.
-              </button>
+              <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2">
+                <ApplicationTriggerButton
+                  variant="link"
+                  className="h-auto p-0 text-sm font-normal text-muted-foreground hover:text-foreground"
+                >
+                  Tell us about your organisation
+                </ApplicationTriggerButton>
+                <button
+                  type="button"
+                  onClick={() => openContact("proof-section")}
+                  className="text-sm text-muted-foreground underline underline-offset-4 transition-colors hover:text-foreground"
+                >
+                  Contact us
+                </button>
+              </div>
             </div>
           </aside>
 
@@ -164,8 +179,24 @@ const ProofSection = () => {
                     </p>
                   </div>
 
-                  <div className="relative aspect-[21/9] w-full overflow-hidden bg-[hsl(var(--shoot)/0.08)] ring-2 ring-inset ring-[hsl(var(--shoot)/0.55)]">
-                    {scenario.imageSrc ? (
+                  <div
+                    className={`relative w-full overflow-hidden bg-[hsl(var(--shoot)/0.08)] ${
+                      index < 5
+                        ? "aspect-[5/4] sm:aspect-[21/9]"
+                        : "aspect-[21/9] ring-2 ring-inset ring-[hsl(var(--shoot)/0.55)]"
+                    }`}
+                  >
+                    {index === 0 ? (
+                      <DonorRecordVisual />
+                    ) : index === 1 ? (
+                      <DonationProcessingVisual />
+                    ) : index === 2 ? (
+                      <RecurringGivingVisual />
+                    ) : index === 3 ? (
+                      <FundraisingPipelineVisual />
+                    ) : index === 4 ? (
+                      <FundraisingDashboardVisual />
+                    ) : scenario.imageSrc ? (
                       <div
                         className={`absolute inset-0 scale-[1.015] ${
                           index % 2 === 0 ? "rotate-[-1.25deg]" : "rotate-[1.25deg]"
@@ -189,18 +220,22 @@ const ProofSection = () => {
                       </div>
                     )}
 
-                    <div
-                      aria-hidden="true"
-                      className="pointer-events-none absolute inset-x-0 top-0 h-px bg-[hsl(var(--shoot))] opacity-60"
-                    />
-                    <div
-                      aria-hidden="true"
-                      className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/60 via-background/15 to-transparent"
-                    />
-                    <div
-                      aria-hidden="true"
-                      className="pointer-events-none absolute inset-x-0 top-0 h-[22%] bg-gradient-to-b from-background/60 via-background/20 to-transparent"
-                    />
+                    {index < 5 ? null : (
+                      <>
+                        <div
+                          aria-hidden="true"
+                          className="pointer-events-none absolute inset-x-0 top-0 h-px bg-[hsl(var(--shoot))] opacity-60"
+                        />
+                        <div
+                          aria-hidden="true"
+                          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/60 via-background/15 to-transparent"
+                        />
+                        <div
+                          aria-hidden="true"
+                          className="pointer-events-none absolute inset-x-0 top-0 h-[22%] bg-gradient-to-b from-background/60 via-background/20 to-transparent"
+                        />
+                      </>
+                    )}
                   </div>
                 </div>
 

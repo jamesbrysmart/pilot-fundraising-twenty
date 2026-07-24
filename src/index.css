@@ -27,6 +27,14 @@
     --accent: 220 10% 93%;
     --accent-foreground: 220 20% 10%;
     --shoot: 138 34% 47%;
+    --brand-soft: 138 30% 96%;
+    --brand-soft-foreground: 138 34% 18%;
+    --brand-soft-muted: 140 12% 39%;
+    --brand-line: 138 22% 83%;
+    --brand-wash: 138 26% 90%;
+    --brand-strong: 138 44% 24%;
+    --brand-strong-foreground: 0 0% 99%;
+    --brand-transition: 138 29% 69%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 99%;
@@ -63,6 +71,14 @@
     --accent: 220 15% 14%;
     --accent-foreground: 0 0% 95%;
     --shoot: 138 35% 68%;
+    --brand-soft: 138 20% 10%;
+    --brand-soft-foreground: 138 25% 91%;
+    --brand-soft-muted: 138 12% 68%;
+    --brand-line: 138 20% 25%;
+    --brand-wash: 138 18% 16%;
+    --brand-strong: 138 35% 28%;
+    --brand-strong-foreground: 0 0% 99%;
+    --brand-transition: 138 27% 35%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 95%;
     --border: 220 15% 16%;

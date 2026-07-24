@@ -39,8 +39,8 @@ const faqs = [
   {
     q: "Can it support more than fundraising?",
     a: [
-      "Yes. Fundraising for Twenty sits within the wider Twenty CRM. 3Trees can help design and implement related areas such as grants, partnerships, memberships, volunteers and other stakeholder relationships.",
-      "These wider areas are shaped during implementation and are not all packaged features within Fundraising for Twenty itself.",
+      "Yes. Fundraising for Twenty sits within the wider Twenty CRM. 3Trees can help shape related areas such as volunteer coordination, membership management, programme participation and other organisational workflows.",
+      "These are not packaged Fundraising for Twenty features. What belongs in Twenty, how it should work and whether specialist systems are needed are agreed during implementation.",
     ],
   },
   {

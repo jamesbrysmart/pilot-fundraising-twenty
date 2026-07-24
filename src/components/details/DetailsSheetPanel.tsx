@@ -80,7 +80,7 @@ const sections: DetailsSection[] = [
             {
               title: "You need flexibility around the core",
               detail:
-                "Fundraising needs to connect with grants, partnerships, memberships, volunteers or other stakeholder relationships.",
+                "You want fundraising to connect with volunteer coordination, membership management, programme participation or other organisational workflows, rather than operating as an isolated system.",
             },
             {
               title: "You are prepared to take part in implementation",

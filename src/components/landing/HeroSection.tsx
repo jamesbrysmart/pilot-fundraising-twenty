@@ -1,36 +1,22 @@
 import ApplicationTriggerButton from "@/components/application/ApplicationTriggerButton";
 import { useDetailsSheet } from "@/components/application/ApplicationSheetProvider";
+import BrandCornerFade from "@/components/branding/BrandCornerFade";
 import GreenShootMark from "@/components/branding/GreenShootMark";
-
-const pilotJourney = [
-  {
-    title: "Bring your fundraising work into Twenty",
-    detail:
-      "Manage donors, gifts, recurring giving, appeals, and funding opportunities in one connected CRM.",
-  },
-  {
-    title: "Start with a developed fundraising model",
-    detail:
-      "Use an app designed around charity fundraising rather than configuring a generic CRM from scratch.",
-  },
-  {
-    title: "Get practical implementation support",
-    detail:
-      "3Trees Digital can help with setup, imports, migration, and rollout.",
-  },
-];
+import HeroPreview from "@/components/landing/HeroPreview";
 
 const HeroSection = () => {
   const { openDetails } = useDetailsSheet();
 
   return (
-    <section className="relative py-24 md:py-32">
-      <div className="container">
+    <section className="relative overflow-hidden border-b border-[hsl(var(--brand-line))] bg-[hsl(var(--brand-strong))] py-24 text-[hsl(var(--brand-strong-foreground))] md:py-32">
+      <BrandCornerFade />
+
+      <div className="container relative z-10">
         <div className="grid gap-10 lg:grid-cols-[1fr_0.95fr] lg:items-start lg:gap-14">
           <div className="max-w-2xl space-y-6">
             <div className="flex items-center gap-3">
-              <span className="h-px w-8 bg-[hsl(var(--shoot))] opacity-60" />
-              <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground">
+              <span className="h-px w-8 bg-[hsl(var(--brand-strong-foreground))] opacity-55" />
+              <p className="text-xs font-medium uppercase tracking-widest text-[hsl(var(--brand-strong-foreground)/0.72)]">
                 Built on Twenty CRM
               </p>
             </div>
@@ -39,78 +25,38 @@ const HeroSection = () => {
               <br />
               CRM for nonprofits.
             </h1>
-            <p className="max-w-md text-base leading-relaxed text-muted-foreground">
+            <p className="max-w-md text-base leading-relaxed text-[hsl(var(--brand-strong-foreground)/0.78)]">
               Give your team the modern tools they need to manage donations and
               build donor relationships you can trust.
             </p>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-sm text-[hsl(var(--brand-strong-foreground)/0.78)]">
               Available with setup and implementation support from 3Trees Digital.
             </p>
             <div className="flex items-center gap-4 pt-2">
-              <ApplicationTriggerButton>Tell us about your organisation</ApplicationTriggerButton>
+              <ApplicationTriggerButton className="bg-[hsl(var(--brand-strong-foreground))] text-[hsl(var(--brand-strong))] hover:bg-[hsl(var(--brand-strong-foreground)/0.9)] focus-visible:ring-[hsl(var(--brand-strong-foreground))] focus-visible:ring-offset-[hsl(var(--brand-strong))]">
+                Tell us about your organisation
+              </ApplicationTriggerButton>
               <button
                 type="button"
                 onClick={openDetails}
-                className="text-sm text-muted-foreground underline underline-offset-2 transition-colors hover:text-foreground"
+                className="text-sm text-[hsl(var(--brand-strong-foreground)/0.78)] underline underline-offset-2 transition-colors hover:text-[hsl(var(--brand-strong-foreground))]"
               >
                 More details
               </button>
             </div>
           </div>
 
-          <aside className="lg:pt-10">
-            <div className="border-t border-border pt-8 lg:border-t-0 lg:pt-0">
-              <p className="text-sm font-medium uppercase tracking-widest text-muted-foreground">
-                Thinking about changing your CRM?
-              </p>
-
-              <div className="relative mt-5 md:mt-6">
-                <span
-                  aria-hidden="true"
-                  className="absolute left-0 top-2 h-[calc(100%-16px)] w-px bg-border"
-                />
-                <div className="space-y-6">
-                  {pilotJourney.map((item, index) => {
-                    const tickWidth = ["w-6", "w-10", "w-14"][index] ?? "w-10";
-                    return (
-                      <div key={item.title} className="flex items-start gap-4">
-                        <div className={`relative ${tickWidth} pt-2`}>
-                          <span
-                            aria-hidden="true"
-                            className="block h-px w-full bg-border"
-                          />
-                          <span
-                            aria-hidden="true"
-                            className="absolute -right-2 top-[calc(0.5rem-0.55em)] text-sm leading-none text-[hsl(var(--shoot))] opacity-60"
-                          >
-                            ›
-                          </span>
-                        </div>
-                        <div className="flex-1">
-                          <p className="text-sm font-medium leading-tight">
-                            {item.title}
-                          </p>
-                          <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-                            {item.detail}
-                          </p>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            </div>
-          </aside>
+          <HeroPreview />
         </div>
       </div>
 
       <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0">
-        <span className="relative left-1/2 block h-px w-screen -translate-x-1/2 bg-border" />
+        <span className="relative left-1/2 block h-px w-screen -translate-x-1/2 bg-[hsl(var(--brand-strong-foreground)/0.2)]" />
 
         <div className="absolute left-1/2 top-0 w-screen -translate-x-1/2">
           <div className="container relative">
             <div className="absolute left-[58%] top-0 -translate-x-1/2 -translate-y-[85%] md:left-auto md:right-12 md:translate-x-0">
-              <GreenShootMark />
+              <GreenShootMark className="text-[hsl(var(--shoot))]" />
             </div>
           </div>
         </div>

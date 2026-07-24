@@ -28,7 +28,10 @@ const Navbar = () => {
           </nav>
         </div>
         <div className="flex items-center gap-2">
-          <ApplicationTriggerButton size="sm" variant="outline">
+          <ApplicationTriggerButton
+            size="sm"
+            className="bg-[hsl(var(--brand-strong))] text-[hsl(var(--brand-strong-foreground))] hover:bg-[hsl(var(--brand-strong)/0.9)] focus-visible:ring-[hsl(var(--brand-strong))]"
+          >
             Enquire
           </ApplicationTriggerButton>
         </div>
