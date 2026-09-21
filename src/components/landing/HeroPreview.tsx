@@ -51,10 +51,10 @@ const HeroPreview = () => {
                 <p className="text-[0.65rem] font-medium uppercase tracking-wider text-muted-foreground">
                   Gifts
                 </p>
-                <p className="mt-1 text-lg font-semibold">This month</p>
+                <p className="mt-1 text-lg font-semibold">Gift activity</p>
               </div>
               <span className="rounded-md border border-border px-2 py-1 text-[0.7rem] text-muted-foreground">
-                Nov 2026
+                Overview
               </span>
             </div>
 
@@ -94,27 +94,39 @@ const HeroPreview = () => {
 
             <div className="mt-4 divide-y divide-border overflow-hidden rounded-lg border border-border">
               {[
-                { name: "Aiyana Okonkwo", type: "Recurring · £25", date: "Today" },
-                { name: "Marlow Trust", type: "Grant · £12,000", date: "Yesterday" },
-                { name: "R. Fitzgerald", type: "One-off · £150", date: "2d ago" },
+                {
+                  name: "Aiyana Okonkwo",
+                  type: "Recurring · £25",
+                  source: "Direct debit",
+                },
+                {
+                  name: "Marlow Trust",
+                  type: "Grant · £12,000",
+                  source: "Bank transfer",
+                },
+                {
+                  name: "R. Fitzgerald",
+                  type: "One-off · £150",
+                  source: "Donation form",
+                },
               ].map((record) => (
                 <div
                   key={record.name}
-                  className="flex items-center justify-between px-3 py-2 text-[0.78rem]"
+                  className="flex items-center justify-between gap-2 px-3 py-2 text-[0.78rem]"
                 >
-                  <div className="flex items-center gap-2.5">
-                    <span className="grid h-6 w-6 place-items-center rounded-full bg-[hsl(var(--shoot)/0.14)] text-[0.65rem] font-semibold text-foreground">
+                  <div className="flex min-w-0 items-center gap-2.5">
+                    <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-[hsl(var(--shoot)/0.14)] text-[0.65rem] font-semibold text-foreground">
                       {record.name[0]}
                     </span>
-                    <div>
-                      <p className="font-medium">{record.name}</p>
+                    <div className="min-w-0">
+                      <p className="truncate font-medium">{record.name}</p>
                       <p className="text-[0.68rem] text-muted-foreground">
                         {record.type}
                       </p>
                     </div>
                   </div>
-                  <span className="text-[0.68rem] text-muted-foreground">
-                    {record.date}
+                  <span className="shrink-0 whitespace-nowrap text-[0.68rem] text-muted-foreground">
+                    {record.source}
                   </span>
                 </div>
               ))}

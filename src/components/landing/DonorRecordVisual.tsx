@@ -12,18 +12,18 @@ const activity = [
   {
     icon: Gift,
     title: "£25 regular gift received",
-    detail: "Community programme · Today",
+    detail: "Community programme · Direct debit",
     accent: true,
   },
   {
     icon: Mail,
     title: "Appeal response recorded",
-    detail: "Spring appeal · 4 days ago",
+    detail: "Spring appeal · Email reply",
   },
   {
     icon: Users,
     title: "Household relationship reviewed",
-    detail: "Updated by Maya · 12 days ago",
+    detail: "Okonkwo household · Updated by Maya",
   },
 ];
 
