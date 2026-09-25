@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -95,6 +95,23 @@
   }
 }
 
+.details-dialog {
+  position: fixed;
+  inset: 0 0 0 auto;
+  margin: 0;
+  height: 100dvh;
+  max-height: 100dvh;
+}
+.details-dialog::backdrop {
+  background: rgb(0 0 0 / 0.8);
+}
+.details-dialog [hidden] {
+  display: none !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
@@ -105,10 +122,11 @@
   body {
     @apply bg-background text-foreground font-sans antialiased;
   }
-  :where(a.underline, button.underline) {
-    text-decoration-color: hsl(var(--border));
-  }
-  :where(a.underline, button.underline):is(:hover, :focus-visible) {
-    text-decoration-color: hsl(var(--shoot));
-  }
+}
+
+.underline {
+  text-decoration-color: hsl(var(--border));
+}
+.underline:is(:hover, :focus-visible) {
+  text-decoration-color: hsl(var(--shoot));
 }

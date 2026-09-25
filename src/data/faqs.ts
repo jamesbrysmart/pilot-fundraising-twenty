@@ -1,11 +1,4 @@
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-
-const faqs = [
+export const faqs = [
   {
     q: "What is Fundraising for Twenty?",
     a: [
@@ -63,38 +56,3 @@ const faqs = [
     ],
   },
 ];
-
-const FaqSection = () => {
-  return (
-    <section className="border-t border-border bg-secondary/40">
-      <div className="container py-24 md:py-32">
-        <div className="grid gap-12 md:grid-cols-[1fr_2fr]">
-          <div>
-            <p className="mb-3 text-[11px] uppercase tracking-wider text-muted-foreground">
-              FAQ
-            </p>
-            <h2 className="text-lg font-semibold">Common questions</h2>
-          </div>
-          <Accordion type="single" collapsible className="w-full">
-            {faqs.map((faq, i) => (
-              <AccordionItem key={faq.q} value={`faq-${i}`} className="border-border">
-                <AccordionTrigger className="text-left text-sm font-medium hover:no-underline">
-                  {faq.q}
-                </AccordionTrigger>
-                <AccordionContent className="text-sm leading-relaxed text-muted-foreground">
-                  <div className="space-y-3">
-                    {faq.a.map((paragraph) => (
-                      <p key={paragraph}>{paragraph}</p>
-                    ))}
-                  </div>
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-        </div>
-      </div>
-    </section>
-  );
-};
-
-export default FaqSection;

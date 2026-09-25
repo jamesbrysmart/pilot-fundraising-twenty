@@ -1,15 +1,3 @@
-import { useEffect, useState } from "react";
-import { Button } from "@/components/ui/button";
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-} from "@/components/ui/sheet";
-import { cn } from "@/lib/utils";
-import { useContactSheet } from "@/components/contact/ContactSheetProvider";
-
 type DetailsSection = {
   id: string;
   label: string;
@@ -27,7 +15,7 @@ const DetailList = ({ items }: { items: Array<{ title: string; detail: string }>
   </div>
 );
 
-const sections: DetailsSection[] = [
+export const sections: DetailsSection[] = [
   {
     id: "starting-point",
     label: "What you start with",
@@ -228,133 +216,3 @@ const sections: DetailsSection[] = [
     ),
   },
 ];
-
-type DetailsSheetPanelProps = {
-  open: boolean;
-  initialSectionId?: string;
-  onOpenChange: (open: boolean) => void;
-  onClose: () => void;
-  onOpenApplication: () => void;
-};
-
-const DetailsSheetPanel = ({
-  open,
-  initialSectionId,
-  onOpenChange,
-  onClose: _onClose,
-  onOpenApplication,
-}: DetailsSheetPanelProps) => {
-  const [activeSection, setActiveSection] = useState(sections[0].id);
-  const { openContact } = useContactSheet();
-
-  useEffect(() => {
-    if (open) {
-      const requested = initialSectionId
-        ? sections.find((section) => section.id === initialSectionId)?.id
-        : undefined;
-      setActiveSection(requested ?? sections[0].id);
-    }
-  }, [initialSectionId, open]);
-
-  const current = sections.find((section) => section.id === activeSection);
-
-  return (
-    <Sheet open={open} onOpenChange={onOpenChange}>
-      <SheetContent
-        side="right"
-        className="w-full overflow-y-auto border-l border-border p-0 sm:max-w-5xl"
-      >
-        <SheetHeader className="space-y-2 border-b border-border px-6 py-6 text-left">
-          <div className="space-y-2">
-            <SheetTitle className="text-xl tracking-tight">What to expect</SheetTitle>
-            <SheetDescription>
-              How the product, implementation and next steps work.
-            </SheetDescription>
-          </div>
-        </SheetHeader>
-
-        <div className="h-[calc(100vh-88px)] overflow-hidden px-6 pb-8 pt-6">
-          <div className="grid h-full gap-8 md:grid-cols-[220px_1fr] lg:grid-cols-[260px_1fr]">
-            <nav className="hidden overflow-y-auto border-r border-border pr-4 md:flex md:flex-col md:gap-1">
-              {sections.map((section) => (
-                <button
-                  key={section.id}
-                  type="button"
-                  onClick={() => setActiveSection(section.id)}
-                  className={cn(
-                    "rounded-md px-3 py-2 text-left text-sm transition-colors",
-                    section.id === activeSection
-                      ? "bg-secondary text-foreground"
-                      : "text-muted-foreground hover:bg-secondary/50 hover:text-foreground",
-                  )}
-                >
-                  {section.label}
-                </button>
-              ))}
-              <div className="mt-auto border-t border-border pt-4">
-                <Button
-                  className="h-auto min-h-10 w-full whitespace-normal py-2 leading-snug"
-                  onClick={onOpenApplication}
-                >
-                  Tell us about your organisation
-                </Button>
-                <button
-                  type="button"
-                  onClick={() => openContact("details-sheet")}
-                  className="mt-3 w-full text-center text-sm text-muted-foreground underline underline-offset-2 transition-colors hover:text-foreground"
-                >
-                  Contact us
-                </button>
-              </div>
-            </nav>
-
-            <div className="overflow-y-auto">
-              <div className="mb-5 overflow-x-auto border-b border-border md:hidden">
-                <div className="flex min-w-max gap-1 pb-2">
-                  {sections.map((section) => (
-                    <button
-                      key={section.id}
-                      type="button"
-                      onClick={() => setActiveSection(section.id)}
-                      className={cn(
-                        "whitespace-nowrap rounded-md px-3 py-2 text-xs transition-colors",
-                        section.id === activeSection
-                          ? "bg-secondary text-foreground"
-                          : "text-muted-foreground",
-                      )}
-                    >
-                      {section.label}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              <div className="max-w-2xl space-y-6 pb-8">
-                <h2 className="text-lg font-semibold tracking-tight">
-                  {current?.label}
-                </h2>
-                {current?.content}
-                <div className="border-t border-border pt-6 md:hidden">
-                  <div className="flex flex-wrap items-center gap-3">
-                    <Button onClick={onOpenApplication}>
-                      Tell us about your organisation
-                    </Button>
-                    <button
-                      type="button"
-                      onClick={() => openContact("details-sheet")}
-                      className="text-sm text-muted-foreground underline underline-offset-2 transition-colors hover:text-foreground"
-                    >
-                      Contact us
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </SheetContent>
-    </Sheet>
-  );
-};
-
-export default DetailsSheetPanel;

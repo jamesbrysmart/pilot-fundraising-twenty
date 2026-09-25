@@ -223,7 +223,6 @@ export default function ApplicationForm({
   const fieldRefs = useRef<Record<string, HTMLElement | null>>({});
 
   const missing = useMemo(() => requiredMissing(form), [form]);
-  const canSubmit = missing.length === 0;
 
   const missingSummary = useMemo(() => {
     if (missing.length === 0) return null;

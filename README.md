@@ -1,73 +1,41 @@
-# Welcome to your Lovable project
+# Fundraising for Twenty website
 
-## Project info
+The public product site at https://www.fundraisingfortwenty.com/. Astro generates
+the homepage as complete HTML at build time. A small site script controls the
+Details panel and workflow navigation; the enquiry and contact form runtime is
+loaded only when a visitor opens a form panel.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
-
-## How can I edit this code?
-
-There are several ways of editing your application.
-
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
+## Local workflow
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+npm ci
 npm run dev
+npm run typecheck
+npm run lint
+npm test
+npm run build
+npm run check:html
 ```
 
-**Edit a file directly in GitHub**
+The homepage is `src/pages/index.astro`. Shared metadata is in
+`src/layouts/SiteLayout.astro`; `src/pages/robots.txt.ts` points to Astro's
+generated sitemap. The 404 page is `src/pages/404.astro`. The build uses the
+Vercel static adapter and has no SPA fallback.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+Static visual components are rendered from their existing TSX source during the
+Astro build. They send HTML and CSS to visitors, with no React hydration.
+The form panels retain React because their current multi-step form and Radix
+dialog behaviour require client interaction. They are split into an on-demand
+JavaScript chunk.
 
-**Use GitHub Codespaces**
+## API and deployment
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+The existing Vercel functions at `/api/apply` and `/api/contact` keep their
+JSON contracts. Enquiry capture uses Google Sheets in production
+(`CAPTURE_MODE=google_sheets` and the `GOOGLE_*` variables); local NDJSON
+capture is not durable on serverless hosting. Contact delivery uses Resend.
+See `.env.example` for variables.
 
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+Vercel builds with `npm run build`. Deployments should be checked for complete
+raw HTML, a one-URL sitemap, robots.txt, static assets, real 404 status, and
+working form submissions before promoting to production.
