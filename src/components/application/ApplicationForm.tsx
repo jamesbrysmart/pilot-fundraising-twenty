@@ -350,16 +350,18 @@ export default function ApplicationForm({
               <Label htmlFor={`${idPrefix}-contactName`}>Your name</Label>
               <Input
                 id={`${idPrefix}-contactName`}
+                required
                 value={form.contactName}
                 onChange={(e) => setForm((p) => ({ ...p, contactName: e.target.value }))}
                 ref={(el) => {
                   fieldRefs.current.contactName = el;
                 }}
                 aria-invalid={showInlineError("contactName")}
+                aria-describedby={showInlineError("contactName") ? `${idPrefix}-contactName-error` : undefined}
                 placeholder="Jane Smith"
               />
               {showInlineError("contactName") ? (
-                <p className="text-xs text-destructive">Required.</p>
+                <p id={`${idPrefix}-contactName-error`} className="text-xs text-destructive">Required.</p>
               ) : null}
             </div>
 
@@ -368,6 +370,7 @@ export default function ApplicationForm({
               <Input
                 id={`${idPrefix}-contactEmail`}
                 type="email"
+                required
                 value={form.contactEmail}
                 onChange={(e) => setForm((p) => ({ ...p, contactEmail: e.target.value }))}
                 onBlur={() => {
@@ -380,6 +383,7 @@ export default function ApplicationForm({
                   fieldRefs.current.contactEmail = el;
                 }}
                 aria-invalid={showInlineError("contactEmail")}
+                aria-describedby={showInlineError("contactEmail") ? `${idPrefix}-contactEmail-error` : undefined}
                 autoComplete="email"
                 inputMode="email"
                 spellCheck={false}
@@ -387,7 +391,7 @@ export default function ApplicationForm({
                 placeholder="jane@nonprofit.org"
               />
               {showInlineError("contactEmail") ? (
-                <p className="text-xs text-destructive">
+                <p id={`${idPrefix}-contactEmail-error`} className="text-xs text-destructive">
                   {normalizeEmail(form.contactEmail)
                     ? "Enter a valid email address."
                     : "Required."}
@@ -400,16 +404,18 @@ export default function ApplicationForm({
             <Label htmlFor={`${idPrefix}-orgName`}>Organisation</Label>
             <Input
               id={`${idPrefix}-orgName`}
+              required
               value={form.orgName}
               onChange={(e) => setForm((p) => ({ ...p, orgName: e.target.value }))}
               ref={(el) => {
                 fieldRefs.current.orgName = el;
               }}
               aria-invalid={showInlineError("orgName")}
+              aria-describedby={showInlineError("orgName") ? `${idPrefix}-orgName-error` : undefined}
               placeholder="Community Foundation of..."
             />
             {showInlineError("orgName") ? (
-              <p className="text-xs text-destructive">Required.</p>
+              <p id={`${idPrefix}-orgName-error`} className="text-xs text-destructive">Required.</p>
             ) : null}
           </div>
 
@@ -444,18 +450,21 @@ export default function ApplicationForm({
         <TabsContent value="setup" className="mt-0 space-y-5 pt-5">
           <div className="grid gap-5 sm:grid-cols-2">
             <div className="space-y-2">
-              <Label>What is your annual fundraising income?</Label>
+              <Label htmlFor={`${idPrefix}-annualFundraisingVolumeBand`}>What is your annual fundraising income?</Label>
               <Select
+                required
                 value={form.annualFundraisingVolumeBand}
                 onValueChange={(value) =>
                   setForm((p) => ({ ...p, annualFundraisingVolumeBand: value }))
                 }
               >
                 <SelectTrigger
+                  id={`${idPrefix}-annualFundraisingVolumeBand`}
                   ref={(el) => {
                     fieldRefs.current.annualFundraisingVolumeBand = el;
                   }}
                   aria-invalid={showInlineError("annualFundraisingVolumeBand")}
+                  aria-describedby={showInlineError("annualFundraisingVolumeBand") ? `${idPrefix}-annualFundraisingVolumeBand-error` : undefined}
                 >
                   <SelectValue placeholder="Select..." />
                 </SelectTrigger>
@@ -468,21 +477,24 @@ export default function ApplicationForm({
                 </SelectContent>
               </Select>
               {showInlineError("annualFundraisingVolumeBand") ? (
-                <p className="text-xs text-destructive">Required.</p>
+                <p id={`${idPrefix}-annualFundraisingVolumeBand-error`} className="text-xs text-destructive">Required.</p>
               ) : null}
             </div>
 
             <div className="space-y-2">
-              <Label>How many donations do you process each month?</Label>
+              <Label htmlFor={`${idPrefix}-donationsPerMonthBand`}>How many donations do you process each month?</Label>
               <Select
+                required
                 value={form.donationsPerMonthBand}
                 onValueChange={(value) => setForm((p) => ({ ...p, donationsPerMonthBand: value }))}
               >
                 <SelectTrigger
+                  id={`${idPrefix}-donationsPerMonthBand`}
                   ref={(el) => {
                     fieldRefs.current.donationsPerMonthBand = el;
                   }}
                   aria-invalid={showInlineError("donationsPerMonthBand")}
+                  aria-describedby={showInlineError("donationsPerMonthBand") ? `${idPrefix}-donationsPerMonthBand-error` : undefined}
                 >
                   <SelectValue placeholder="Select..." />
                 </SelectTrigger>
@@ -495,14 +507,15 @@ export default function ApplicationForm({
                 </SelectContent>
               </Select>
               {showInlineError("donationsPerMonthBand") ? (
-                <p className="text-xs text-destructive">Required.</p>
+                <p id={`${idPrefix}-donationsPerMonthBand-error`} className="text-xs text-destructive">Required.</p>
               ) : null}
             </div>
           </div>
 
           <div className="space-y-2">
-            <Label>Which system does your team currently use to track donations?</Label>
+            <Label htmlFor={`${idPrefix}-currentSystem`}>Which system does your team currently use to track donations?</Label>
             <Select
+              required
               value={form.currentSystem}
               onValueChange={(value) =>
                 setForm((p) => ({
@@ -513,10 +526,12 @@ export default function ApplicationForm({
               }
             >
               <SelectTrigger
+                id={`${idPrefix}-currentSystem`}
                 ref={(el) => {
                   fieldRefs.current.currentSystem = el;
                 }}
                 aria-invalid={showInlineError("currentSystem")}
+                aria-describedby={showInlineError("currentSystem") ? `${idPrefix}-currentSystem-error` : undefined}
               >
                 <SelectValue placeholder="Select..." />
               </SelectTrigger>
@@ -530,7 +545,9 @@ export default function ApplicationForm({
             </Select>
             {form.currentSystem === "Other" ? (
               <div className="pt-3">
+                <Label htmlFor={`${idPrefix}-currentSystemOther`} className="sr-only">Name of your current system</Label>
                 <Input
+                  id={`${idPrefix}-currentSystemOther`}
                   value={form.currentSystemOther}
                   onChange={(e) => setForm((p) => ({ ...p, currentSystemOther: e.target.value }))}
                   placeholder="Type the system..."
@@ -538,7 +555,7 @@ export default function ApplicationForm({
               </div>
             ) : null}
             {showInlineError("currentSystem") ? (
-              <p className="text-xs text-destructive">Required.</p>
+              <p id={`${idPrefix}-currentSystem-error`} className="text-xs text-destructive">Required.</p>
             ) : null}
           </div>
 
@@ -590,7 +607,7 @@ export default function ApplicationForm({
 
       <div className="sticky bottom-0 -mx-6 border-t border-border bg-background/95 px-6 py-4 backdrop-blur">
         <div className="flex items-center justify-between gap-4">
-          <div className="text-xs text-muted-foreground">
+          <div className="text-xs text-muted-foreground" role="status">
             {attemptedSubmit && missingSummary ? (
               <>
                 Missing: <span className="text-foreground">{missingSummary}</span>

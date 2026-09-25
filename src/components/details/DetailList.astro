@@ -1,0 +1,12 @@
+---
+interface Props { items: { title: string; detail: string }[] }
+const { items } = Astro.props;
+---
+<div class="space-y-4">
+    {items.map((item) => (
+      <div class="space-y-1">
+        <p class="text-sm font-medium text-foreground">{item.title}</p>
+        <p class="text-sm leading-relaxed text-muted-foreground">{item.detail}</p>
+      </div>
+    ))}
+  </div>

@@ -1,33 +1,33 @@
 ---
-import { renderToStaticMarkup } from "react-dom/server";
 import SiteLayout from "../layouts/SiteLayout.astro";
-import StaticReact from "../components/StaticReact.astro";
-import GreenShootMark from "../components/branding/GreenShootMark";
-import BrandCornerFade from "../components/branding/BrandCornerFade";
-import HeroPreview from "../components/landing/HeroPreview";
-import SignalStrip from "../components/landing/SignalStrip";
-import NarrativeSection from "../components/landing/NarrativeSection";
+import GreenShootMark from "../components/branding/GreenShootMark.astro";
+import BrandCornerFade from "../components/branding/BrandCornerFade.astro";
+import HeroPreview from "../components/landing/HeroPreview.astro";
+import SignalStrip from "../components/landing/SignalStrip.astro";
+import NarrativeSection from "../components/landing/NarrativeSection.astro";
 import { scenarios } from "../data/workflows";
-import DonorRecordVisual from "../components/landing/DonorRecordVisual";
-import DonationProcessingVisual from "../components/landing/DonationProcessingVisual";
-import RecurringGivingVisual from "../components/landing/RecurringGivingVisual";
-import FundraisingPipelineVisual from "../components/landing/FundraisingPipelineVisual";
-import FundraisingDashboardVisual from "../components/landing/FundraisingDashboardVisual";
-import PilotProcess from "../components/landing/PilotProcess";
-import OutcomesSection from "../components/landing/OutcomesSection";
+import DonorRecordVisual from "../components/landing/DonorRecordVisual.astro";
+import DonationProcessingVisual from "../components/landing/DonationProcessingVisual.astro";
+import RecurringGivingVisual from "../components/landing/RecurringGivingVisual.astro";
+import FundraisingPipelineVisual from "../components/landing/FundraisingPipelineVisual.astro";
+import FundraisingDashboardVisual from "../components/landing/FundraisingDashboardVisual.astro";
+import PilotProcess from "../components/landing/PilotProcess.astro";
+import OutcomesSection from "../components/landing/OutcomesSection.astro";
 import { faqs } from "../data/faqs";
 import { sections } from "../data/details";
-import Footer from "../components/Footer";
-import { buttonVariants } from "../components/ui/button";
+import DetailsContent from "../components/details/DetailsContent.astro";
+import Footer from "../components/Footer.astro";
+import { buttonVariants } from "../lib/button-variants";
 import { cn } from "../lib/utils";
 
-const visuals = [
-  DonorRecordVisual,
-  DonationProcessingVisual,
-  RecurringGivingVisual,
-  FundraisingPipelineVisual,
-  FundraisingDashboardVisual,
-];
+const workflowVisuals = {
+  "workflow-donor-360": DonorRecordVisual,
+  "workflow-gift-intake": DonationProcessingVisual,
+  "workflow-recurring": RecurringGivingVisual,
+  "workflow-pipeline": FundraisingPipelineVisual,
+  "workflow-dashboard": FundraisingDashboardVisual,
+} satisfies Record<(typeof scenarios)[number]["anchorId"], typeof DonorRecordVisual>;
+
 const primaryButton = cn(
   buttonVariants(),
   "bg-[hsl(var(--brand-strong-foreground))] text-[hsl(var(--brand-strong))] hover:bg-[hsl(var(--brand-strong-foreground)/0.9)] focus-visible:ring-[hsl(var(--brand-strong-foreground))] focus-visible:ring-offset-[hsl(var(--brand-strong))]",
@@ -40,7 +40,7 @@ const primaryButton = cn(
       <div class="container flex h-14 items-center justify-between">
         <div class="flex items-center gap-6">
           <a href="/" class="inline-flex items-center gap-2 text-sm font-semibold tracking-tight text-foreground">
-            <StaticReact component={GreenShootMark} className="h-6 w-6 md:h-7 md:w-7" />
+            <GreenShootMark class="h-6 w-6 md:h-7 md:w-7" />
             Fundraising for Twenty
           </a>
           <nav class="hidden items-center gap-3 text-xs text-muted-foreground md:flex">
@@ -57,7 +57,7 @@ const primaryButton = cn(
 
     <main class="flex-1">
       <section class="relative overflow-hidden border-b border-[hsl(var(--brand-line))] bg-[hsl(var(--brand-strong))] py-24 text-[hsl(var(--brand-strong-foreground))] md:py-32">
-        <StaticReact component={BrandCornerFade} />
+        <BrandCornerFade />
         <div class="container relative z-10">
           <div class="grid gap-10 lg:grid-cols-[1fr_0.95fr] lg:items-start lg:gap-14">
             <div class="max-w-2xl space-y-6">
@@ -79,7 +79,7 @@ const primaryButton = cn(
                 <button type="button" data-panel="details" class="text-sm text-[hsl(var(--brand-strong-foreground)/0.78)] underline underline-offset-2 transition-colors hover:text-[hsl(var(--brand-strong-foreground))]">More details</button>
               </div>
             </div>
-            <StaticReact component={HeroPreview} />
+            <HeroPreview />
           </div>
         </div>
         <div aria-hidden="true" class="pointer-events-none absolute inset-x-0 bottom-0">
@@ -87,15 +87,15 @@ const primaryButton = cn(
           <div class="absolute left-1/2 top-0 w-screen -translate-x-1/2">
             <div class="container relative">
               <div class="absolute left-[58%] top-0 -translate-x-1/2 -translate-y-[85%] md:left-auto md:right-12 md:translate-x-0">
-                <StaticReact component={GreenShootMark} />
+                <GreenShootMark />
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <StaticReact component={SignalStrip} />
-      <StaticReact component={NarrativeSection} />
+      <SignalStrip />
+      <NarrativeSection />
 
       <section class="border-y border-border bg-secondary/20">
         <div class="container pt-16 pb-24 md:py-32">
@@ -125,14 +125,16 @@ const primaryButton = cn(
               </div>
             </aside>
             <div class="space-y-6">
-              {scenarios.map((scenario, index) => (
+              {scenarios.map((scenario) => {
+                const Visual = workflowVisuals[scenario.anchorId];
+                return (
                 <article id={scenario.anchorId} class="scroll-mt-24 overflow-hidden rounded-lg border border-border bg-card">
                   <div class="border-b border-border">
                     <div class="border-b border-border bg-background px-4 py-3 md:px-5">
                       <p class="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">{scenario.thesis}</p>
                     </div>
                     <div class="relative w-full overflow-hidden bg-[hsl(var(--shoot)/0.08)] aspect-[5/4] sm:aspect-[21/9]">
-                      <StaticReact component={visuals[index]} />
+                      <Visual />
                     </div>
                   </div>
                   <div class="space-y-3 p-5 md:p-6">
@@ -142,14 +144,15 @@ const primaryButton = cn(
                     </div>
                   </div>
                 </article>
-              ))}
+                );
+              })}
             </div>
           </div>
         </div>
       </section>
 
-      <StaticReact component={PilotProcess} />
-      <StaticReact component={OutcomesSection} />
+      <PilotProcess />
+      <OutcomesSection />
 
       <section class="border-t border-border bg-secondary/40">
         <div class="container py-24 md:py-32">
@@ -176,7 +179,7 @@ const primaryButton = cn(
       </section>
 
       <section class="relative overflow-hidden border-t border-[hsl(var(--brand-line))] bg-[hsl(var(--brand-strong))] text-[hsl(var(--brand-strong-foreground))]">
-        <StaticReact component={BrandCornerFade} />
+        <BrandCornerFade />
         <div class="container relative z-10 py-24 md:py-32">
           <div class="max-w-md space-y-4">
             <h2 class="text-xl font-semibold tracking-tight md:text-2xl">Let&apos;s talk about the CRM your organisation needs.</h2>
@@ -193,7 +196,7 @@ const primaryButton = cn(
       </section>
     </main>
 
-    <StaticReact component={Footer} />
+    <Footer />
   </div>
 
   <button type="button" data-panel="enquiry" data-edge-toggle aria-expanded="false" aria-label="Open enquiry panel" aria-controls="application-sheet"
@@ -237,7 +240,7 @@ const primaryButton = cn(
           {sections.map((section, index) => (
             <div data-details-content={section.id} hidden={index !== 0} class="max-w-2xl space-y-6 pb-8">
               <h2 class="text-lg font-semibold tracking-tight">{section.label}</h2>
-              <Fragment set:html={renderToStaticMarkup(section.content)} />
+              <DetailsContent sectionId={section.id} />
               <div class="border-t border-border pt-6 md:hidden">
                 <div class="flex flex-wrap items-center gap-3">
                   <button type="button" data-panel="enquiry" class={buttonVariants()}>Tell us about your organisation</button>
@@ -251,6 +254,10 @@ const primaryButton = cn(
     </div>
   </dialog>
   <div id="forms-root"></div>
+  <div id="form-load-status" role="alert" hidden class="fixed bottom-4 left-4 z-[60] rounded-md border border-border bg-background px-4 py-3 text-sm text-destructive shadow-lg">
+    <p>The form could not load. Refresh this page and try again.</p>
+    <button type="button" data-reload-form class="mt-2 underline underline-offset-2">Reload page</button>
+  </div>
   <script>
     import "../scripts/site";
   </script>

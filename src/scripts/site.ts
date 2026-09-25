@@ -14,14 +14,28 @@ function selectDetails(id: string) {
 }
 
 let formsPromise: Promise<typeof import("./forms-entry")> | undefined;
-function openForm(type: "enquiry" | "contact", source?: string) {
+let latestFormRequest = 0;
+async function openForm(type: "enquiry" | "contact", source?: string) {
   if (details?.open) details.close();
+  const request = ++latestFormRequest;
+  const status = document.getElementById("form-load-status");
+  if (status) status.hidden = true;
   formsPromise ??= import("./forms-entry");
-  void formsPromise.then(({ mountForms }) => mountForms(type, source));
+  try {
+    const { mountForms } = await formsPromise;
+    if (request === latestFormRequest) mountForms(type, source);
+  } catch {
+    formsPromise = undefined;
+    if (request === latestFormRequest && status) status.hidden = false;
+  }
 }
 
 document.addEventListener("click", (event) => {
   const target = event.target as HTMLElement;
+  if (target.closest("[data-reload-form]")) {
+    window.location.reload();
+    return;
+  }
   const panelButton = target.closest<HTMLButtonElement>("[data-panel]");
   if (panelButton) {
     const panel = panelButton.dataset.panel;

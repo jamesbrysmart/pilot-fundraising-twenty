@@ -1,0 +1,175 @@
+---
+import GreenShootMark from "../branding/GreenShootMark.astro";
+import { CalendarDays, Check, CircleAlert, Repeat2 } from "@lucide/astro";
+
+const payments = [
+  { month: "April", date: "2 Apr", status: "Paid", complete: true },
+  { month: "May", date: "2 May", status: "Paid", complete: true },
+  { month: "June", date: "2 Jun", status: "Needs attention", attention: true },
+  { month: "July", date: "2 Jul", status: "Upcoming" },
+];
+---
+<figure
+      class="relative h-full w-full overflow-hidden bg-[hsl(var(--brand-wash))] p-4 sm:p-5"
+      aria-labelledby="recurring-giving-visual-caption"
+    >
+      <figcaption
+        id="recurring-giving-visual-caption"
+        class="relative z-10 flex items-center gap-1.5 text-[10px] font-medium uppercase tracking-wider text-[hsl(var(--brand-strong))]"
+      >
+        <GreenShootMark class="h-4 w-4 md:h-4 md:w-4" />
+        Illustrative product view
+      </figcaption>
+
+      <div
+        aria-hidden="true"
+        class="absolute inset-x-4 -bottom-3 top-11 overflow-hidden rounded-t-lg border border-border bg-card sm:inset-x-7 sm:top-12"
+      >
+        <div class="flex h-8 items-center justify-between border-b border-border px-3 text-[10px] sm:h-9 sm:px-4 sm:text-xs">
+          <div class="flex min-w-0 items-center gap-2">
+            <span class="grid h-4 w-4 shrink-0 place-items-center rounded bg-[hsl(var(--brand-soft))] text-[hsl(var(--brand-strong))]">
+              <Repeat2 class="h-2.5 w-2.5" stroke-width={2} />
+            </span>
+            <span class="truncate text-muted-foreground">Recurring gifts</span>
+            <span class="text-border">/</span>
+            <span class="truncate font-medium text-foreground">
+              Aiyana Okonkwo
+            </span>
+          </div>
+          <span class="ml-3 hidden shrink-0 rounded bg-[hsl(var(--brand-soft))] px-2 py-1 text-[10px] font-medium text-[hsl(var(--brand-strong))] sm:inline">
+            Active
+          </span>
+        </div>
+
+        <div class="hidden h-[calc(100%-2.25rem)] grid-cols-[1fr_190px] sm:grid">
+          <div class="border-r border-border p-4">
+            <div class="flex items-start justify-between gap-4">
+              <div>
+                <p class="text-[10px] font-medium text-muted-foreground">
+                  Recurring agreement
+                </p>
+                <p class="mt-1 text-xl font-semibold tracking-tight text-foreground">
+                  £25 <span class="text-xs font-medium text-muted-foreground">monthly</span>
+                </p>
+              </div>
+              <span class="grid h-8 w-8 shrink-0 place-items-center rounded-md border border-[hsl(var(--brand-line))] bg-[hsl(var(--brand-soft))] text-[hsl(var(--brand-strong))]">
+                <CalendarDays class="h-4 w-4" stroke-width={1.75} />
+              </span>
+            </div>
+
+            <dl class="mt-3 grid grid-cols-3 gap-3 border-y border-border py-2.5 text-[10px]">
+              <div>
+                <dt class="text-muted-foreground">Started</dt>
+                <dd class="mt-0.5 font-medium text-foreground">May 2021</dd>
+              </div>
+              <div>
+                <dt class="text-muted-foreground">Fund</dt>
+                <dd class="mt-0.5 font-medium text-foreground">General</dd>
+              </div>
+              <div>
+                <dt class="text-muted-foreground">Next gift</dt>
+                <dd class="mt-0.5 font-medium text-foreground">2 July</dd>
+              </div>
+            </dl>
+
+            <div class="mt-3">
+              <div class="flex items-center justify-between text-[10px]">
+                <span class="font-medium text-foreground">This year</span>
+                <span class="text-muted-foreground">5 of 6 expected gifts</span>
+              </div>
+              <div class="mt-2 grid grid-cols-6 gap-1.5">
+                {[true, true, true, true, false, null].map((state, index) => (
+                  <div>
+                    <span
+                      class={`block h-2 rounded-sm ${
+                        state === true
+                          ? "bg-[hsl(var(--brand-strong))]"
+                          : state === false
+                            ? "border border-border bg-secondary"
+                            : "bg-border"
+                      }`}
+                    />
+                    <span class="mt-1 block text-center text-[8px] text-muted-foreground">
+                      {['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'][index]}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div class="p-3">
+            <p class="text-[10px] font-semibold text-foreground">Payment schedule</p>
+            <div class="mt-2 divide-y divide-border">
+              {payments.map((payment) => (
+                <div
+                  class="grid grid-cols-[18px_1fr_auto] items-center gap-2 py-2"
+                >
+                  <span
+                    class={`grid h-[18px] w-[18px] place-items-center rounded-full ${
+                      payment.complete
+                        ? "bg-[hsl(var(--brand-soft))] text-[hsl(var(--brand-strong))]"
+                        : "bg-secondary text-muted-foreground"
+                    }`}
+                  >
+                    {payment.complete ? (
+                      <Check class="h-2.5 w-2.5" stroke-width={2} />
+                    ) : payment.attention ? (
+                      <CircleAlert class="h-2.5 w-2.5" stroke-width={1.75} />
+                    ) : (
+                      <span class="h-1.5 w-1.5 rounded-full bg-border" />
+                    )}
+                  </span>
+                  <div class="min-w-0">
+                    <p class="truncate text-[10px] font-medium text-foreground">
+                      {payment.month}
+                    </p>
+                    <p class="text-[9px] text-muted-foreground">{payment.date}</p>
+                  </div>
+                  <span
+                    class={`text-[9px] ${
+                      payment.complete
+                        ? "text-[hsl(var(--brand-strong))]"
+                        : "text-muted-foreground"
+                    }`}
+                  >
+                    {payment.status}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div class="p-3 sm:hidden">
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-[9px] text-muted-foreground">Recurring agreement</p>
+              <p class="mt-0.5 text-base font-semibold">
+                £25 <span class="text-[9px] font-normal text-muted-foreground">monthly</span>
+              </p>
+            </div>
+            <span class="rounded bg-[hsl(var(--brand-soft))] px-2 py-1 text-[9px] font-medium text-[hsl(var(--brand-strong))]">
+              Active
+            </span>
+          </div>
+          <div class="mt-3 grid grid-cols-6 gap-1">
+            {[true, true, true, true, false, null].map((state) => (
+              <span
+                class={`h-1.5 rounded-sm ${
+                  state === true
+                    ? "bg-[hsl(var(--brand-strong))]"
+                    : state === false
+                      ? "border border-border bg-secondary"
+                      : "bg-border"
+                }`}
+              />
+            ))}
+          </div>
+          <div class="mt-3 flex items-center gap-2 border-t border-border pt-2 text-[9px]">
+            <CircleAlert class="h-3 w-3 text-muted-foreground" />
+            <span class="text-foreground">June payment needs attention</span>
+          </div>
+        </div>
+      </div>
+    </figure>

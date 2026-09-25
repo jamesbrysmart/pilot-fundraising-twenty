@@ -1,5 +1,6 @@
 import {
   createContext,
+  useCallback,
   useContext,
   useId,
   useMemo,
@@ -68,11 +69,11 @@ const ContactSheetProvider = ({ children }: { children: ReactNode }) => {
   const [honeypot, setHoneypot] = useState("");
   const formId = useId();
 
-  const openContact = (nextSource = "unknown") => {
+  const openContact = useCallback((nextSource = "unknown") => {
     setSource(nextSource);
     setIsOpen(true);
-  };
-  const closeContact = () => setIsOpen(false);
+  }, []);
+  const closeContact = useCallback(() => setIsOpen(false), []);
 
   const handleChange =
     (field: keyof ContactFormData) =>
@@ -140,7 +141,7 @@ const ContactSheetProvider = ({ children }: { children: ReactNode }) => {
       openContact,
       closeContact,
     }),
-    [isOpen],
+    [isOpen, openContact, closeContact],
   );
 
   return (

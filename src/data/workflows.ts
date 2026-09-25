@@ -6,8 +6,6 @@ export const scenarios = [
     headline: "A complete view of every supporter.",
     description:
       "See giving history, household relationships, and every interaction, from emails to events, on a single unified record.",
-    imageSrc: "/images/proof/fundraising-donor-360.webp",
-    imageAlt: "Donor profile view showing giving history and interactions.",
   },
   {
     id: "02",
@@ -16,8 +14,6 @@ export const scenarios = [
     headline: "Process donations with confidence.",
     description:
       "Handle large volumes, prevent duplicates, and resolve errors before donations ever hit your records.",
-    imageSrc: "/images/proof/fundraising-gift-intake-batch.webp",
-    imageAlt: "Gift intake and batch processing view showing grouped gifts and workflow actions.",
   },
   {
     id: "03",
@@ -26,8 +22,6 @@ export const scenarios = [
     headline: "Stay in control of recurring donations.",
     description:
       "See what’s paid, what’s missed, and what needs attention - all in one place.",
-    imageSrc: "/images/proof/fundraising-recurring-lifecycle.webp",
-    imageAlt: "Recurring gift lifecycle view showing status and timeline for a donor.",
   },
   {
     id: "04",
@@ -36,8 +30,6 @@ export const scenarios = [
     headline: "Structured tracking for high-value fundraising.",
     description:
       "Manage major donors and grant applications through clear stages, with full visibility into progress and next steps.",
-    imageSrc: "/images/proof/fundraising-pipeline-kanban.webp",
-    imageAlt: "Fundraising pipeline board showing opportunities in stages.",
   },
   {
     id: "05",
@@ -46,7 +38,5 @@ export const scenarios = [
     headline: "Real-time fundraising insight.",
     description:
       "Customizable dashboards with clear metrics, goal tracking, and instant visibility across income and pipeline.",
-    imageSrc: "/images/proof/fundraising-performance-dashboard.webp",
-    imageAlt: "Fundraising performance dashboard showing key metrics and charts.",
   },
-];
+] as const;

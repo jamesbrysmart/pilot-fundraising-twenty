@@ -1,15 +1,12 @@
 import sitemap from "@astrojs/sitemap";
 import vercel from "@astrojs/vercel";
 import { defineConfig } from "astro/config";
-import path from "node:path";
+import site from "./src/config/site.json";
 
 export default defineConfig({
-  site: "https://www.fundraisingfortwenty.com",
+  site: site.origin,
   output: "static",
   trailingSlash: "never",
   integrations: [sitemap()],
   adapter: vercel(),
-  vite: {
-    resolve: { alias: { "@": path.resolve("./src") } },
-  },
 });

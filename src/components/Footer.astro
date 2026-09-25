@@ -1,0 +1,40 @@
+---
+import GreenShootMark from "./branding/GreenShootMark.astro";
+---
+<footer class="relative py-8">
+      <div aria-hidden="true" class="pointer-events-none absolute inset-x-0 top-0">
+        <span class="relative left-1/2 block h-px w-screen -translate-x-1/2 bg-border" />
+
+        <div class="absolute left-1/2 top-0 w-screen -translate-x-1/2">
+          <div class="container relative">
+            <div class="absolute left-[58%] top-0 -translate-x-1/2 -translate-y-[85%] md:left-auto md:right-12 md:translate-x-0">
+              <GreenShootMark />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <p class="text-xs text-muted-foreground">
+          Fundraising for Twenty is a specialist fundraising app for{" "}
+          <a
+            href="https://twenty.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="underline underline-offset-2 transition-colors hover:text-foreground"
+          >
+            Twenty CRM
+          </a>
+          , developed and supported by{" "}
+          <a
+            href="https://3trees.digital"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="underline underline-offset-2 transition-colors hover:text-foreground"
+          >
+            3Trees Digital
+          </a>
+          . It is not an official Twenty product.
+        </p>
+      </div>
+    </footer>

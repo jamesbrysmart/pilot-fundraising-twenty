@@ -17,13 +17,14 @@ npm run build
 npm run check:html
 ```
 
-The homepage is `src/pages/index.astro`. Shared metadata is in
+The homepage is `src/pages/index.astro`. Canonical site information is in
+`src/config/site.json` and shared metadata is in
 `src/layouts/SiteLayout.astro`; `src/pages/robots.txt.ts` points to Astro's
 generated sitemap. The 404 page is `src/pages/404.astro`. The build uses the
 Vercel static adapter and has no SPA fallback.
 
-Static visual components are rendered from their existing TSX source during the
-Astro build. They send HTML and CSS to visitors, with no React hydration.
+Presentation sections and illustrative product views are native Astro
+components. They send HTML and CSS to visitors, with no React hydration.
 The form panels retain React because their current multi-step form and Radix
 dialog behaviour require client interaction. They are split into an on-demand
 JavaScript chunk.

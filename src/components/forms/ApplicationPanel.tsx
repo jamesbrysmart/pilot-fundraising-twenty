@@ -7,9 +7,10 @@ import ApplicationForm, {
   type ApplicationFormSection,
   type ApplicationFormV1,
 } from "../application/ApplicationForm";
+import type { FormRequest } from "./FormsIsland";
 
-export default function ApplicationPanel({ initialOpen }: { initialOpen: boolean }) {
-  const [isOpen, setIsOpen] = useState(initialOpen);
+export default function ApplicationPanel({ request }: { request: FormRequest }) {
+  const [isOpen, setIsOpen] = useState(request.type === "enquiry");
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
@@ -21,21 +22,13 @@ export default function ApplicationPanel({ initialOpen }: { initialOpen: boolean
   useEffect(() => {
     const edge = document.querySelector<HTMLButtonElement>("[data-edge-toggle]");
     if (!edge) return;
+    edge.classList.toggle("hidden", isOpen);
     edge.setAttribute("aria-expanded", String(isOpen));
-    edge.setAttribute("aria-label", isOpen ? "Close enquiry panel" : "Open enquiry panel");
-    const label = edge.querySelector("span");
-    if (label) label.textContent = isOpen ? "Close Enquiry" : "Enquire";
   }, [isOpen]);
 
   useEffect(() => {
-    const listener = (event: Event) => {
-      const { type } = (event as CustomEvent<{ type: string }>).detail;
-      if (type === "enquiry") setIsOpen(true);
-      if (type === "contact") setIsOpen(false);
-    };
-    document.addEventListener("f42:open-form", listener);
-    return () => document.removeEventListener("f42:open-form", listener);
-  }, []);
+    setIsOpen(request.type === "enquiry");
+  }, [request.id, request.type]);
 
   const submitApplication = async (result: ApplicationFormResult) => {
     if (isSubmitting) return;

@@ -1,0 +1,15 @@
+---
+interface Props { card: { title: string; funder: string; amount: string } };
+const { card } = Astro.props;
+---
+<div class="rounded border border-border bg-secondary p-2">
+    <p class="line-clamp-2 text-[9px] font-medium leading-tight text-foreground sm:text-[10px]">
+      {card.title}
+    </p>
+    <p class="mt-1 truncate text-[8px] text-muted-foreground sm:text-[9px]">
+      {card.funder}
+    </p>
+    <p class="mt-1 text-[9px] font-medium text-foreground sm:text-[10px]">
+      {card.amount}
+    </p>
+  </div>

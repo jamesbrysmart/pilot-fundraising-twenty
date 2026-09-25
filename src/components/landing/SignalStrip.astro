@@ -1,0 +1,63 @@
+---
+const signals = [
+  {
+    label: "Built on",
+    value: "Twenty CRM",
+    href: "https://twenty.com",
+    iconSrc: "/twenty-logo.svg",
+    iconAlt: "Twenty",
+  },
+  {
+    label: "Built by",
+    value: "3Trees Digital",
+    href: "https://3trees.digital",
+  },
+  { label: "Designed for", value: "Small + mid-sized nonprofits" },
+  { label: "Available with", value: "Setup + implementation support" },
+];
+---
+<section class="relative border-b border-border">
+      <span
+        aria-hidden="true"
+        class="pointer-events-none absolute inset-x-0 top-0 h-px bg-[hsl(var(--shoot))] opacity-40"
+      />
+      <div class="container">
+        <div class="grid grid-cols-2 md:grid-cols-4">
+          {signals.map((signal, i) => (
+            <div
+              class={`py-6 md:py-8 ${
+                i % 2 === 1 ? "border-l border-border pl-6 md:pl-8" : ""
+              }`}
+            >
+              <p class="text-[11px] uppercase tracking-wider text-muted-foreground mb-1">
+                {signal.label}
+              </p>
+              <p class="text-sm font-medium">
+                {"href" in signal ? (
+                  <a
+                    href={signal.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center gap-2 transition-colors hover:text-foreground"
+                  >
+                    {"iconSrc" in signal ? (
+                      <img
+                        src={signal.iconSrc}
+                        alt={signal.iconAlt}
+                        class="h-5 w-5 shrink-0 rounded-[5px]"
+                        loading="lazy"
+                      />
+                    ) : null}
+                    <span class="underline underline-offset-2">
+                      {signal.value}
+                    </span>
+                  </a>
+                ) : (
+                  signal.value
+                )}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>

@@ -1,0 +1,69 @@
+---
+const steps = [
+  {
+    number: "01",
+    title: "Understand your organisation",
+    detail:
+      "Understand your fundraising processes, existing systems, data and wider requirements that need to shape the implementation.",
+  },
+  {
+    number: "02",
+    title: "Design the implementation",
+    detail:
+      "Define how the CRM should be structured, how its workflows and connections should operate and how existing data will move across.",
+  },
+  {
+    number: "03",
+    title: "Prepare the data and team",
+    detail:
+      "Move and validate the agreed data, test the setup with real scenarios and prepare the team for day-to-day use.",
+  },
+  {
+    number: "04",
+    title: "Launch with support",
+    detail:
+      "Move into live use with practical support and resolve what emerges as the team begins working in the CRM.",
+  },
+];
+---
+<section class="border-y border-border bg-secondary/40">
+      <div class="container py-24 md:py-32">
+        <div class="mb-9 max-w-2xl space-y-3">
+          <h2 class="text-xl font-semibold tracking-tight md:text-2xl">
+            From developed product to working CRM.
+          </h2>
+          <p class="text-sm leading-relaxed text-muted-foreground">
+            Fundraising for Twenty gives you a substantial fundraising starting
+            point. 3Trees works alongside your team through system design, data
+            migration, testing and rollout, so the CRM is ready for confident
+            day-to-day use.
+          </p>
+        </div>
+
+        <div class="relative space-y-0">
+          <span
+            aria-hidden="true"
+            class="absolute bottom-10 left-5 top-10 w-px bg-[hsl(var(--brand-line))]"
+          />
+          {steps.map((step, i) => (
+            <div
+              class={`relative grid grid-cols-[2.5rem_minmax(0,1fr)] items-start gap-6 py-5 md:min-h-[5.75rem] md:gap-6 ${
+                i < steps.length - 1 ? "border-b border-border" : ""
+              }`}
+            >
+              <span class="relative z-10 grid h-10 w-10 place-items-center rounded-full border border-[hsl(var(--brand-line))] bg-[hsl(var(--brand-soft))] text-xs font-semibold tabular-nums text-[hsl(var(--brand-strong))]">
+                {step.number}
+              </span>
+              <div class="flex flex-col gap-1 md:grid md:grid-cols-[320px_minmax(0,1fr)] md:items-baseline md:gap-x-4 md:gap-y-1">
+                <h3 class="text-base font-medium md:whitespace-nowrap md:text-lg">
+                  {step.title}
+                </h3>
+                <p class="max-w-xl text-sm leading-relaxed text-muted-foreground">
+                  {step.detail}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>

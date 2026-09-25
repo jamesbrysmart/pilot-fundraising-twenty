@@ -1,31 +1,22 @@
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import ContactSheetProvider, { useContactSheet } from "../contact/ContactSheetProvider";
 import ApplicationPanel from "./ApplicationPanel";
 
-type FormEventDetail = { type: "enquiry" | "contact"; source?: string };
+export type FormRequest = { id: number; type: "enquiry" | "contact"; source?: string };
 
-function ContactBridge({ initialType, initialSource }: { initialType: FormEventDetail["type"]; initialSource?: string }) {
+function ContactBridge({ request }: { request: FormRequest }) {
   const { openContact, closeContact } = useContactSheet();
-  const actions = useRef({ openContact, closeContact });
-  actions.current = { openContact, closeContact };
-  const initial = useRef({ type: initialType, source: initialSource });
   useEffect(() => {
-    if (initial.current.type === "contact") actions.current.openContact(initial.current.source);
-    const listener = (event: Event) => {
-      const { type, source } = (event as CustomEvent<FormEventDetail>).detail;
-      if (type === "contact") actions.current.openContact(source);
-      if (type === "enquiry") actions.current.closeContact();
-    };
-    document.addEventListener("f42:open-form", listener);
-    return () => document.removeEventListener("f42:open-form", listener);
-  }, []);
-  return <ApplicationPanel initialOpen={initialType === "enquiry"} />;
+    if (request.type === "contact") openContact(request.source);
+    else closeContact();
+  }, [request.id, request.type, request.source, openContact, closeContact]);
+  return <ApplicationPanel request={request} />;
 }
 
-export default function FormsIsland(props: { initialType: FormEventDetail["type"]; initialSource?: string }) {
+export default function FormsIsland({ request }: { request: FormRequest }) {
   return (
     <ContactSheetProvider>
-      <ContactBridge {...props} />
+      <ContactBridge request={request} />
     </ContactSheetProvider>
   );
 }
